@@ -16,6 +16,10 @@ class Ajax extends CI_Controller {
         echo json_encode($output);        
     }
 
+    public function function_2(){
+        return 'heyHOLetsGO!';
+    }
+
     public function login(){
         $this->load->model('user');
         //creating stanard result, with preset values
@@ -25,7 +29,7 @@ class Ajax extends CI_Controller {
         );
 
         //adding comment to test commit
-        //new change Hello Fame user!!
+        //new change
 
 
         //getting income values
