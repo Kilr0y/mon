@@ -16,15 +16,6 @@ class Ajax extends CI_Controller {
         echo json_encode($output);        
     }
 
-    public function function_2(){
-        //this is commnet
-        return 'heyHOLetsGO!';
-    } 
-
-    public function function_1(){
-        return 'Hello';
-    }
-
     public function login(){
         $this->load->model('user');
         //creating stanard result, with preset values
@@ -32,10 +23,6 @@ class Ajax extends CI_Controller {
             'status' => 'error',
             'message' => 'Incorrect login or password'
         );
-
-        //adding comment to test commit
-        //new change Hello Fame user!!
-
 
         //getting income values
         $login = $this->input->post('login');
