@@ -19,7 +19,7 @@ class Ajax extends CI_Controller {
     public function function_2(){
         //this is commnet
         return 'heyHOLetsGO!';
-    }
+    } 
 
     public function function_1(){
         return 'Hello';
