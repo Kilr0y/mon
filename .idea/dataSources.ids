@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - monova@localhost" uuid="b8ea254f-5377-4582-872a-6a24968107ed">
+    <database-info product="MySQL" version="5.6.17" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="monova"/>
+    <table name="activitylog" schema="" catalog="monova" type="TABLE">
+      <column name="id_log" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="id_user" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="action" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="details" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id_log"/>
+      <index name="id_user" unique="false" columns="id_user"/>
+    </table>
+    <table name="api_usage" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="api" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="key" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="type" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ip" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="ban" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ip" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="reason" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="ip" unique="true" columns="ip"/>
+      <index name="reason" unique="false" columns="reason"/>
+    </table>
+    <table name="categories" schema="" catalog="monova" type="TABLE">
+      <column name="catid" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="name" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="subid" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" autoIncrement="true"/>
+      <column name="subname" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="torrents" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="segment" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <index name="catid" unique="false" columns="catid"/>
+      <index name="catid_name" unique="false" columns="catid,name"/>
+      <index name="catid_subname" unique="false" columns="catid,subname"/>
+      <index name="name" unique="false" columns="name"/>
+      <index name="subid" unique="false" columns="subid,subname"/>
+    </table>
+    <table name="comments" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ip_poster" sqlType="VARCHAR" precision="16" scale="0" nullable="false" jdbcType="12"/>
+      <column name="post" sqlType="VARCHAR" precision="1000" scale="0" nullable="false" jdbcType="12"/>
+      <column name="date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="name" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="reported" sqlType="ENUM" precision="6" scale="0" nullable="false" jdbcType="1" def="J2ZhbHNlJw=="/>
+      <column name="reported_by" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="reason" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="id" unique="false" columns="id"/>
+      <index name="id_reported" unique="false" columns="reported,id"/>
+      <index name="ip_poster" unique="false" columns="ip_poster"/>
+    </table>
+    <table name="description" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="descr" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="id" unique="false" columns="id"/>
+    </table>
+    <table name="download_bypass" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="type" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="torrent_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="ignore" schema="" catalog="monova" type="TABLE">
+      <column name="what" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="type" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <index name="type" unique="false" columns="type"/>
+      <index name="what" unique="false" columns="what"/>
+    </table>
+    <table name="last_id" schema="" catalog="monova" type="TABLE">
+      <column name="name" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <index name="name" unique="true" columns="name"/>
+    </table>
+    <table name="logs" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="type" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="info" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="maillog" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ip" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="torrentid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="ip" unique="false" columns="ip"/>
+    </table>
+    <table name="movie" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="imdb_id" sqlType="VARCHAR" precision="12" scale="0" nullable="true" jdbcType="12"/>
+      <column name="title" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="year" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="rating" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12"/>
+      <column name="votes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="country" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="poster" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="poster_large" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="trailer" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="genres" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="story" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="directors" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="writers" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="cast" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="movie_screenshot" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="imdb_id" sqlType="VARCHAR" precision="12" scale="0" nullable="true" jdbcType="12"/>
+      <column name="torrent_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="link" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="ratings" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="total_votes" sqlType="SMALLINT UNSIGNED" precision="5" scale="0" nullable="false" jdbcType="5" def="MA=="/>
+      <column name="total_value" sqlType="SMALLINT UNSIGNED" precision="5" scale="0" nullable="false" jdbcType="5" def="MA=="/>
+      <column name="used_ips" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="id" unique="false" columns="id"/>
+      <index name="total_value" unique="false" columns="total_value"/>
+      <index name="total_votes" unique="false" columns="total_votes,total_value"/>
+      <index name="total_votes_2" unique="false" columns="total_votes"/>
+    </table>
+    <table name="reports" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="user" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ip_reporter" sqlType="VARCHAR" precision="16" scale="0" nullable="false" jdbcType="12"/>
+      <column name="date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="content" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <index name="id" unique="false" columns="id"/>
+    </table>
+    <table name="search" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="search" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="count" sqlType="MEDIUMINT UNSIGNED" precision="8" scale="0" nullable="false" jdbcType="4" def="MQ=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="search" unique="true" columns="search"/>
+      <index name="count" unique="false" columns="count"/>
+    </table>
+    <table name="stats" schema="" catalog="monova" type="TABLE">
+      <column name="file" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="date" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="hour" sqlType="VARCHAR" precision="3" scale="0" nullable="false" jdbcType="12"/>
+      <column name="direct" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="indirect" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <index name="date" unique="false" columns="date"/>
+      <index name="file" unique="false" columns="file"/>
+    </table>
+    <table name="stats_ip" schema="" catalog="monova" type="TABLE">
+      <column name="date" sqlType="VARCHAR" precision="12" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ip" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="count" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <index name="count" unique="false" columns="count"/>
+      <index name="date" unique="false" columns="date"/>
+      <index name="ip" unique="false" columns="ip"/>
+    </table>
+    <table name="subscriptions" schema="" catalog="monova" type="TABLE">
+      <column name="subs_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="user" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="subs_id"/>
+      <index name="id" unique="false" columns="id"/>
+      <index name="user" unique="false" columns="user"/>
+    </table>
+    <table name="torrentban" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="hash" sqlType="VARCHAR" precision="40" scale="0" nullable="false" jdbcType="12"/>
+      <column name="reason" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="hash" unique="true" columns="hash"/>
+    </table>
+    <table name="torrents" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="MEDIUMINT UNSIGNED" precision="8" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ip" sqlType="VARCHAR" precision="17" scale="0" nullable="false" jdbcType="12" def="J1Vua25vd24n"/>
+      <column name="last_non_zero" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="attempts_with_zero" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="torrentname" sqlType="VARCHAR" precision="110" scale="0" nullable="false" jdbcType="12"/>
+      <column name="added" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="downloaded" sqlType="MEDIUMINT UNSIGNED" precision="8" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="folder_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="size" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="pieces" sqlType="MEDIUMINT UNSIGNED" precision="8" scale="0" nullable="false" jdbcType="4"/>
+      <column name="piecelength" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="seeds" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="peers" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="registration" sqlType="ENUM" precision="2" scale="0" nullable="false" jdbcType="1" def="JzAn"/>
+      <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="ENUM" precision="2" scale="0" nullable="false" jdbcType="1" def="JzAn"/>
+      <column name="nfo" sqlType="ENUM" precision="2" scale="0" nullable="false" jdbcType="1" def="JzAn"/>
+      <column name="hash" sqlType="CHAR" precision="40" scale="0" nullable="false" jdbcType="1"/>
+      <column name="tracker" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="maincat" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="subcat" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="moved" sqlType="ENUM" precision="2" scale="0" nullable="false" jdbcType="1" def="JzAn"/>
+      <column name="verified_by" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="J05PQk9EWSc="/>
+      <column name="imported_from" sqlType="VARCHAR" precision="5" scale="0" nullable="false" jdbcType="12"/>
+      <column name="need_reaction" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="verified" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" def="MA=="/>
+      <column name="torrent_file" sqlType="ENUM" precision="2" scale="0" nullable="false" jdbcType="1" def="JzEn"/>
+      <column name="imdb_id" sqlType="VARCHAR" precision="12" scale="0" nullable="false" jdbcType="12"/>
+      <column name="comments" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="hash_2" unique="true" columns="hash"/>
+      <index name="added" unique="false" columns="added"/>
+      <index name="ip" unique="false" columns="ip"/>
+      <index name="maincat" unique="false" columns="maincat"/>
+      <index name="need_reaction" unique="false" columns="need_reaction"/>
+      <index name="peers" unique="false" columns="peers"/>
+      <index name="seeds" unique="false" columns="seeds"/>
+      <index name="size" unique="false" columns="size"/>
+      <index name="subcat" unique="false" columns="subcat"/>
+      <index name="subcat_verified" unique="false" columns="subcat,verified"/>
+      <index name="torrentname" unique="false" columns="torrentname"/>
+      <index name="tracker" unique="false" columns="tracker"/>
+      <index name="verified" unique="false" columns="verified"/>
+      <index name="verified_by" unique="false" columns="verified_by"/>
+    </table>
+    <table name="trackerban" schema="" catalog="monova" type="TABLE">
+      <column name="tracker" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="reason" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="tracker" unique="true" columns="tracker"/>
+    </table>
+    <table name="trackers" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="torrent_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="tracker" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="torrent_id" unique="false" columns="torrent_id"/>
+    </table>
+    <table name="user" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="login" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="pass" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="active" sqlType="ENUM" precision="2" scale="0" nullable="false" jdbcType="1" def="JzAn"/>
+      <column name="last_login" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="last_ip" sqlType="VARCHAR" precision="16" scale="0" nullable="false" jdbcType="12"/>
+      <column name="temp_data" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="banned" sqlType="ENUM" precision="2" scale="0" nullable="false" jdbcType="1" def="JzAn"/>
+      <column name="ban_reason" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="verified" sqlType="ENUM" precision="2" scale="0" nullable="false" jdbcType="1" def="JzAn"/>
+      <column name="reserved" sqlType="ENUM" precision="2" scale="0" nullable="false" jdbcType="1" def="JzAn"/>
+      <column name="uploads" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="only_uploads" sqlType="ENUM" precision="2" scale="0" nullable="false" jdbcType="1" def="JzEn"/>
+      <column name="language" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12" def="J2VuJw=="/>
+      <column name="verif_mail" sqlType="ENUM" precision="2" scale="0" nullable="false" jdbcType="1"/>
+      <column name="upload_pass" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="J1RPUCBTRUNSRVQgVVBMT0FEIFBBU1MgMTIzNCBOTyBVU0UgVEhJUyc="/>
+      <column name="social_type" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="social_id" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="avatar" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="flagged" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="login" unique="true" columns="login"/>
+      <index name="active" unique="false" columns="active"/>
+      <index name="login_2" unique="false" columns="login"/>
+      <index name="login_3" unique="false" columns="login"/>
+      <index name="login_4" unique="false" columns="login"/>
+      <index name="social_id" unique="false" columns="social_id"/>
+      <index name="verified" unique="false" columns="verified"/>
+    </table>
+    <table name="users" schema="" catalog="monova" type="TABLE">
+      <column name="id" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="mail" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="company" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="del_limit" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MjA="/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="verification" schema="" catalog="monova" type="TABLE">
+      <column name="user" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <index name="user" unique="true" columns="user"/>
+    </table>
+  </data-source>
+</component>
