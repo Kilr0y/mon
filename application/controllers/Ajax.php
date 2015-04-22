@@ -25,7 +25,7 @@ class Ajax extends CI_Controller {
         );
 
         //adding comment to test commit
-        //new change 2
+        //new change Hello Fame user!!
 
 
         //getting income values
