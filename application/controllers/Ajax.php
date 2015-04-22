@@ -24,6 +24,8 @@ class Ajax extends CI_Controller {
             'message' => 'Incorrect login or password'
         );
 
+        //adding comment to test commit
+
 
         //getting income values
         $login = $this->input->post('login');
