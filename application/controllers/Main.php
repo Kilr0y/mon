@@ -44,8 +44,8 @@ class Main extends CI_Controller {
         $this->load->library('general');
         $header = $this->general->get_header_array('latest');
         $header['title'] = $this->config->item('site_title');
-        
-        
+
+
         
         if (! $this->config->item('cache_enabled') || ! $page_str = $this->cache->get('latest')){
         

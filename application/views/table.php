@@ -1,7 +1,7 @@
 <?php if (count($table_data) > 0): ?>
 <table class="table table-bordered main-table">
     <thead>                        
-        <th class="torrent_name">Torrent Names</th>
+        <th class="torrent_name">Torrent Name</th>
         <th class="px50"><i class="fa fa-check" data-toggle="tooltip" data-placement="top" title="Verified"></th>
         <th class="px50"><i class="glyphicon glyphicon-comment" data-toggle="tooltip" data-placement="top" title="Comments"></i></th>
         <th class="px50"><i class="glyphicon glyphicon-star" data-toggle="tooltip" data-placement="top" title="Rating"></i></th>                        

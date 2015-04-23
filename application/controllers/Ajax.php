@@ -16,6 +16,8 @@ class Ajax extends CI_Controller {
         echo json_encode($output);        
     }
 
+    //comment
+
     public function login(){
         $this->load->model('user');
         //creating stanard result, with preset values
