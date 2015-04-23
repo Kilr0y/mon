@@ -16,15 +16,7 @@ class Ajax extends CI_Controller {
         echo json_encode($output);        
     }
 
-    // @todo  gdfg
-    public function function_2(){//TODO: end this
-        //this is commnet
-        return 'heyHOLetsGO!';
-    }
-
-    public function function_1(){
-        return 'Hello';
-    }
+    //comment
 
     public function login(){
         $this->load->model('user');
@@ -33,10 +25,6 @@ class Ajax extends CI_Controller {
             'status' => 'error',
             'message' => 'Incorrect login or password'
         );
-
-        //adding comment to test commit
-        //new change Hello Fame user!!
-
 
         //getting income values
         $login = $this->input->post('login');
