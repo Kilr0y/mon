@@ -68,6 +68,20 @@ $route['music'] = 'main/category/3';
 $route['software'] = 'main/category/5';
 $route['pictures'] = 'main/category/10';
 $route['other'] = 'main/category/9';
+$route['adult'] = 'main/category/11';
+
+$route['hot'] = 'main/hot/1';
+
+$route['hot/movies'] = 'main/hot/1';
+$route['hot/music'] = 'main/hot/3';
+$route['hot/games'] = 'main/hot/4';
+$route['hot/software'] = 'main/hot/5';
+$route['hot/anime'] = 'main/hot/6';
+$route['hot/books'] = 'main/hot/7';
+$route['hot/tv'] = 'main/hot/8';
+$route['hot/other'] = 'main/hot/9';
+$route['hot/pictures'] = 'main/hot/10';
+$route['hot/adult'] = 'main/hot/11';
 
 $route["adult/clips"] = "main/subcategory/177";
 $route["adult/games"] = "main/subcategory/179";

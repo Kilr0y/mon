@@ -84,3 +84,15 @@ define('EXIT_USER_INPUT', 7); // invalid user input
 define('EXIT_DATABASE', 8); // database error
 define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+//define id of main categories
+define('CAT_MOVIES', 1);
+define('CAT_MUSIC', 3);
+define('CAT_GAMES', 4);
+define('CAT_SOFTWARE', 5);
+define('CAT_ANIME', 6);
+define('CAT_BOOKS', 7);
+define('CAT_TV', 8);
+define('CAT_OTHERS', 9);
+define('CAT_PICTURES', 10);
+define('CAT_ADULT', 11);

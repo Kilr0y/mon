@@ -27,6 +27,7 @@ $config['site_title'] = ' - monova.org';
 $config['latest_per_category'] = 10;
 $config['category_per_page'] = 25;
 $config['search_per_page'] = 25;
+$config['hot_per_page'] = 12;
 $config['related_items_count'] = 5;
 $config['related_verified_only'] = true;
 
@@ -52,7 +53,7 @@ $config['magnet_link'] = '&tr=udp%3A%2F%2Ftracker.istole.it%3A80%2Fannounce&tr=u
 
 
 /***** TECH CONFIG ********/
-$config['cache_enabled'] = false;
+$config['cache_enabled'] = true;
 $config['cache_adapter'] = 'xcache';
 
 

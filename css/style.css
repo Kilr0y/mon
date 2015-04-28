@@ -51,6 +51,17 @@ body{
     
 }
 
+.hot_img {
+    width: 100%;
+    max-width: 126px;
+    height: 170px;
+}
+
+.hot_box{
+    height: 220px;
+}
+
+
 .multi-column-dropdown li a {
 	display: block;
 	clear: both;

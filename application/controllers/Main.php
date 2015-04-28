@@ -68,6 +68,23 @@ class Main extends CI_Controller {
         echo $page_str['page'];        
         echo $this->load->view('footer', null, true);        
     }
+
+    public function hot($cat_id = 1){
+        $this->load->library('general');
+        $header = $this->general->get_header_array('latest');
+        $header['title'] = $this->config->item('site_title');
+
+        $this->load->model('torrents');
+
+        $data['hots'] = $this->torrents->get_hotest($cat_id);
+        $data['cat'] = $cat_id;
+
+        $this->load->view('header', $header);
+        $this->load->view('hot', $data);
+        $this->load->view('footer');
+
+
+    }
     
     public function category($cat_id = 0){
         
