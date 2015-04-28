@@ -67,8 +67,7 @@ class Torrents extends CI_Model {
             $limit = $this->config->item('category_per_page');  
             
         $sort = $this->_get_sort_string($sort_val); 
-        
-        
+
         $verified = '';
         if ($verf == '1'){            
             $verified = " AND verified = \"1\" ";
