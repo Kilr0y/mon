@@ -23,16 +23,16 @@
 <div class="row margin-bottom-10">
     <div class="col-md-12">
         <h3 style="position: relative;">
-            Hot
+            Hot <?=$this->config->item('maincat_name')[$cat]?>
         </h3>
         <ul class="nav nav-tabs" style="float: right;">
-            <li role="presentation" <?php if ($cat == '1') echo 'class="active"'?>><a href="<?=site_url("hot/movies")?>">Movies</a></li>
-            <li role="presentation" <?php if ($cat == '8') echo 'class="active"'?>><a href="<?=site_url('hot/tv')?>">TV</a></li>
-            <li role="presentation" <?php if ($cat == '6') echo 'class="active"'?>><a href="<?=site_url('hot/anime')?>">Anime</a></li>
-            <li role="presentation" <?php if ($cat == '3') echo 'class="active"'?>><a href="<?=site_url('hot/music')?>">Music</a></li>
-            <li role="presentation" <?php if ($cat == '7') echo 'class="active"'?>><a href="<?=site_url('hot/books')?>">Books</a></li>
-            <li role="presentation" <?php if ($cat == '4') echo 'class="active"'?>><a href="<?=site_url('hot/games')?>">Games</a></li>
-            <li role="presentation" <?php if ($cat == '5') echo 'class="active"'?>><a href="<?=site_url('hot/software')?>">Apps</a></li>
+            <li role="presentation" <?php if ($cat == CAT_MOVIES) echo 'class="active"'?>><a href="<?=site_url("hot/movies")?>">Movies</a></li>
+            <li role="presentation" <?php if ($cat == CAT_TV) echo 'class="active"'?>><a href="<?=site_url('hot/tv')?>">TV</a></li>
+            <li role="presentation" <?php if ($cat == CAT_ANIME) echo 'class="active"'?>><a href="<?=site_url('hot/anime')?>">Anime</a></li>
+<!--            <li role="presentation" --><?php //if ($cat == CAT_MUSIC) echo 'class="active"'?><!-- ><a href="--><?//=site_url('hot/music')?><!--">Music</a></li>-->
+<!--            <li role="presentation" --><?php //if ($cat == CAT_BOOKS) echo 'class="active"'?><!-- ><a href="--><?//=site_url('hot/books')?><!--">Books</a></li>-->
+<!--            <li role="presentation" --><?php //if ($cat == CAT_GAMES) echo 'class="active"'?><!-- ><a href="--><?//=site_url('hot/games')?><!--">Games</a></li>-->
+<!--            <li role="presentation" --><?php //if ($cat == CAT_SOFTWARE) echo 'class="active"'?><!-- ><a href="--><?//=site_url('hot/software')?><!--">Apps</a></li>-->
         </ul>
     </div>
 </div>

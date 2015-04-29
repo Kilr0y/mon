@@ -74,15 +74,20 @@ class Main extends CI_Controller {
         $header = $this->general->get_header_array('latest');
         $header['title'] = $this->config->item('site_title');
 
-        $this->load->model('torrents');
+        if (! $this->config->item('cache_enabled') || ! $page_str = $this->cache->get('hot_cat_'.$cat_id)) {
+            $this->load->model('torrents');
 
-        $data['hots'] = $this->torrents->get_hotest($cat_id);
-        $data['cat'] = $cat_id;
+            $data['hots'] = $this->torrents->get_hotest($cat_id);
+            $data['cat'] = $cat_id;
 
-        $this->load->view('header', $header);
-        $this->load->view('hot', $data);
-        $this->load->view('footer');
+            $page_str['page'] = $this->load->view('hot', $data, true);
 
+            $this->cache->save('hot_cat_'.$cat_id, $page_str);
+        }
+
+        echo $this->load->view('header', $header, true);
+        echo $page_str['page'];
+        echo $this->load->view('footer', null, true);
 
     }
     

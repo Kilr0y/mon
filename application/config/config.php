@@ -100,6 +100,21 @@ $config['pagination'] = array(
 );
 
 
+// Names of main cattrgories
+$config['maincat_name'] = array(
+    CAT_MOVIES => 'Movies',
+    CAT_MUSIC => 'Music',
+    CAT_GAMES => 'Games',
+    CAT_SOFTWARE => 'Software',
+    CAT_ANIME => 'Anime',
+    CAT_BOOKS => 'Books',
+    CAT_TV => 'TV',
+    CAT_OTHERS => 'Others',
+    CAT_PICTURES => 'Pictures',
+    CAT_ADULT => 'Adult',
+);
+
+
 
 /*
 |--------------------------------------------------------------------------
