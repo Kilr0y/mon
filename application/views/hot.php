@@ -40,7 +40,7 @@
     <?php foreach ($hots as $hot):?>
         <div class="hot_box col-xs-6 col-md-2 col-sm-3 text-center">
             <a href="<?=site_url("torrent/{$hot['id']}")?>">
-                <img class="hot_img img-thumbnail" src="<?=site_url($hot['poster'])?>">
+                <img class="hot_img img-thumbnail" src="<?=media_url($hot['poster'])?>">
                 <div class="hot_title">
                     <?=$hot['title']?>
                 </div>
