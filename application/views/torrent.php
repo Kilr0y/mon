@@ -45,8 +45,8 @@
             <?php if (isset($movie)): ?>
                 <?php if (! empty($movie['poster_large'])): ?>
                 <div class="col-md-2 margin-bottom-10">
-                    <a href="<?=site_url($movie['poster_large'])?>" data-lightbox="poster">
-                        <img class="poster" src="<?=site_url($movie['poster_large'])?>"  />
+                    <a href="<?=$this->config->item('media_url') . $movie['poster_large']?>" data-lightbox="poster">
+                        <img class="poster" src="<?=$this->config->item('media_url') . $movie['poster_large']?>"  />
                     </a>
                 </div>
                 <?php endif ?>
@@ -130,8 +130,8 @@
                 <h3>Screenshots</h3>
                 <div class="screenshots">
                     <?php foreach ($screenshots as $screen): ?>
-                    <a href="<?=site_url($screen['link'])?>" data-lightbox="screenshot">
-                        <img src="<?=site_url($screen['link'])?>" />
+                    <a href="<?=$this->config->item('media_url') . $screen['link']?>" data-lightbox="screenshot">
+                        <img src="<?=$this->config->item('media_url') . $screen['link']?>" />
                     </a>
                     <?php endforeach ?>
                 </div>

@@ -20,7 +20,7 @@
     </script>
   </head>
 
-  <body role="document">
+  <body role="document"> 
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
