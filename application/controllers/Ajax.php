@@ -16,7 +16,7 @@ class Ajax extends CI_Controller {
         echo json_encode($output);        
     }
 
-    //comment
+    //another comment here
 
     public function login(){
         $this->load->model('user');
