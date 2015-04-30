@@ -64,10 +64,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'monova',
+	'hostname' => 'piggy.mysql.ukraine.com.ua',
+	'username' => 'piggy_monova',
+	'password' => 'zslvzbjg',
+	'database' => 'piggy_monova',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
