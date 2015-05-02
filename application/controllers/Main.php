@@ -71,14 +71,15 @@ class Main extends CI_Controller {
 
     public function hot($cat_id = 1){
         $this->load->library('general');
-        $header = $this->general->get_header_array('latest');
+        $header = $this->general->get_header_array('hot');
         $header['title'] = $this->config->item('site_title');
 
         if (! $this->config->item('cache_enabled') || ! $page_str = $this->cache->get('hot_cat_'.$cat_id)) {
-            $this->load->model('torrents');
+            $this->load->model('items');
 
-            $data['hots'] = $this->torrents->get_hotest($cat_id);
+            $data['hots'] = $this->items->get_hotest($cat_id);
             $data['cat'] = $cat_id;
+            $data['catname'] = strtolower($this->config->item('maincat_name')[$cat_id]);
 
             $page_str['page'] = $this->load->view('hot', $data, true);
 

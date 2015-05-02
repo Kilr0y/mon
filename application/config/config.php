@@ -38,7 +38,7 @@ $config['magnet_link'] = '&tr=udp%3A%2F%2Ftracker.istole.it%3A80%2Fannounce&tr=u
 
 
 /***** TECH CONFIG ********/
-$config['cache_enabled'] = true;
+$config['cache_enabled'] = false;
 $config['cache_adapter'] = 'xcache';
 
 
