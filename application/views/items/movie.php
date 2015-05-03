@@ -78,7 +78,7 @@
         <div class="col-md-12">
             <h3>Related Torrents</h3>
             <?php $table_data = $movie['related'] ?>
-            <?php include('/../table.php') ?>
+            <?php include(__DIR__.'/../table.php') ?>
         </div>
     </div>
 <?php endif ?>
@@ -90,7 +90,7 @@
     </div>
 </div>
 
-<?php include('/../footer_links.php') ?>
+<?php include(__DIR__.'/../footer_links.php') ?>
    
         
 
