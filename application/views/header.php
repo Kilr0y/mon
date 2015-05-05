@@ -58,7 +58,7 @@
                     <ul class="multi-column-dropdown">
                         <li><a href="<?=site_url('latest')?>"><i class="fa fa-clock-o fa-lg"></i>&nbsp;Latest</a></li>
                         <li><a href="<?=site_url('movies')?>"><i class="fa fa-video-camera fa-lg"></i>&nbsp;Movies</a></li>                        
-                        <li><a href="<?=$this->config->item('adult_base_url')?>"><i class="fa fa-venus-mars fa-lg"></i>&nbsp;Adult</a></li>
+                        <li><a href="<?=site_url('adult')?>"><i class="fa fa-venus-mars fa-lg"></i>&nbsp;Adult</a></li>
                         <li><a href="<?=site_url('books')?>"><i class="fa fa-book fa-lg"></i>&nbsp;Books</a></li>
                         <li><a href="<?=site_url('games')?>"><i class="fa fa-gamepad fa-lg"></i>&nbsp;Games</a></li>                
                         <li><a href="<?=site_url('anime')?>"><i class="fa fa-video-camera fa-lg"></i>&nbsp;Anime</a></li>

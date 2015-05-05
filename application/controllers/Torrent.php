@@ -12,7 +12,6 @@ class Torrent extends CI_Controller {
     }
 
     public function index($id = 0){
-        
         //Generating header data
         $header = $this->general->get_header_array('torrent');        
         $header['title'] = $this->config->item('site_title');
@@ -30,11 +29,13 @@ class Torrent extends CI_Controller {
             redirect(base_url());
         }
         $data['torrent'] = $torrent;
+
+        //check adult access
+        if ($torrent['maincat'] == CAT_ADULT && !isset($_COOKIE['adult']))
+            redirect(site_url('torrent/adult_confirm/'.$id));
         
         
-        
-        
-        
+
         //if this is movie torrent, taking related film data
         if (! empty($torrent['imdb_id'])){
             $this->load->model('movie');
@@ -94,6 +95,27 @@ class Torrent extends CI_Controller {
         $this->load->view('footer');
                 
     }
+
+    public function adult_confirm($id){
+        //Generating header data
+        $header = $this->general->get_header_array('torrent');
+        $header['title'] = $this->config->item('site_title');
+
+        $data['id'] = $id;
+
+        $this->load->view('header', $header);
+        $this->load->view('adult_confirm', $data);
+        $this->load->view('footer');
+    }
+
+    public function set_adult_cockie($id = ''){
+        setcookie('adult', 'true', time() + ($this->config->item('adult_coockie_live')), '/');
+        if ($id)
+            redirect(site_url('torrent/'.$id));
+        else
+            redirect(site_url('latest'));
+    }
+
     
     public function download($id = ''){
         

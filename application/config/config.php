@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 date_default_timezone_set('Europe/Kiev');
 $config['base_url'] = 'http://127.0.0.1/monova/';
 $config['media_url'] = 'http://127.0.0.1/monova_crawlers/';
-$config['adult_base_url'] = 'http://127.0.0.1/monova/';
 
 
 $config['site_title'] = ' - monova.org';
@@ -22,7 +21,7 @@ $config['show_cloud_tags'] = false;
 
 $config['magnet_link'] = '&tr=udp%3A%2F%2Ftracker.istole.it%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Fopen.demonii.com%3A1337';
 
-
+$config['adult_coockie_live'] = 60*60*24;
 
 
 
