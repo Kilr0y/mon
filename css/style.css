@@ -47,8 +47,8 @@ body{
 .nav-column {
     float: left;
 }
-.nav-column li{
-    
+.community-menu i{
+    width: 22px;
 }
 
 .hot_img {
@@ -409,6 +409,10 @@ body{
     margin: 10px 0;
 }
 
+#lightbox_contact textarea{
+    width: 600px;
+}
+
 /**** END OF LIGHTBOX *****/
 
 /**** Lightbox_login ******/
@@ -457,13 +461,14 @@ body{
 
 }
 
-
+#lightbox_contact .text_1,
 #lightbox_login .text_1,
 #lightbox_registration .text_1,
 #lightbox_report .text_1{
     font-size: 20px;
     font-weight: bold;
 }
+#lightbox_contact .text_2,
 #lightbox_login .text_2,
 #lightbox_registration .text_2{
     font-size: 13px;

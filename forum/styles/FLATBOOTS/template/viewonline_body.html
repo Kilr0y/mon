@@ -1,0 +1,57 @@
+<!-- INCLUDE overall_header.html -->
+<div class="side-segment"><h3>{TOTAL_REGISTERED_USERS_ONLINE}</h3></div>
+<p>{TOTAL_GUEST_USERS_ONLINE}<!-- IF S_SWITCH_GUEST_DISPLAY --> &#166; <a href="{U_SWITCH_GUEST_DISPLAY}">{L_SWITCH_GUEST_DISPLAY}</a><!-- ENDIF --></p>
+
+<div class="panel panel-forum">
+	     <div class="panel-heading">
+		  <i class="fa fa-map-marker"></i> {L_WHO_IS_ONLINE}
+		 </div>
+		 <div class="panel-inner">
+		<table class="footable table table-striped table-primary table-hover">
+	<!-- IF .user_row -->	
+	<thead>
+		<tr>
+			<th data-class="expand"><a href="{U_SORT_USERNAME}">{L_USERNAME}</a></th>
+			<th data-hide="phone"><a href="{U_SORT_LOCATION}">{L_FORUM_LOCATION}</a></th>
+			<th data-hide="phone"><a href="{U_SORT_UPDATED}">{L_LAST_UPDATED}</a></th>
+		</tr>
+	</thead>		
+	<tbody>
+		<!-- BEGIN user_row -->
+		<tr>
+			<td>{user_row.USERNAME_FULL}<!-- IF user_row.USER_IP --> &#166; {L_IP}: <a href="{user_row.U_USER_IP}">{user_row.USER_IP}</a> &#187; <a href="{user_row.U_WHOIS}" onclick="popup(this.href, 750, 500); return false;">{L_WHOIS}</a><!-- ENDIF -->
+			<!-- IF user_row.USER_BROWSER --><br />{user_row.USER_BROWSER}<!-- ENDIF -->
+			</td>
+			<td><a href="{user_row.U_FORUM_LOCATION}">{user_row.FORUM_LOCATION}</a></td>
+			<td>{user_row.LASTUPDATE}</td>
+		</tr>
+		<!-- END user_row -->
+	<!-- ELSE -->
+		<tr>
+			<td colspan="3">{L_NO_ONLINE_USERS}<!-- IF S_SWITCH_GUEST_DISPLAY --> &bull; <a href="{U_SWITCH_GUEST_DISPLAY}">{L_SWITCH_GUEST_DISPLAY}</a><!-- ENDIF --></td>
+		</tr>
+	<!-- ENDIF -->
+	</tbody>
+	</table>
+	</div>
+</div>
+
+<div class="pull-right">
+	<ul class="pagination pagination-sm">
+	  <!-- IF PREVIOUS_PAGE --><li><a href="{PREVIOUS_PAGE}">{L_PREVIOUS}</a></li><!-- ENDIF -->
+      <!-- IF PAGINATION --><li><a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a></li> {PAGINATION}<!-- ELSE --> <li><a>{PAGE_NUMBER}</a></li><!-- ENDIF -->
+	  <!-- IF NEXT_PAGE --><li><a href="{NEXT_PAGE}">{L_NEXT}</a></li><!-- ENDIF -->
+	</ul>	
+</div>
+	
+<!-- IF LEGEND -->
+<div class="clearfix">
+ <div class="pull-left">
+  <p><small>{L_LEGEND}: {LEGEND}</small></p>
+ </div>
+</div>
+<!-- ENDIF -->
+<div class="row">
+<!-- INCLUDE jumpbox.html -->
+</div>
+<!-- INCLUDE overall_footer.html -->

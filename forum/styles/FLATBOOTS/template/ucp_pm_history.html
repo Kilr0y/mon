@@ -1,0 +1,30 @@
+<div class="side-segment">
+<span class="pull-right" style="margin-top:10px;"><a href="#review" onclick="viewableArea(getElementById('topicreview'), true); var rev_text = getElementById('review').getElementsByTagName('a').item(0).firstChild; if (rev_text.data == '{LA_EXPAND_VIEW}'){rev_text.data = '{LA_COLLAPSE_VIEW}'; } else if (rev_text.data == '{LA_COLLAPSE_VIEW}'){rev_text.data = '{LA_EXPAND_VIEW}'};">{L_EXPAND_VIEW}</a></span>
+<h3>{L_MESSAGE_HISTORY}:</h3>
+</div>
+<div id="topicreview">
+<script>
+	// <![CDATA[
+		bbcodeEnabled = {S_BBCODE_ALLOWED};
+	// ]]>
+</script>
+	<!-- BEGIN history_row -->
+		<div class="well well-sm" id="pr{history_row.MSG_ID}">
+		 <h3><a href="{history_row.U_VIEW_MESSAGE}" <!-- IF history_row.S_CURRENT_MSG -->class="current"<!-- ENDIF -->>{history_row.SUBJECT}</a></h3>
+			<div class="pull-left">
+			 {history_row.MINI_POST_IMG} {L_SENT_AT}: <strong>{history_row.SENT_DATE}</strong><br /> 
+			 {L_MESSAGE_BY_AUTHOR} {history_row.MESSAGE_AUTHOR_FULL}
+			</div> 
+			<!-- IF history_row.U_QUOTE or history_row.MESSAGE_AUTHOR_QUOTE -->
+			<div class="pull-right">
+				<a class="btn btn-sm btn-default" <!-- IF history_row.U_QUOTE -->href="{history_row.U_QUOTE}"<!-- ELSE -->href="#postingbox" onclick="addquote({history_row.MSG_ID}, '{history_row.MESSAGE_AUTHOR_QUOTE}', '{LA_WROTE}');"<!-- ENDIF --> title="{L_QUOTE} {history_row.MESSAGE_AUTHOR}"><i class="fa fa-comment"></i></a>
+			</div>
+			<!-- ENDIF -->
+		  <div class="space10"></div>
+			<div class="content"><!-- IF history_row.MESSAGE -->{history_row.MESSAGE}<!-- ELSE --><span class="error">{L_MESSAGE_REMOVED_FROM_OUTBOX}</span><!-- ENDIF --></div>
+			 <div id="message_{history_row.MSG_ID}" style="display: none;">{history_row.DECODED_MESSAGE}</div>
+		</div>
+	<!-- END history_row -->
+</div>
+<hr />
+

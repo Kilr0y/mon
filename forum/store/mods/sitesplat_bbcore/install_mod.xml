@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
+	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
+		<meta name="generator" content="MODX file generated with PP MODX Creator 1.2.6 by tumba25 (phpBB version)"/>
+		<license><![CDATA[SiteSplat 2014 all rights reserved - http://sitesplat.com/]]></license>
+		<title lang="en"><![CDATA[SiteSplat BBcore - 4.2.1]]></title>
+		<description lang="en"><![CDATA[This MOD adds proper functionality to the SiteSplat's styles by editing the phpBB3 core files.]]></description>
+		<author-notes lang="en"><![CDATA[This MOD adds proper functionality to the SiteSplat's styles by editing the phpBB3 core files.]]></author-notes>
+		<author-group>
+			<author>
+				<realname><![CDATA[Dave]]></realname>
+				<username phpbbcom="no"><![CDATA[ThemeSplat (SiteSplat)]]></username>
+				<homepage><![CDATA[www.sitesplat.com]]></homepage>
+				<email><![CDATA[info@sitesplat.com]]></email>
+			</author>
+		</author-group>
+		<mod-version>4.2.1</mod-version>
+		<installation>
+			<level>easy</level>
+			<time>300</time>
+			<target-version>3.0.12</target-version>
+		</installation>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/*.*" to="*.*"/>
+		</copy>
+		<open src="common.php">
+			<edit>
+				<find><![CDATA[// Add own hook handler]]></find>
+				<action type="before-add"><![CDATA[// SiteSplat themes
+$sitesplat_themes = array('BBOOTS', 'FLATBOOTS');]]></action>
+			</edit>
+		</open>
+		<open src="search.php">
+			<edit>
+				<find><![CDATA['U_SEARCH_WORDS'	=> $u_search,]]></find>
+				<action type="before-add"><![CDATA['U_MARK_FORUMS'     => ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}index.$phpEx", 'hash=' . generate_link_hash('global') . '&amp;mark=forums') : '',]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['POST_ID'			=> ($show_results == 'posts') ? $row['post_id'] : false,]]></find>
+				<action type="after-add"><![CDATA[				'S_POST_ANNOUNCE'	=> ($row['topic_type'] == POST_ANNOUNCE) ? true : false,
+				'S_POST_GLOBAL'	    => ($row['topic_type'] == POST_GLOBAL) ? true : false,
+				'S_POST_STICKY'	    => ($row['topic_type'] == POST_STICKY) ? true : false,
+				'S_HAS_POLL'		    => ($row['poll_start']) ? true : false,
+				'S_LOCKED'          => (!empty($row['topic_status'])) ? $row['topic_status'] == ITEM_LOCKED : false,]]></action>
+			</edit>
+		</open>
+		<open src="ucp.php">
+			<edit>
+				<find><![CDATA[$update_time = $config['load_online_time'] * 60;]]></find>
+				<action type="after-add"><![CDATA[include($phpbb_root_path . 'includes/functions_sitesplat.' . $phpEx);]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['SELECT'	=> 'u.user_id, u.username, u.username_clean, u.user_colour, MAX(s.session_time) as online_time, MIN(s.session_viewonline) AS viewonline',]]></find>
+				<action type="replace-with"><![CDATA['SELECT'	=> 'u.user_id, u.username, u.username_clean, u.user_colour, MAX(s.session_time) as online_time, MIN(s.session_viewonline) AS viewonline, u.user_avatar, u.user_avatar_type, u.user_avatar_width, u.user_avatar_height',]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['U_PROFILE'		=> get_username_string('profile', $row['user_id'], $row['username'], $row['user_colour']),]]></find>
+				<action type="after-add"><![CDATA['AVATAR'		=> sitesplat_user_avatar($row['user_avatar'], $row['user_avatar_type'], $row['user_avatar_width'], $row['user_avatar_height']),]]></action>
+			</edit>
+		</open>
+		<open src="viewtopic.php">
+			<edit>
+				<find><![CDATA[// Does this topic contain a poll?]]></find>
+				<action type="before-add"><![CDATA[global $sitesplat_themes;
+if (in_array($user->theme['template_path'], $sitesplat_themes)) {
+	$template->assign_vars(array( 
+		'S_TOPIC_MOD'       => ($topic_mod != '') ? '<select class="selectpicker" data-container="body" data-width="auto" data-style="btn btn-default form-control" name="action" id="quick-mod-select">' . $topic_mod . '</select>' : '',
+		'BOOKMARK_CLASS'    => ($user->data['is_registered'] && $config['allow_bookmarks'] && $topic_data['bookmarked']) ? 'fa fa-star' : 'fa fa-star-o',
+	));
+}
+]]></action>
+			</edit>
+		</open>
+		<open src="adm/style/acp_styles.html">
+			<edit>
+				<find><![CDATA[	<!-- IF S_STYLE --> <!-- DEFINE $COLSPAN = 5 --> <!-- ELSE --> <!-- DEFINE $COLSPAN = 4 --> <!-- ENDIF -->]]></find>
+				<action type="before-add"><![CDATA[	<!-- IF .sitesplat_themes -->
+		<table cellspacing="1">
+			<thead><tr>
+				<th colspan="2">Sitesplat Update Manager</th>
+			</tr></thead>
+			<tbody>
+			<!-- BEGIN sitesplat_themes -->
+			<tr style="font-size: 14px;">
+				<td style="text-align:center;" class="row2">
+	        <strong>{sitesplat_themes.NAME}</strong>
+				</td>
+				<td class="row1">
+					Installed Version: <strong>{sitesplat_themes.VERSION}</strong><br />
+				<!-- IF sitesplat_themes.MSG -->
+					<br />{sitesplat_themes.MSG}
+				<!-- ENDIF -->
+				</td>
+			</tr>
+	    <!-- END sitesplat_themes -->
+			</tbody>
+		</table>
+		<br />
+	<!-- ENDIF -->
+]]></action>
+			</edit>
+		</open>
+		<open src="includes/bbcode.php">
+			<edit>
+				<find><![CDATA['img'		=> '<img src="$1" alt="' . $user->lang['IMAGE'] . '" />',]]></find>
+				<action type="replace-with"><![CDATA['img'		=> '<img class="img-responsive" src="$1" alt="' . $user->lang['IMAGE'] . '" />',]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions.php">
+			<edit>
+				<find><![CDATA[$seperator = '<span class="page-sep">' . $user->lang['COMMA_SEPARATOR'] . '</span>';]]></find>
+				<action type="replace-with"><![CDATA[global $sitesplat_themes;
+	$sitesplat_not_adm = ($user->page['page_dir'] != 'adm' && in_array($user->theme['template_path'], $sitesplat_themes)) ? true : false;
+	if ($sitesplat_not_adm) {
+	$seperator = '<li class="page-sep">' . $user->lang['COMMA_SEPARATOR'] . '</li>';
+	} else {
+	$seperator = '<span class="page-sep">' . $user->lang['COMMA_SEPARATOR'] . '</span>';
+	}]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$page_string = ($on_page == 1) ? '<strong>1</strong>' : '<a href="' . $base_url . '">1</a>';]]></find>
+				<action type="after-add"><![CDATA[  global $sitesplat_themes;
+	$sitesplat_not_adm = ($user->page['page_dir'] != 'adm' && in_array($user->theme['template_path'], $sitesplat_themes)) ? true : false;
+  
+	if ($sitesplat_not_adm) {
+		$page_string = ($on_page == 1) ? '<li class="active"><a>1</a></li>' : '<li><a href="' . $base_url . '">1</a></li>';
+	}]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$page_string .= ($start_cnt > 1) ? '<span class="page-dots"> ... </span>' : $seperator;]]></find>
+				<action type="replace-with"><![CDATA[    if ($sitesplat_not_adm) {
+      $page_string .= ($start_cnt > 1) ? '<li class="active"><a> ... </a></li>' : $seperator;
+    } else {
+		  $page_string .= ($start_cnt > 1) ? '<span class="page-dots"> ... </span>' : $seperator;
+    }]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';]]></find>
+				<action type="replace-with"><![CDATA[			if ($sitesplat_not_adm) {
+				$page_string .= ($i == $on_page) ? '<li class="active"><a>' . $i . '</a></li>' : '<li><a href="' . $base_url . "{$url_delim}start=" . (($i - 1) * $per_page) . '">' . $i . '</a></li>';
+			} else {
+				$page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';
+			}]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$page_string .= ($end_cnt < $total_pages) ? '<span class="page-dots"> ... </span>' : $seperator;]]></find>
+				<action type="replace-with"><![CDATA[    if ($sitesplat_not_adm) {
+      $page_string .= ($end_cnt < $total_pages) ? '<li class="active"><a> ... </a></li>' : $seperator;
+    } else {
+      $page_string .= ($end_cnt < $total_pages) ? '<span class="page-dots"> ... </span>' : $seperator;
+    }]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';]]></find>
+				<action type="replace-with"><![CDATA[      if ($sitesplat_not_adm) {
+        $page_string .= ($i == $on_page) ? '<li class="active"><a>' . $i . '</a></li>' : '<li><a href="' . $base_url . "{$url_delim}start=" . (($i - 1) * $per_page) . '">' . $i . '</a></li>';
+      } else {
+        $page_string .= ($i == $on_page) ? '<strong>' . $i . '</strong>' : '<a href="' . $base_url . "{$url_delim}start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';
+      }]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$page_string .= ($on_page == $total_pages) ? '<strong>' . $total_pages . '</strong>' : '<a href="' . $base_url . "{$url_delim}start=" . (($total_pages - 1) * $per_page) . '">' . $total_pages . '</a>';]]></find>
+				<action type="replace-with"><![CDATA[  if ($sitesplat_not_adm) {
+    $page_string .= ($on_page == $total_pages) ? '<li class="active"><a>' . $total_pages . '</a></li>' : '<li><a href="' . $base_url . "{$url_delim}start=" . (($total_pages - 1) * $per_page) . '">' . $total_pages . '</a></li>';
+  } else {
+    $page_string .= ($on_page == $total_pages) ? '<strong>' . $total_pages . '</strong>' : '<a href="' . $base_url . "{$url_delim}start=" . (($total_pages - 1) * $per_page) . '">' . $total_pages . '</a>';
+  }]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$page_string = '<a href="' . $base_url . "{$url_delim}start=" . (($on_page - 2) * $per_page) . '">' . $user->lang['PREVIOUS'] . '</a>&nbsp;&nbsp;' . $page_string;]]></find>
+				<action type="replace-with"><![CDATA[      if ($sitesplat_not_adm) {
+        $page_string = '<li><a href="' . $base_url . "{$url_delim}start=" . (($on_page - 2) * $per_page) . '">' . $user->lang['PREVIOUS'] . '</a></li>&nbsp;&nbsp;' . $page_string;
+      } else {
+        $page_string = '<a href="' . $base_url . "{$url_delim}start=" . (($on_page - 2) * $per_page) . '">' . $user->lang['PREVIOUS'] . '</a>&nbsp;&nbsp;' . $page_string;
+      }]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "{$url_delim}start=" . ($on_page * $per_page) . '">' . $user->lang['NEXT'] . '</a>';]]></find>
+				<action type="replace-with"><![CDATA[      if ($sitesplat_not_adm) {
+        $page_string .= '&nbsp;&nbsp;<li><a href="' . $base_url . "{$url_delim}start=" . ($on_page * $per_page) . '">' . $user->lang['NEXT'] . '</a></li>';
+      } else {
+        $page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "{$url_delim}start=" . ($on_page * $per_page) . '">' . $user->lang['NEXT'] . '</a>';
+      }]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[// Generate logged in/logged out status]]></find>
+				<action type="before-add"><![CDATA[	global $sitesplat_themes;
+	if (in_array($user->theme['template_path'], $sitesplat_themes)) {
+		$user->add_lang('mods/sitesplat');
+	}
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[// The following assigns all _common_ variables that may be used at any point in a template.]]></find>
+				<action type="before-add"><![CDATA[if (in_array($user->theme['template_path'], $sitesplat_themes)) {
+    if ( !function_exists('get_user_avatar')) {
+    	include_once($phpbb_root_path . 'includes/functions_display.' . $phpEx);
+    }
+    
+    $template->assign_vars(array(	
+      'USER_AVATAR'  				    => ($user->data['user_avatar'] && $user->optionget('viewavatars')) ? get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], ($user->data['user_avatar_width'] > $user->data['user_avatar_height']) ? 22 : round((22 / $user->data['user_avatar_height']) * $user->data['user_avatar_width']), ($user->data['user_avatar_height'] > $user->data['user_avatar_width']) ? 22 : round((22 / $user->data['user_avatar_width']) * $user->data['user_avatar_height'])) : '<i class="fa fa-picture-o"></i>',
+      'CURRENT_USERNAME'  			    => ($user->data['user_id'] == ANONYMOUS) ? $user->lang['GUEST'] : $user->data['username'],
+      'U_USER_PROFILE'                  => append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . $user->data['user_id']),
+	  'CURRENT_USERNAME_FULL'      => get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),
+	  
+	  'USER_EMAIL_MENU'				    => $user->data['user_email'],
+      'USER_AVATAR_MENU'  			    => ($user->data['user_avatar'] && $user->optionget('viewavatars')) ? get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], ($user->data['user_avatar_width'] > $user->data['user_avatar_height']) ? 100 : round((100 / $user->data['user_avatar_height']) * $user->data['user_avatar_width']), ($user->data['user_avatar_height'] > $user->data['user_avatar_width']) ? 100 : round((100 / $user->data['user_avatar_width']) * $user->data['user_avatar_height'])) : '<img alt="No avatar" src="./images/user4.png">',
+      'USER_AVATAR_THUMB'  				=> ($user->data['user_avatar'] && $user->optionget('viewavatars')) ? get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], ($user->data['user_avatar_width'] > $user->data['user_avatar_height']) ? 30 : round((30 / $user->data['user_avatar_height']) * $user->data['user_avatar_width']), ($user->data['user_avatar_height'] > $user->data['user_avatar_width']) ? 30 : round((30 / $user->data['user_avatar_width']) * $user->data['user_avatar_height'])) : '<img alt="No avatar" src="./images/user4.png">',
+      'BOARD_EMAIL'			            =>  $config['board_contact'],
+	  'SITESPLAT_TOTAL_POSTS'			=> ($config['num_posts']) ? $config['num_posts'] : '0',
+	  'SITESPLAT_TOTAL_TOPICS'			=> ($config['num_topics']) ? $config['num_topics'] : '0',
+	  'SITESPLAT_TOTAL_USERS'			=> ($config['num_users']) ? $config['num_users'] : '0',
+	  'SITESPLAT_NEWEST_USER'           => ($config['newest_user_id']) ? get_username_string('full', $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour']) : '',
+      'SITESPLAT_RECORD_ONLINE'		    => ($config['record_online_users']) ? $config['record_online_users'] : '0',
+      'SITESPLAT_CURRENTLY_ONLINE'		=> (isset($total_online_users) && $total_online_users) ? $total_online_users : '0',
+	  
+      'U_LOGOUT'						=> ($user->data['user_id'] != ANONYMOUS) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=logout', true, $user->session_id) : append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login'),
+      'U_UCP_MAIN'               		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main'),
+      'U_UCP_MAIN_FRONT'            	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&amp;mode=front'),
+      'U_UCP_MAIN_SUBSCRIPTION'      	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&amp;mode=subscribed'),
+      'U_UCP_MAIN_BOOKMARKS'         	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&amp;mode=bookmarks'),
+      'U_UCP_MAIN_DRAFTS'            	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&amp;mode=drafts'),
+      'U_UCP_MAIN_ATTACHMENTS'      	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=attachments&amp;mode=attachments'),
+      
+      'U_UCP_PROFILE'               	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=profile'),
+      'U_UCP_PROFILE_PROFILE'           => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=profile&amp;mode=profile_info'),
+      'U_UCP_PROFILE_SIGNITURE'      	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=profile&amp;mode=signature'),
+      'U_UCP_PROFILE_AVATAR'         	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=profile&amp;mode=avatar'),
+      'U_UCP_PROFILE_SETTINGS'      	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=profile&amp;mode=reg_details'),
+      
+      'U_UCP_PREFERENCE'            	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=prefs'),
+      'U_UCP_PREFERENCE_SETTINGS'       => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=prefs&amp;mode=personal'),
+      'U_UCP_PREFERENCE_DEFAULTS'       => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=prefs&amp;mode=post'),
+      'U_UCP_PREFERENCE_OPTIONS'        => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=prefs&amp;mode=view'),
+      
+      'U_UCP_PM'                  	    => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm'),
+      'U_UCP_PM_COMPOSE'             	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;mode=compose'),
+      'U_UCP_PM_DRAFTS_COPY'            => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;mode=drafts'),
+      'U_UCP_PM_INBOX'            	    => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=inbox'),
+      'U_UCP_PM_OUTBOX'            	    => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=outbox'),
+      'U_UCP_PM_SENTBOX'            	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=sentbox'),
+      'U_UCP_PM_OPTIONS'           	    => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;mode=options'),
+      
+      'U_UCP_GROUPS'            		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=groups'),
+      'U_UCP_GROUPS_MEMBERSHIP'   	    => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=groups&amp;mode=membership'),
+      'U_UCP_GROUPS_MANAGE'      		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=groups&amp;mode=manage'),
+      
+      'U_UCP_ZEBRA'               	    => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=zebra'),
+      'U_UCP_ZEBRA_FRIENDS'         	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=zebra&amp;mode=friends'),
+      'U_UCP_ZEBRA_FOES'            	=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=zebra&amp;mode=foes'),
+    ));
+  }]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions_content.php">
+			<edit>
+				<find><![CDATA[$sort_ary['output'] = '<select name="' . $name . '" id="' . $name . '">';]]></find>
+				<action type="after-add"><![CDATA[        global $sitesplat_themes;
+				if ($user->page['page_dir'] != 'adm' && in_array($user->theme['template_path'], $sitesplat_themes)) {
+      $sort_ary['output'] = '<select class="selectpicker" data-width="100%" data-style="btn btn-default form-control" data-container="body" name="' . $name . '" id="' . $name . '">';
+    }]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions_display.php">
+			<edit>
+				<find><![CDATA[$pagination .= '<span class="page-dots"> ... </span>';]]></find>
+				<action type="replace-with"><![CDATA[        global $sitesplat_themes;
+				if (in_array($user->theme['template_path'], $sitesplat_themes)) {
+          $pagination .= '<span class="page-dots"> ... </span>';
+        } else {
+          $pagination .= '<span class="page-dots"> ... </span>';
+        }]]></action>
+			</edit>
+		</open>
+		<open src="includes/session.php">
+			<edit>
+				<find><![CDATA[send_status_line(503, 'Service Unavailable');
+			}]]></find>
+				<action type="after-add"><![CDATA[global $sitesplat_themes;
+            if (in_array($this->theme['template_path'], $sitesplat_themes)) {
+			$template->assign_vars(array(
+                    'ACP_DISABLE_MESSAGE'    => $config['board_disable_msg'],)
+            );
+            page_header();
+                    $template->set_filenames(array(
+                     'body' => 'addons/offline_board_body.html')
+                    );
+                    page_footer();
+                exit;
+            }]]></action>
+			</edit>
+		</open>
+		<open src="includes/acp/acp_board.php">
+			<edit>
+				<find><![CDATA['allow_avatar_local'	=> array('lang' => 'ALLOW_LOCAL',			'validate' => 'bool',	'type' => 'radio:yes_no', 'explain' => false),]]></find>
+				<action type="before-add"><![CDATA['allow_gravatar'		=> array('lang' => 'ALLOW_GRAVATAR',		'validate' => 'bool',	'type' => 'radio:yes_no', 'explain' => false),]]></action>
+			</edit>
+		</open>
+		<open src="includes/acp/acp_styles.php">
+			<edit>
+				<find><![CDATA[				$this->frontend('style', array('details'), array('export', 'delete'));]]></find>
+				<action type="before-add"><![CDATA[				global $sitesplat_themes;
+
+				foreach ($sitesplat_themes as $sitesplat_theme)
+				{
+					if ( file_exists($phpbb_root_path . 'styles/' . $sitesplat_theme . '/style.cfg'))
+					{
+						$cfg_ary = parse_cfg_file($phpbb_root_path . 'styles/' . $sitesplat_theme . '/style.cfg');
+
+						if ($cfg_ary)
+						{
+						  $theme_lower = strtolower($sitesplat_theme);
+
+							$version = ( !empty($cfg_ary[$theme_lower])) ? $cfg_ary[$theme_lower] : '3.0.2';
+
+							$ch = curl_init();
+							curl_setopt($ch, CURLOPT_URL, 'http://www.sitesplat.com/updatecheck/'.$theme_lower.'.txt');
+							curl_setopt($ch, CURLOPT_HEADER, false);
+							curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+							$contents = curl_exec($ch);
+							$http = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+							curl_close($ch);
+
+							if ($http >= 400) {
+								$contents = '';
+							}
+
+						  $template->assign_block_vars('sitesplat_themes', array(
+								'NAME'		=> $sitesplat_theme,
+								'VERSION'	=> $version,
+								'MSG'			=> $contents
+							));
+	          }
+          }
+				}]]></action>
+			</edit>
+		</open>
+		<open src="includes/acp/acp_users.php">
+			<edit>
+				<find><![CDATA[								'user_email_hash'	=> phpbb_email_hash($update_email),]]></find>
+				<action type="after-add"><![CDATA[  
+								'user_avatar'		=> ($user_row['user_avatar_type'] == 9) ? 'http://www.gravatar.com/avatar/' . md5(strtolower(trim($update_email))) . '?d=identicon&s=' . min($config['avatar_max_width'], $config['avatar_max_height']) : $user_row['user_avatar'],]]></action>
+			</edit>
+		</open>
+		<open src="includes/mcp/mcp_forum.php">
+			<edit>
+				<find><![CDATA['LAST_VIEW_TIME'	=> $user->format_date($row['topic_last_view_time']),]]></find>
+				<action type="after-add"><![CDATA['S_POST_ANNOUNCE'	=> ($row['topic_type'] == POST_ANNOUNCE) ? true : false,
+			'S_POST_GLOBAL'	    => ($row['topic_type'] == POST_GLOBAL) ? true : false,
+			'S_POST_STICKY'	    => ($row['topic_type'] == POST_STICKY) ? true : false,
+			'S_LOCKED'          => (!empty($row['topic_status'])) ? $row['topic_status'] == ITEM_LOCKED : false,
+			'S_TOPIC_MOVED'		=> ($row['topic_status'] == ITEM_MOVED) ? true : false,
+			'S_HAS_POLL'		=> ($row['poll_start']) ? true : false,]]></action>
+			</edit>
+		</open>
+		<open src="includes/ucp/ucp_main.php">
+			<edit>
+				<find><![CDATA['U_TOPIC_AUTHOR'		=> get_username_string('profile', $row['topic_poster'], $row['topic_first_poster_name'], $row['topic_first_poster_colour']),]]></find>
+				<action type="before-add"><![CDATA['S_LOCKED'          => (!empty($row['topic_status'])) ? $row['topic_status'] == ITEM_LOCKED : false,]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['U_NEWEST_POST'			=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params . '&amp;view=unread') . '#unread',]]></find>
+				<action type="before-add"><![CDATA['S_POST_ANNOUNCE'	=> ($row['topic_type'] == POST_ANNOUNCE) ? true : false,
+				'S_POST_GLOBAL'	    => ($row['topic_type'] == POST_GLOBAL) ? true : false,
+				'S_POST_STICKY'	    => ($row['topic_type'] == POST_STICKY) ? true : false,
+				'S_LOCKED'          => (!empty($row['topic_status'])) ? $row['topic_status'] == ITEM_LOCKED : false,
+				'S_TOPIC_MOVED'		=> ($row['topic_status'] == ITEM_MOVED) ? true : false,
+				'S_HAS_POLL'		=> ($row['poll_start']) ? true : false,]]></action>
+			</edit>
+		</open>
+		<open src="includes/ucp/ucp_prefs.php">
+			<edit>
+				<find><![CDATA[foreach ($_options as $sort_option)]]></find>
+				<action type="before-add"><![CDATA[global $sitesplat_themes;]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[${'s_limit_' . $sort_option . '_days'} = '<select name="' . $sort_option . '_st">';]]></find>
+				<action type="replace-with"><![CDATA[				if (in_array($user->theme['template_path'], $sitesplat_themes)) {
+            ${'s_limit_' . $sort_option . '_days'} = '<select class="selectpicker" data-container="body" name="' . $sort_option . '_st">';
+          } else {
+            ${'s_limit_' . $sort_option . '_days'} = '<select name="' . $sort_option . '_st">';
+          }]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[${'s_sort_' . $sort_option . '_key'} = '<select name="' . $sort_option . '_sk">';]]></find>
+				<action type="replace-with"><![CDATA[				if (in_array($user->theme['template_path'], $sitesplat_themes)) {
+            ${'s_sort_' . $sort_option . '_key'} = '<select class="selectpicker" data-container="body" name="' . $sort_option . '_sk">';
+          } else {
+            ${'s_sort_' . $sort_option . '_key'} = '<select name="' . $sort_option . '_sk">';
+          }]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[${'s_sort_' . $sort_option . '_dir'} = '<select name="' . $sort_option . '_sd">';]]></find>
+				<action type="replace-with"><![CDATA[				if (in_array($user->theme['template_path'], $sitesplat_themes)) {
+            ${'s_sort_' . $sort_option . '_dir'} = '<select class="selectpicker" data-container="body" name="' . $sort_option . '_sd">';
+          } else {
+            ${'s_sort_' . $sort_option . '_dir'} = '<select name="' . $sort_option . '_sd">';
+          }]]></action>
+			</edit>
+		</open>
+		<open src="includes/ucp/ucp_profile.php">
+			<edit>
+				<find><![CDATA[							'user_passchg'		=> ($auth->acl_get('u_chgpasswd') && $data['new_password']) ? time() : 0,]]></find>
+				<action type="after-add"><![CDATA[  
+							'user_avatar'		=> ($auth->acl_get('u_chgavatar') && $user->data['user_avatar_type'] == 9) ? 'http://www.gravatar.com/avatar/' . md5(strtolower(trim((($auth->acl_get('u_chgemail')) ? $data['email'] : $user->data['user_email'])))) . '?d=identicon&s=' . min($config['avatar_max_width'], $config['avatar_max_height']) : $user->data['user_avatar'],]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[						if (avatar_process_user($error, false, $can_upload))]]></find>
+				<action type="before-add"><![CDATA[						$gravatar = (!empty($_POST['gravatar'])) ? true : false;
+						if ($gravatar && !$auth->acl_get('u_chgavatar')) {
+							$error[] = $user->lang['AVATAR_NOT_ALLOWED'];
+						}
+						else if ($gravatar && $auth->acl_get('u_chgavatar')) {
+							if ($delete) {
+								$sql = 'UPDATE ' . USERS_TABLE . " SET user_avatar = '', user_avatar_type = 0, user_avatar_width = 0, user_avatar_height = 0 WHERE user_id = " . $user->data['user_id'];
+								$db->sql_query($sql);
+							}
+							else {
+								$asize = min($config['avatar_max_width'], $config['avatar_max_height']);
+								$sql = 'UPDATE ' . USERS_TABLE . " SET user_avatar = 'http://www.gravatar.com/avatar/" . md5(strtolower(trim($user->data['user_email']))) . "?d=identicon&s=" . $asize . "', user_avatar_type = 9, user_avatar_width = " . $asize . ', user_avatar_height = ' . $asize . '
+									WHERE user_id = ' . $user->data['user_id'];
+								$db->sql_query($sql);
+							}
+							meta_refresh(3, $this->u_action);
+							$message = $user->lang['PROFILE_UPDATED'] . '<br /><br />' . sprintf($user->lang['RETURN_UCP'], '<a href="' . $this->u_action . '">', '</a>');
+							trigger_error($message);
+						}]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[					'AVATAR_SIZE'	=> $config['avatar_filesize'],]]></find>
+				<action type="after-add"><![CDATA[  
+					'S_GRAVATAR'	=> ($user->data['user_avatar_type'] == 9) ? 'yes' : '',]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['S_AVATARS_ENABLED'		=> $avatars_enabled,]]></find>
+				<action type="after-add"><![CDATA['S_ALLOW_GRAVATAR'      => (!empty($config['allow_gravatar'])) ? (int) $config['allow_gravatar'] : 0,]]></action>
+			</edit>
+		</open>
+		<open src="includes/ucp/ucp_register.php">
+			<edit>
+				<find><![CDATA[if ($config['new_member_post_limit'])]]></find>
+				<action type="before-add"><![CDATA[				if ($config['allow_gravatar']) {
+                    $asize = min($config['avatar_max_width'], $config['avatar_max_height']);
+                    $user_row['user_avatar'] = 'http://www.gravatar.com/avatar/' . md5(strtolower(trim($data['email']))) . '?d=identicon&s=' . $asize;
+                    $user_row['user_avatar_type'] = 9;
+                    $user_row['user_avatar_width'] = $asize;
+                    $user_row['user_avatar_height'] = $asize;
+                }]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['S_CONFIRM_REFRESH'	=> ($config['enable_confirm'] && $config['confirm_refresh']) ? true : false,]]></find>
+				<action type="after-add"><![CDATA['S_ALLOW_GRAVATAR'      => (int) $config['allow_gravatar'],]]></action>
+			</edit>
+		</open>
+		<open src="language/en/acp/board.php">
+			<edit>
+				<find><![CDATA['ALLOW_LOCAL'					=> 'Enable gallery avatars',]]></find>
+				<action type="before-add"><![CDATA['ALLOW_GRAVATAR'				=> 'Enable Gravatars',]]></action>
+			</edit>
+		</open>
+		<diy-instructions lang="en"><![CDATA[IMPORTANT ! 
+
+#####################################################################
+Login onto the Administration Control Panel (ACP)
+
+#####################################################################
+A) Refresh the template and theme :
+
+	1) Navigate to "Styles" Tab.
+	2) Under "Style components " click on "Templates".
+	3) Under "Actions" click on "Refresh" for the SiteSplat style installed.
+	4) in the next screen, click on "Yes" to confirm
+        5) Repeat the steps for the "Themes" tab right under the "Templates" tab
+
+#####################################################################
+B) Purge the cache :
+
+	1) Navigate to General Tab
+	2) look at Purge the cache
+	3) Click on "Run Now" button at right
+	4) in the next screen, click on "Yes" to confirm
+
+#####################################################################
+
+D) Enjoy it ! Don't forget to rate it 5 STARS on ThemeForest ;-) You can find the rating system under the "downloads" tab on your ThemeForest account.
+
+http://themeforest.net/downloads/
+
+Then Under the theme download button you will see the star rating system.
+
+Cheers!]]></diy-instructions>
+	</action-group>
+</mod>

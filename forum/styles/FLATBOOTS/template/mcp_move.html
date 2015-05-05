@@ -1,0 +1,29 @@
+<!-- INCLUDE overall_header.html -->
+<form id="confirm" action="{S_CONFIRM_ACTION}" method="post">
+      <div class="side-segment"><h3>{MESSAGE_TITLE}</h3></div>
+	<div class="well">
+		<!-- IF ADDITIONAL_MSG --><p>{ADDITIONAL_MSG}</p><!-- ENDIF -->
+	<fieldset>
+		<div class="control-group">
+			<label class="control-label">{L_SELECT_DESTINATION_FORUM}:</label>
+		 <div class="controls controls-row">
+			<select class="selectpicker" data-container="body" name="to_forum_id">{S_FORUM_SELECT}</select>
+			<div class="space10"></div>
+			<!-- IF S_CAN_LEAVE_SHADOW -->
+			   <input type="checkbox" name="move_leave_shadow" id="move_leave_shadow" checked="checked"><label class="checkbox-inline" for="move_leave_shadow">{L_LEAVE_SHADOW}</label>
+			<!-- ENDIF -->
+	     </div>
+		</div>
+	 </fieldset>
+		<span class="help-block">{MESSAGE_TEXT}</span>
+		
+	<div class="space10"></div>
+    <fieldset>
+	{S_HIDDEN_FIELDS}
+	<button class="btn btn-default" name="confirm" type="submit" value="{YES_VALUE}">{YES_VALUE}</button>
+	<button class="btn btn-default" name="cancel" type="submit">{L_NO}</button>
+	{S_FORM_TOKEN}
+    </fieldset>
+	</div>
+</form>
+<!-- INCLUDE overall_footer.html -->

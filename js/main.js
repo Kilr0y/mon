@@ -92,6 +92,17 @@ $(document).ready(function(){
             closeAllLightbox();
     });
     
+    $('#logout-submit').click(function(e){
+        e.preventDefault();        
+        $.post(base_uri + 'ajax/logout', {}, function(data){            
+            if (data.status == 'ok'){
+                location.reload();
+            } else if (data.status == 'error'){
+                showNotification(data.message, 'error');
+            }
+        }, 'json');
+    });
+    
     
 });
 
@@ -139,6 +150,25 @@ function closeAllLightbox(){
     $('.lightbox').hide();
 }
 
+function set_lightbox_message(text, lightbox_name){    
+    if (lightbox_name != undefined){
+        $('#contact_message_close').val('Back');
+        $('#contact_message_close').attr('data-lightbox', lightbox_name);
+    } else {
+        $('#contact_message_close').val('Close');
+    }
+    $('#lightbox_message h1').html(text);
+}
+
+function get_hidden_height(elem){
+    //getting scroll height of top and bottom clouds
+    var temp_height = $('#cloud-header').height();
+    $('#cloud-header').css('height', 'auto');
+    var height = $('#cloud-header').height();
+    $('#cloud-header').height(temp_height);
+    return height;
+}
+
 function showNotification(text, type){
     if (type == undefined) type = 'success';
     var n = noty({
@@ -153,5 +183,10 @@ function showNotification(text, type){
             speed: 500 // opening & closing animation speed
         }
     });
+}
+
+function ContactCheckEmail(email) { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);    
 }
 

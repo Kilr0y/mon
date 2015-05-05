@@ -1,0 +1,106 @@
+<!-- INCLUDE ucp_header.html -->
+<div class="tab-pane active">
+	
+	<div class="alert alert-info fade in">
+        <button data-dismiss="alert" class="close" type="button" aria-hidden="true"><i class="awe-remove-circle"></i></button>
+       {L_UCP_WELCOME}
+    </div> 
+	
+<!-- IF .topicrow -->
+	<div class="side-segment"><h3>{L_IMPORTANT_NEWS}</h3></div>
+	
+	<div class="panel panel-forum">
+	<div class="panel-heading">
+	 <i class="fa fa-bolt"></i> {L_IMPORTANT_NEWS}
+	</div>
+	<div class="panel-inner">
+	<table class="footable table table-striped table-primary table-hover">
+	<thead>
+		<tr>
+			<th data-class="expand">{L_TOPICS}</th>
+			<th data-hide="phone">{L_LAST_POST}</th>
+		</tr>
+	</thead>
+	<!-- BEGIN topicrow -->
+		<tbody>
+			<tr>
+				<td>
+				 <span class="icon-wrapper">
+				 <i class="row-icon-font icon-moon-podcast2<!-- IF topicrow.S_UNREAD --> text-info<!-- ELSE --> text-muted<!-- ENDIF -->" title="{topicrow.TOPIC_FOLDER_IMG_ALT}"></i>
+				 </span>
+				 <i class="row-icon-font-mini <!-- IF topicrow.S_LOCKED -->fa fa-lock forumview-lock<!-- ENDIF -->" title="{topicrow.TOPIC_FOLDER_IMG_ALT}"></i>
+				 <!-- IF topicrow.S_UNREAD --><a href="{topicrow.U_NEWEST_POST}"><i class="fa fa-asterisk"></i></a><!-- ENDIF --><a href="{topicrow.U_VIEW_TOPIC}" class="topictitle"> {topicrow.TOPIC_TITLE}</a><br>
+				 <!-- IF topicrow.PAGINATION --><strong class="pagination"><span>{topicrow.PAGINATION}</span></strong><!-- ENDIF -->
+				 <!-- IF topicrow.ATTACH_ICON_IMG -->{topicrow.ATTACH_ICON_IMG} <!-- ENDIF -->{L_POST_BY_AUTHOR} {topicrow.TOPIC_AUTHOR_FULL}<small> {topicrow.FIRST_POST_TIME}</small>
+				</td>
+				<td class="center">{L_POST_BY_AUTHOR} {topicrow.LAST_POST_AUTHOR_FULL}
+				<a rel="tooltip" data-placement="right" data-original-title="{L_FORUMLIST_LASTPOST}" href="{topicrow.U_LAST_POST}"><i class="fa fa-sign-out"></i></a> 
+				<br /><small>{topicrow.LAST_POST_TIME}</small>
+				</td>
+			</tr>
+		</tbody>
+	<!-- END topicrow -->
+	</table>
+	</div>
+	</div>
+<!-- ENDIF -->
+
+<div class="side-segment"><h3>{L_YOUR_DETAILS}</h3></div>
+  
+    <section class="tile">
+         <div class="tile-widget">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#users-tab" data-toggle="tab"><i class="fa fa-users"></i></a></li>
+            </ul>
+        </div>
+            <div class="tile-body tab-content">
+                <ul id="users-tab" class="tab-pane fade active in">
+                  <li>
+                    <span class="icon"><i class="fa fa-calendar fa-lg"></i></span>
+					<span class="date">{JOINED}</span>
+                    <span class="subject">{L_USER} {L_JOINED}</span>
+                  </li>
+				  
+				  <li>
+				    <span class="icon"><i class="fa fa-eye fa-lg"></i></span>
+                    <span class="date">{LAST_VISIT_YOU}</span>
+                    <span class="subject">{L_VISITED}</span>
+                  </li>
+				  
+				  <!-- IF WARNINGS -->
+				  <li>
+				    <span class="icon"><i class="fa fa-bolt fa-lg"></i></span>
+                    <span class="date">{L_DAYS_AGO}</span>
+                    <span class="subject">{L_YOUR_WARNINGS}: {WARNING_IMG} [{WARNINGS}]</span>
+                  </li>
+				  <!-- ENDIF -->
+				  
+				  <li>
+				    <span class="icon"><i class="fa fa-comments fa-lg"></i></span>
+                    <span class="date">({POSTS_DAY} / {POSTS_PCT})</span>
+                    <span class="subject">{L_TOTAL_POSTS}: <!-- IF POSTS_PCT -->{POSTS}<!-- IF S_DISPLAY_SEARCH --> | <a href="{U_SEARCH_USER}">{L_SEARCH_YOUR_POSTS}</a><!-- ENDIF --> <!-- ELSE -->{POSTS} <!-- ENDIF --></span>
+                  </li>
+				  
+				  <!-- IF ACTIVE_FORUM != '' -->
+				  <li>
+				    <span class="icon"><i class="fa fa-sitemap fa-lg"></i></span>
+                    <span class="date">({ACTIVE_FORUM_POSTS} / {ACTIVE_FORUM_PCT})</span>
+                    <span class="subject">{L_ACTIVE_IN_FORUM}: <a href="{U_ACTIVE_FORUM}">{ACTIVE_FORUM}</a></span>
+                  </li>
+				  <!-- ENDIF -->
+				  
+				  <!-- IF ACTIVE_TOPIC != '' -->
+				  <li>
+				    <span class="icon"><i class="fa fa-comment fa-lg"></i></span>
+                    <span class="date">({ACTIVE_TOPIC_POSTS} / {ACTIVE_TOPIC_PCT})</span>
+                    <span class="subject">{L_ACTIVE_IN_TOPIC}: <a href="{U_ACTIVE_TOPIC}">{ACTIVE_TOPIC}</a></span>
+                  </li>
+				  <!-- ENDIF -->
+
+                </ul>
+            </div>
+        </section>
+	
+</div>
+
+<!-- INCLUDE ucp_footer.html -->

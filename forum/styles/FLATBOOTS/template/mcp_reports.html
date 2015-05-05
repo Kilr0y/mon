@@ -1,0 +1,160 @@
+<!-- INCLUDE mcp_header.html -->
+<form id="mcp" method="post" action="{S_MCP_ACTION}">
+<div class="side-segment"><h3>{L_TITLE}</h3></div>
+ <p>{L_EXPLAIN}</p>
+<div class="clearfix">
+		<div class="pull-right">
+            <ul class="pagination pagination-sm">
+	         <!-- IF PREVIOUS_PAGE --><li><a href="{PREVIOUS_PAGE}">{L_PREVIOUS}</a></li><!-- ENDIF -->
+	         <!-- IF TOTAL --><li class="active"><a>{TOTAL_REPORTS}</a></li><!-- ENDIF -->
+             <!-- IF PAGE_NUMBER --><!-- IF PAGINATION --><li><a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a></li> {PAGINATION}<!-- ELSE --> <li><a>{PAGE_NUMBER}</a></li><!-- ENDIF --><!-- ENDIF -->
+	         <!-- IF NEXT_PAGE --><li><a href="{NEXT_PAGE}">{L_NEXT}</a></li><!-- ENDIF -->
+	        </ul>	
+	    </div>
+		
+	<!-- IF not S_PM -->
+	<div class="row">
+	  <fieldset class="form-group col-md-3">
+	  <div class="input-group">
+		<select class="selectpicker" data-container="body" data-width="auto" data-style="btn btn-default form-control" name="f" id="fo">{S_FORUM_OPTIONS}</select>  
+		<span class="input-group-btn">
+		<button type="submit" name="sort" class="btn btn-default">{L_GO}</button>
+		</span>
+		</div>
+		{S_FORM_TOKEN}
+	 </fieldset>
+   </div>
+   <!-- ENDIF -->
+</div>
+	
+	<!-- IF .postrow -->
+	<div class="panel panel-forum">
+	     <div class="panel-heading">
+		  <i class="fa fa-list-ol"></i> {L_REPORTS}
+		 </div>
+		 <div class="panel-inner">
+		<table class="footable table table-striped table-primary table-hover">
+        <thead>
+		<tr>
+			<th data-class="expand">{L_VIEW_DETAILS}</th>
+			<th data-hide="phone">{L_REPORTER}<!-- IF not S_PM --> {L_FORUM}<!-- ENDIF --></th>
+		    <th class="table-check">{L_MARK}</th>
+		</tr>
+		</thead>
+		<tbody>
+		<!-- BEGIN postrow -->
+	<tr>
+		<!-- IF S_PM -->
+		<td>
+		   <a href="{postrow.U_VIEW_DETAILS}" class="topictitle">{postrow.PM_SUBJECT}</a> {postrow.ATTACH_ICON_IMG}<br />
+		   {L_MESSAGE_BY_AUTHOR} {postrow.PM_AUTHOR_FULL} {L_MESSAGE_TO} {postrow.RECIPIENTS} &#45;
+		   <small>{postrow.PM_TIME}</small>
+		</td>
+		
+		<td>
+		{postrow.REPORTER_FULL}<br>
+		<small>{postrow.REPORT_TIME}</small>
+		</td>
+		<!-- ELSE -->
+		
+		<td>
+		<a href="{postrow.U_VIEW_DETAILS}">{postrow.POST_SUBJECT}</a> {postrow.ATTACH_ICON_IMG}<br />
+	    {L_POST_BY_AUTHOR} {postrow.POST_AUTHOR_FULL} &#45;
+		<small>{postrow.POST_TIME}</small>
+		</td>
+		
+		<td>
+		{postrow.REPORTER_FULL} &#45;
+		<small>{postrow.REPORT_TIME}</small><br />
+		<!-- IF postrow.U_VIEWFORUM -->{L_FORUM}: <a href="{postrow.U_VIEWFORUM}">{postrow.FORUM_NAME}</a><!-- ELSE -->{postrow.FORUM_NAME}<!-- ENDIF -->
+		</td>
+		<!-- ENDIF -->
+		<td class="table-check"><div class="checker"><input type="checkbox" name="report_id_list[]" value="{postrow.REPORT_ID}" id="report_id_list[]"><label for="report_id_list[]"></label></div></td>
+	</tr>
+			
+		<!-- END postrow -->
+			</tbody>
+	</table>
+	</div>
+</div>
+	<!-- ELSE -->
+	<div class="alert alert-info fade in">
+        <button data-dismiss="alert" class="close" type="button" aria-hidden="true"><i class="awe-remove-circle"></i></button>
+        <i class="fa fa-warning"></i> <strong>{L_INFO_BOX}</strong> {L_NO_REPORTS}
+    </div> 
+	<!-- ENDIF -->
+
+	<div class="clearfix">
+		<div class="pull-right">
+            <ul class="pagination pagination-sm">
+			<li><a title="" data-original-title="" href="javascript:void(0);" data-target=".sorting" data-toggle="collapse">{L_OPTIONS}</a></li>
+	         <!-- IF PREVIOUS_PAGE --><li><a href="{PREVIOUS_PAGE}">{L_PREVIOUS}</a></li><!-- ENDIF -->
+	         <!-- IF TOTAL --><li class="active"><a>{TOTAL_REPORTS}</a></li><!-- ENDIF -->
+             <!-- IF PAGE_NUMBER --><!-- IF PAGINATION --><li><a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a></li> {PAGINATION}<!-- ELSE --> <li><a>{PAGE_NUMBER}</a></li><!-- ENDIF --><!-- ENDIF -->
+	         <!-- IF NEXT_PAGE --><li><a href="{NEXT_PAGE}">{L_NEXT}</a></li><!-- ENDIF -->
+	        </ul> 	
+	    </div>
+		
+	<!-- IF .postrow -->
+	<div class="pull-left">
+	<fieldset>
+	<div class="btn-group">
+	 <button class="btn btn-default" type="submit" name="action[delete]" title="" data-original-title="{L_DELETE_REPORTS}"><i class="fa fa-trash-o"></i></button>
+	 <!-- IF not S_CLOSED -->
+	 <button class="btn btn-default" type="submit" name="action[close]" title="" data-original-title="{L_CLOSE_REPORTS}"><i class="fa fa-lock"></i></button>
+	 <!-- ENDIF -->
+	</div>
+	
+	<div class="btn-group">
+	<a href="javascript:;" onclick="marklist('mcp', 'report_id_list', true); return false;" class="btn btn-default" title="" data-original-title="{L_MARK_ALL}"><i class="fa fa-check-square-o"></i></a>
+	<a href="javascript:;" onclick="marklist('mcp', 'report_id_list', false); return false;" class="btn btn-default" title="" data-original-title="{L_UNMARK_ALL}"><i class="fa fa-square-o"></i></a>
+	</div>
+    </fieldset>
+	</div>
+    <!-- ENDIF -->
+	</div>
+
+<div class="space10"></div>
+	
+<div class="hidden-xs">
+	<fieldset class="controls-row">
+                    <div class="sorting collapse">
+					 <div class="panel panel-default">
+					  <div class="panel-body">
+					  <div class="row">
+                        <div class="col-md-12 col-sm-12">
+						<div class="col-md-4 col-sm-4"> 
+                         <label for="bday_day">{L_DISPLAY}:</label>
+                            <div class="control-row">
+                              {S_SELECT_SORT_DAYS}
+                            </div>
+						</div>
+	 
+	                    <div class="col-md-4 col-sm-4"> 
+                          <label for="bday_day">{L_SORT_BY} </label>
+                            <div class="control-row">
+                              {S_SELECT_SORT_KEY}
+                            </div>
+						</div>
+											
+						<div class="col-md-4 col-sm-4"> 
+                           <label for="bday_day">{L_SORT_BY}</label>
+                            <div class="control-row">
+							<div class="input-group">
+                             {S_SELECT_SORT_DIR}
+							 <span class="input-group-btn">
+                              <button class="btn btn-default" name="sort" type="submit">{L_GO}</button>
+							</span>
+							</div>
+						    </div>   
+						</div>
+                        </div>
+						</div>
+                      </div>
+					 </div>
+					</div>
+            <!-- // Widget --> 
+	</fieldset> 
+</div>
+</form>
+<!-- INCLUDE mcp_footer.html -->

@@ -29,35 +29,35 @@ $modal = array(
                                 <div style="text-align: left">
                                     <input type="hidden" name="modal" value="true">
                                     <div class="form-group">
-                                        <label>Login</label>
-                                        <input type="email" class="form-control" name="login" placeholder="Login">
+                                        <label><?=tr('Login')?></label>
+                                        <input type="email" class="form-control" name="login" placeholder="<?=tr('Login')?>">
                                     </div>
                                     <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="password" class="form-control" name="password" placeholder="Password">
+                                        <label><?=tr('Password')?></label>
+                                        <input type="password" class="form-control" name="password" placeholder="<?=tr('Password')?>">
                                     </div>
                                 </div>
-                                <button id="login-submit" type="submit" class="btn btn-default">Login</button>
+                                <button id="login-submit" type="submit" class="btn btn-default"><?=tr('Login')?></button>
                             </form>
 
-                            <br />
+                            <!--br />
 
                             <a href="#" onclick="javascript:lightboxAction('lightbox_registration');"><small><u>Create an Account</u></small></a> &nbsp;
-                            <a href="#" onclick="javascript:lightboxAction('lightbox_reset');"><small><u>Password Reset</u></small></a> &nbsp;
+                            <a href="#" onclick="javascript:lightboxAction('lightbox_reset');"><small><u>Password Reset</u></small></a> &nbsp; -->
                         </div>
                         
                         <br /><br />
-                        <div class="text_1">Alternatively, you can log in using:</div>
+                        <div class="text_1"><?=tr('Alternatively, you can log in using:')?></div>
                         <br />
                         <div class="links">
-                            <a class="login_fb" href="<?php echo $base_uri ?>social_login.php?login_type=facebook"></a>
-                            <a class="login_tw" href="<?php echo $base_uri ?>social_login.php?login_type=twitter"></a>
-                            <a class="login_gg" href="<?php echo $base_uri ?>social_login.php?login_type=google"></a>
-                            <a class="login_vk" href="<?php echo $base_uri ?>social_login.php?login_type=vk"></a>
+                            <a class="login_fb" href="<?php echo $base_uri ?>login/social_login?login_type=facebook"></a>
+                            <a class="login_tw" href="<?php echo $base_uri ?>login/social_login?login_type=twitter"></a>
+                            <a class="login_gg" href="<?php echo $base_uri ?>login/social_login?login_type=google"></a>
+                            <a class="login_vk" href="<?php echo $base_uri ?>login/social_login?login_type=vk"></a>
                         </div>
                         <div class="clearfix"></div>                        
                         <br /><br /><br />
-                        <div class="text_2">If you have any difficulties using social login, please <a href="javascript:void('')" onclick="javascript:lightboxAction('lightbox_contact', true);"><span><u>let us know</u></span></a></div>
+                        <div class="text_2"><?=tr('If you have any difficulties using social login, please')?> <a href="javascript:void('')" onclick="javascript:lightboxAction('lightbox_contact', true);"><span><u><?=tr('let us know')?></u></span></a></div>
                     </div>
                     <div class="clearfix"></div>
                 </div>

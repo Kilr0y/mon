@@ -1,0 +1,179 @@
+<!-- IF S_IN_SEARCH_POPUP -->
+	<!-- INCLUDE simple_header_ACP.html -->
+	<!-- INCLUDE memberlist_search.html -->
+	<form method="post" id="results" action="{S_MODE_ACTION}" onsubmit="insert_marked(this.user); return false">
+
+<!-- ELSEIF S_SEARCH_USER -->
+	<!-- INCLUDE overall_header.html -->	
+	<!-- INCLUDE memberlist_search.html -->
+	<form method="post" action="{S_MODE_ACTION}">
+
+<!-- ELSE -->
+	<!-- INCLUDE overall_header.html -->
+	<form method="post" action="{S_MODE_ACTION}">
+
+<!-- ENDIF -->
+
+	<!-- IF S_SHOW_GROUP -->
+
+		<div class="side-segment"><h3<!-- IF GROUP_COLOR --> style="color:#{GROUP_COLOR};"<!-- ENDIF -->>{GROUP_NAME}</h3></div> 
+		<p>{GROUP_DESC} {GROUP_TYPE}</p>
+		<p>
+			<!-- IF AVATAR_IMG -->{AVATAR_IMG}<!-- ENDIF -->
+			<!-- IF RANK_IMG -->{RANK_IMG}<!-- ENDIF -->
+			<!-- IF GROUP_RANK -->{GROUP_RANK}<!-- ENDIF -->
+		</p>
+
+	<!-- ELSE -->
+		<div class="side-segment"><h3>{PAGE_TITLE}<!-- IF SEARCH_WORDS -->: <a href="{U_SEARCH_WORDS}">{SEARCH_WORDS}</a><!-- ENDIF --></h3></div> 
+    <div class="clearfix">
+		<div class="pull-left">
+            <ul class="pagination pagination-sm members-search">
+	        <!-- IF U_FIND_MEMBER and not S_SEARCH_USER --><li class=""><a href="{U_FIND_MEMBER}">{L_FIND_USERNAME}</a></li><!-- ELSEIF S_SEARCH_USER and U_HIDE_FIND_MEMBER and not S_IN_SEARCH_POPUP --><li class=""><a href="{U_HIDE_FIND_MEMBER}">{L_HIDE_MEMBER_SEARCH}</a></li><!-- ENDIF -->
+	        <!-- BEGIN first_char -->
+					<li class=""><a href="{first_char.U_SORT}">{first_char.DESC}</a></li>
+				<!-- END first_char -->
+			</ul>
+		</div> 
+	<script>
+	head.ready(function () {
+	  $('.members-search a[href="' +location.pathname + location.search +'"]').closest('li').addClass('active');
+	});
+	</script>
+	</div> 	
+		<div class="space10"></div> 	
+	<!-- ENDIF -->
+	<!-- IF S_LEADERS_SET or not S_SHOW_GROUP or not .memberrow -->
+	<div class="panel panel-forum">
+	     <div class="panel-heading">
+		  <i class="fa fa-group"></i> {L_MEMBERS}
+		 </div>
+		 <div class="panel-inner">
+		<table id="memberlist" class="footable table table-striped table-primary table-hover">
+		<thead>
+	   <tr>
+		<th data-class="expand"><a href="{U_SORT_USERNAME}"><!-- IF S_SHOW_GROUP and .memberrow -->{L_GROUP_LEADER}<!-- ELSE -->{L_USERNAME}<!-- ENDIF --></a>{L_COMMA_SEPARATOR}<a href="{U_SORT_RANK}">{L_RANK}</a></th>
+		<th data-hide="phone"><a href="{U_SORT_POSTS}#memberlist">{L_POSTS}</a></th>
+		<th data-hide="phone"><a href="{U_SORT_WEBSITE}#memberlist">{L_WEBSITE}</a>{L_COMMA_SEPARATOR}<a href="{U_SORT_LOCATION}">{L_LOCATION}</a></th>
+		<th data-hide="phone"><a href="{U_SORT_JOINED}#memberlist">{L_JOINED}</a></th>
+        <!-- IF U_SORT_ACTIVE -->
+        <th data-hide="phone"><a href="{U_SORT_ACTIVE}#memberlist">{L_LAST_ACTIVE}</a></th>
+		<!-- ENDIF -->
+		</tr>
+		</thead>
+		<tbody>
+	<!-- ENDIF -->
+		<!-- BEGIN memberrow -->
+		<!-- IF S_SHOW_GROUP -->
+		<!-- IF not memberrow.S_GROUP_LEADER and not $S_MEMBER_HEADER -->
+		<!-- IF S_LEADERS_SET and memberrow.S_FIRST_ROW -->
+		<tr>
+			<td colspan="<!-- IF U_SORT_ACTIVE -->5<!-- ELSE -->4<!-- ENDIF -->">&nbsp;</td>
+		</tr>
+		<!-- ENDIF -->
+<!-- IF S_LEADERS_SET -->
+		</tbody>
+		</table>
+		</div>
+    </div>
+<!-- ENDIF -->
+   <div class="panel panel-forum">
+	     <div class="panel-heading">
+		  <i class="fa fa-group"></i> {L_MEMBERS}
+		 </div>
+		 <div class="panel-inner">
+		<table class="footable table table-striped table-primary table-hover">
+	<thead>
+	<tr>
+	<!-- IF not S_LEADERS_SET -->
+		<th data-class="expand"><a href="{U_SORT_USERNAME}"><!-- IF S_SHOW_GROUP -->{L_GROUP_MEMBERS}<!-- ELSE -->{L_USERNAME}<!-- ENDIF --></a><span>{L_COMMA_SEPARATOR}<a href="{U_SORT_RANK}">{L_RANK}</a></span></th>
+		<th data-hide="phone"><a href="{U_SORT_POSTS}#memberlist">{L_POSTS}</a></th>
+		<th data-hide="phone"><a href="{U_SORT_WEBSITE}#memberlist">{L_WEBSITE}</a>{L_COMMA_SEPARATOR}<a href="{U_SORT_LOCATION}">{L_LOCATION}</a></th>
+	    <th data-hide="phone"><a href="{U_SORT_JOINED}#memberlist">{L_JOINED}</a></th>
+		<!-- IF U_SORT_ACTIVE -->
+		<th><a href="{U_SORT_ACTIVE}#memberlist">{L_LAST_ACTIVE}</a></th>
+		<!-- ENDIF -->
+	<!-- ELSEIF S_SHOW_GROUP -->
+		<th><i class="fa fa-group"></i> {L_GROUP_MEMBERS}</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+		<!-- IF U_SORT_ACTIVE --><th class="active">&nbsp;</th><!-- ENDIF -->
+	<!-- ENDIF -->
+	</tr>
+	</thead>
+	<tbody>
+			<!-- DEFINE $S_MEMBER_HEADER = 1 -->
+		<!-- ENDIF -->
+	<!-- ENDIF -->
+
+	<tr>
+		<td><!-- IF S_IN_SEARCH_POPUP and not S_SELECT_SINGLE --><span><input type="checkbox" name="user" id="{memberrow.USERNAME}" value="{memberrow.USERNAME}"><label for="{memberrow.USERNAME}"></label></span> <!-- ENDIF -->{memberrow.USERNAME_FULL}<br><!-- IF memberrow.RANK_IMG -->{memberrow.RANK_IMG}<!-- ELSE --><small>{memberrow.RANK_TITLE}</small><!-- ENDIF --><!-- IF S_SELECT_SINGLE --><br />[&nbsp;<a href="#" onclick="insert_single('{memberrow.A_USERNAME}'); return false;">{L_SELECT}</a>&nbsp;]<!-- ENDIF --></td>
+		<td><!-- IF memberrow.POSTS and S_DISPLAY_SEARCH --><a href="{memberrow.U_SEARCH_USER}" title="{L_SEARCH_USER_POSTS}">{memberrow.POSTS}</a><!-- ELSE -->{memberrow.POSTS}<!-- ENDIF --></td>
+		<td><!-- IF memberrow.U_WWW or memberrow.LOCATION --><!-- IF memberrow.U_WWW --><div><a href="{memberrow.U_WWW}" title="{L_VISIT_WEBSITE}: {memberrow.U_WWW}">{memberrow.U_SHORT_WWW}</a></div><!-- ENDIF --><!-- IF memberrow.LOCATION --><div>{memberrow.LOCATION}</div><!-- ENDIF --><!-- ELSE -->&nbsp;<!-- ENDIF --></td>
+		<td>{memberrow.JOINED}</td>
+        <!-- IF S_VIEWONLINE -->
+        <td>{memberrow.VISITED}</td>
+	    <!-- ENDIF -->
+	</tr>
+		<!-- BEGINELSE -->
+	<tr>
+		<td colspan="<!-- IF S_VIEWONLINE -->5<!-- ELSE -->4<!-- ENDIF -->">{L_NO_MEMBERS}</td>
+	</tr>
+		<!-- END memberrow -->
+	</tbody>
+	</table>
+	 </div>
+  </div>
+<!-- IF S_IN_SEARCH_POPUP and not S_SELECT_SINGLE -->
+<div class="pull-left">
+	<fieldset>
+	<div class="btn-group">
+	<a href="javascript:;" onclick="marklist('results', 'user', true); return false;" class="btn btn-default" title="" data-original-title="{L_MARK_ALL}"><i class="fa fa-check-square-o"></i></a>
+	<a href="javascript:;" onclick="marklist('results', 'user', false); return false;" class="btn btn-default" title="" data-original-title="{L_UNMARK_ALL}"><i class="fa fa-square-o"></i></a>
+	</div>
+	<button class="btn btn-default" type="submit" title="" data-original-title="{L_SELECT_MARKED}"> {L_SELECT_MARKED}</button>
+    </fieldset>
+</div>
+<!-- ENDIF -->
+
+<!-- IF S_IN_SEARCH_POPUP -->
+</form>
+
+<form method="post" id="sort-results" action="{S_MODE_ACTION}">
+<!-- ENDIF -->
+
+<!-- IF S_IN_SEARCH_POPUP and not S_SEARCH_USER -->
+<fieldset>
+	<label for="sk">{L_SELECT_SORT_METHOD}:</label> 
+	<select class="selectpicker" data-container="body" data-width="auto" name="sk" id="sk">{S_MODE_SELECT}</select>
+	
+	<label for="sd">{L_ORDER}</label> 
+	<select class="selectpicker" data-container="body" data-width="auto" name="sd" id="sd">{S_ORDER_SELECT}</select> 
+	<button type="submit" name="sort" value="{L_SUBMIT}" class="btn btn-default">{L_SUBMIT}</button>
+</fieldset>
+<!-- ENDIF -->
+</form>
+
+
+<div class="clearfix">
+    <div class="pull-right">
+            <ul class="pagination pagination-sm">
+			<!-- IF PREVIOUS_PAGE --><li><a href="{PREVIOUS_PAGE}">{L_PREVIOUS}</a></li><!-- ENDIF -->
+	         <li class="active"><a>{TOTAL_USERS}</a></li>
+             <!-- IF PAGINATION --><li><a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a></li> {PAGINATION}<!-- ELSE --> <li><a>{PAGE_NUMBER}</a></li><!-- ENDIF -->
+			<!-- IF NEXT_PAGE --><li><a href="{NEXT_PAGE}">{L_NEXT}</a></li><!-- ENDIF -->
+			</ul>	
+    </div>
+ </div>
+
+<!-- IF S_IN_SEARCH_POPUP -->
+	<!-- INCLUDE simple_footer.html -->
+<!-- ELSE -->
+	<div class="row">
+<!-- INCLUDE jumpbox.html -->
+</div>
+
+<!-- INCLUDE jump_links.html -->
+	<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->

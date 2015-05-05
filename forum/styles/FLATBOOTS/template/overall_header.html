@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}">
+<head>
+<meta charset="{S_CONTENT_ENCODING}">
+<meta name="author" content="SiteSplat www.sitesplat.com">
+<meta name="designer" content="SiteSplat www.sitesplat.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><!-- Set the viewport width to device width for mobile -->
+<meta name="Description" content=""><!-- Set Your forum description here inside the "" tag -->
+<meta name="Keywords" content=""><!-- Set Your forum keywords here inside the "" tag and make sure they are separated by a comma -->
+<meta name="application-name" content="FLATBOOTS"><!-- WIN8 Tiles setup forum name -->
+<meta name="msapplication-TileColor" content="#ffffff"><!-- WIN8 Tiles color -->
+<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+{META}
+<title>{SITENAME}<!-- IF S_IN_MCP --> {L_MCP}<!-- ELSEIF S_IN_UCP --> {L_UCP}<!-- ENDIF --> {PAGE_TITLE}</title>
+
+<!-- IF S_ENABLE_FEEDS -->
+	<!-- IF S_ENABLE_FEEDS_OVERALL --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {SITENAME}" href="{U_FEED}" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_NEWS --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FEED_NEWS}" href="{U_FEED}?mode=news" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_FORUMS --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_ALL_FORUMS}" href="{U_FEED}?mode=forums" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_TOPICS --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FEED_TOPICS_NEW}" href="{U_FEED}?mode=topics" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_TOPICS_ACTIVE --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FEED_TOPICS_ACTIVE}" href="{U_FEED}?mode=topics_active" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_FORUM and S_FORUM_ID --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FORUM} - {FORUM_NAME}" href="{U_FEED}?f={S_FORUM_ID}" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_TOPIC and S_TOPIC_ID --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_TOPIC} - {TOPIC_TITLE}" href="{U_FEED}?f={S_FORUM_ID}&amp;t={S_TOPIC_ID}" /><!-- ENDIF -->
+<!-- ENDIF -->
+
+<!-- phpBB Premium style name: FLATBOOTS (3.0.2) @SiteSplat.com -->
+
+<!-- CSS files start here-->
+<link href="{T_STYLESHEET_LINK}" rel="stylesheet">
+<!-- Google free font here -->
+<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Asap:700' rel='stylesheet' type='text/css'>
+<!-- CSS files -->
+
+<!-- Scripts start here after the jquery.js -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/headjs/1.0.3/head.min.js"></script>
+<script>
+// this loads jquery asyncrounously & in parallel
+head.load("//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js", "{T_THEME_PATH}/bootstrap/js/bootstrap.min.js", "{T_THEME_PATH}/bootstrap/js/bootstrap-select.min.js", "{T_THEME_PATH}/vendors/forum_fn.js", "{T_THEME_PATH}/vendors/twitterFetcher_v10_min.js", "{T_THEME_PATH}/vendors/icheck.min.js", "{T_THEME_PATH}/vendors/footable/js/footable.min.js");
+</script>
+<script>
+function find_username(e){popup(e,760,570,"_usersearch");return false}var jump_page="{LA_JUMP_PAGE}:";var on_page="{ON_PAGE}";var per_page="{PER_PAGE}";var base_url="{A_BASE_URL}";var style_cookie="phpBBstyle";var style_cookie_settings="{A_COOKIE_SETTINGS}";var onload_functions=new Array;var onunload_functions=new Array;window.onload=function(){for(var i=0;i<onload_functions.length;i++){eval(onload_functions[i])}};window.onunload=function(){for(var i=0;i<onunload_functions.length;i++){eval(onunload_functions[i])}}
+</script>
+<!-- IF not S_IS_BOT and S_USER_LOGGED_IN and S_USER_PM_POPUP and S_DISPLAY_PM and (S_USER_NEW_PRIVMSG or S_USER_UNREAD_PRIVMSG) -->
+<script>
+// lets load and call the function only if there is PM in the inbox
+head.load("{T_THEME_PATH}/vendors/jquery.cookie.min.js");
+head.ready('jquery.cookie.min.js', function() {
+$("#message1").toggleClass("in");var expires=new Date();expires.setMinutes(expires.getMinutes()+5);$("a.dismiss").click(function(){$.cookie("pmStatus","hidden",{expires:expires,path:"/"})});var pmStatus=$.cookie("pmStatus");if(pmStatus=="hidden"){$(".notifier-box").hide()};
+});
+</script>
+<!-- ENDIF -->
+
+</head>
+<body id="phpbb" class="section-{SCRIPT_NAME} {S_CONTENT_DIRECTION}">
+
+ <header role="banner" id="top" class="navbar navbar-inverse navbar-static-top flat-nav">
+  <div class="container">
+    <div class="navbar-header">
+      <button data-target=".flat-nav-collapse" data-toggle="collapse" type="button" class="nav-tog lines-button x navbar-toggle neutro">
+        <span class="sr-only">{L_TOGGLE_NAV}</span>
+        <span class="lines"></span>
+      </button>
+      <a class="navbar-brand" href="{U_INDEX}">{L_FLATBOOTS}</a>
+    </div>
+	 <!-- INCLUDE addons/navigation.html -->
+  </div>
+ </header>
+    <div class="search-input search-input-fullscreen">
+	   <form method="get" id="search" role="search" action="{U_SEARCH}">
+		   <fieldset>
+		   <input name="keywords" id="keywords" type="text" maxlength="128" title="{L_SEARCH_KEYWORDS}" placeholder="{L_SEARCH}" value="" autocomplete="off"/>
+		   <div class="close">&times;</div>
+		   {S_SEARCH_HIDDEN_FIELDS}
+		   </fieldset> 
+        </form> 
+    </div>
+
+   <!-- INCLUDE addons/header_teaser_body.html -->
+
+<div class="dormient">
+<div class="container">
+  <!-- start content -->
+  <div id="content-forum">
+<!-- Subheader block -->
+
+<!-- Subheader block -->
+	<div class="breadcrumb-line clearfix">
+		<ul class="breadcrumb">
+		  <li><a href="{U_INDEX}" accesskey="h"><span class="icon fa fa-home"></span></a></li>
+		  <li><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></li>
+		  <!-- BEGIN navlinks -->
+		  <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+		  <!-- END navlinks -->
+	    </ul>
+	</div>
+
+	<div id="page-body">
+	 <main role="main">
+
+	<!-- IF not S_IS_BOT and S_USER_LOGGED_IN and S_USER_PM_POPUP and S_DISPLAY_PM and (S_USER_NEW_PRIVMSG or S_USER_UNREAD_PRIVMSG) -->
+	<div class="notifier-box">
+		 <div class="alert alert-info fade" id="message1" role="alert">
+		   <button data-dismiss="alert" class="close"><span class="awe-remove-circle"></span></button>
+		   <h4>{L_HELLO} {S_USERNAME}</h4>
+		   <a class="text-info" href="{U_PRIVATEMSGS}"> {L_YOU_HAVE} {PRIVATE_MESSAGE_INFO}<!-- IF PRIVATE_MESSAGE_INFO_UNREAD --> {L_AND} {PRIVATE_MESSAGE_INFO_UNREAD}<!-- ENDIF --></a>
+		 <div class="space10"></div>
+		   <!-- IF S_DISPLAY_PM and S_USER_NEW_PRIVMSG -->
+		   <a role="button" href="{U_PRIVATEMSGS}" title="" class="btn btn-sm btn-success"><i class="icon-moon-emailforward"></i> {L_READ_NOW}</a>
+		   <!-- ENDIF -->
+		   <a role="button" data-dismiss="alert" class="btn btn-sm btn-success dismiss"><i class="icon-moon-alarm2"></i> {L_DISMISS_PM}</a>
+		 </div>
+	</div>
+	<!-- ENDIF -->
+	
+	<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
+	<div class="alert alert-warning fade in">
+		<button data-dismiss="alert" class="close"><span class="awe-remove-circle"></span></button>
+		<i class="fa fa-info-sign"></i> <strong>{L_INFORMATION}:</strong> {L_BOARD_DISABLED}
+	</div>
+	<!-- ENDIF -->

@@ -27,6 +27,10 @@ $config['adult_coockie_live'] = 60*60*24;
 
 
 
+/***** EMAIL CONFIG ********/
+$config['mail_to'] = 'monova.org@gmail.com';
+$config['mail_to_name'] = 'monova.org';
+$config['mail_max_posts'] = 5;
 
 
 
@@ -37,8 +41,10 @@ $config['adult_coockie_live'] = 60*60*24;
 
 
 /***** TECH CONFIG ********/
-$config['cache_enabled'] = false;
+$config['cache_enabled'] = true;
 $config['cache_adapter'] = 'xcache';
+
+$config['track_language_errors'] = true;    //if language item not found, error will be loged
 
 
 
@@ -99,7 +105,7 @@ $config['pagination'] = array(
 );
 
 
-// Names of main cattrgories
+// Names of main categories
 $config['maincat_name'] = array(
     CAT_MOVIES => 'Movies',
     CAT_MUSIC => 'Music',
@@ -307,7 +313,7 @@ $config['directory_trigger'] = 'd';
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 1;
 
 /*
 |--------------------------------------------------------------------------

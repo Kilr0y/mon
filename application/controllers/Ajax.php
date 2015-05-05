@@ -2,6 +2,27 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ajax extends CI_Controller {
+    
+    public function __construct(){
+        parent::__construct();
+        //loading cache by default        
+        //$this->load->driver('cache', array('adapter'=>$this->config->item('cache_adapter')));
+        
+        
+        //lets check if this is not bot
+        if( ! empty($_POST['username'])){  //username field should stay empty
+            echo json_encode(array('status'=>'error', 'error'=>'Unknown error'));
+            die();
+        }
+        
+        
+        //taking session language
+        $lang = $this->session->userdata('lang');
+        if (!$lang) $lang = 'en';
+        
+        //loading library
+        $this->lang->load('all', $lang);        
+    }
 
     public function get_autocomplete(){
         
@@ -15,8 +36,6 @@ class Ajax extends CI_Controller {
         
         echo json_encode($output);        
     }
-
-    //comment
 
     public function login(){
         $this->load->model('user');
@@ -44,10 +63,20 @@ class Ajax extends CI_Controller {
 
                     $this->session->set_userdata('user_id', $user['id']);
                     $this->session->set_userdata('user_login', $user['login']);
+                    $this->session->set_userdata('lang', $user['language']);
 
                 }
             }
         }
+        echo json_encode($data);
+    }
+    
+    public function logout(){
+        
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_login']);
+                
+        $data['status'] = 'ok';
         echo json_encode($data);
     }
 
@@ -127,8 +156,6 @@ class Ajax extends CI_Controller {
             $path = 'templates/' . $name;
         }
         
-        
-        
         if (file_exists(APPPATH . 'views/' . $path . '.php')){
             $output = $this->load->view($path, null, true);
             $json = array(
@@ -141,16 +168,69 @@ class Ajax extends CI_Controller {
             echo 'not exists';
         }
     }
-
-    public function report(){
-        $this->load->database();
-        $data = array(
-            'user_id'=>$_POST['user_id'],
-            'reason'=>$_POST['reason'],
-            'torrent_id'=>$_POST['torrent_id'],
-            'date'=>date("Y-m-d H:i:s")
+    
+    // TODO: Add limit of mails per user/session
+    public function contact(){
+        //checking for all required fields: email, message, and modal
+        if (empty($_POST['message']) || empty($_POST['mail'])){
+            echo json_encode(array('status'=>'error', 'error'=> tr('Please Fill All Required Fields') ));
+            die();
+        }
+        
+        $mail_to = $this->config->item('mail_to');
+        $mail_to_name = $this->config->item('mail_to_name');
+        
+        //detecting type of contact
+        if ($_POST["type"] == "reminder") $prefix='[MONOVA-UNAUTH PASSWD RESET]';
+		else if ($_POST["type"] == "user") $prefix='[MONOVA-USERNAME REQ]';
+		else if ($_POST["type"] == "user2") $prefix='[MONOVA-USERNAME REQ]';
+		else if ($_POST["type"] == "na") $prefix='[MONOVA-USERNAME NOT ACTIVE]';
+		else if ($_POST["type"] == "ban") $prefix='[MONOVA-BAN INQ]';
+		else if ($_POST["type"] == "lock") $prefix='[MONOVA-LOGIN LOCK]';
+		else if ($_POST["type"] == "language") $prefix='[MONOVA-LANGUAGE]';
+		else if ($_POST["type"] == "gateway") $prefix='[MONOVA-GATEWAY DISABLE REQ]';
+		else if ($_POST["type"] == "contact") $prefix='[MONOVA-CONTACT]';
+        else $prefix='[MONOVA-UNKNOWN]';
+        
+        //taking user data, if logged in
+        $user_id = $this->session->userdata('user_id');
+        if ($user_id){
+            $this->load->model('user');
+            $user = $this->user->get_user_data_by_id($user_id);
+        }
+        
+        //Building message information
+        $footer_message = "<br /><br /><br />ADDITIONAL INFO:<br />";
+		$footer_message .= "........................................<br />";
+		$footer_message .= "IP : ".$this->input->ip_address()."<br />";
+		$footer_message .= "Referer : ".(isset($_POST["ref"]) ? $_POST["ref"] : '')."<br />";
+		$footer_message .= "Username : ".$this->session->userdata('user_login')."<br />";
+		$footer_message .= "Typed in Email : ".$_POST["mail"]."<br />";
+		$footer_message .= "Registered Email : ".(isset($user["email"]) ? $user['email'] : '')."<br />";
+		$footer_message .= "Activation Status : ".(isset($user["active"]) ? $user['active'] : '')."<br />";
+		$footer_message .= "Ban Status : ".(isset($user["banned"]) ? $user['banned'] : '')."<br />";
+		$footer_message .= "Ban Reason : ".(isset($user["ban_reason"]) ? $user['ban_reason'] : '')."<br />";
+		$footer_message .= "........................................<br />";
+        
+        
+        //loading library and settings values
+        $this->load->library('email');
+        //setting mail configs
+        $mail_config = array(
+            'mailtype' => 'html'            
         );
-        $this->db->insert('torrent_report', $data);
-        echo 'ok';
+        $this->email->initialize($mail_config);
+        $this->email->from($_POST['mail'], isset($user['login']) ? $user['login'] : $mail_to_name);
+        $this->email->to($mail_to);
+        $this->email->subject($prefix." ". (isset($_POST["subject"]) ? $_POST["subject"] : '') );
+        $this->email->message($_POST["message"].$footer_message);        
+        $r = @$this->email->send();
+
+		if ($r){
+            echo json_encode(array('status'=>'ok', 'message'=>tr('Your message was successfully sent. Thank you')));
+		} else {
+            echo json_encode(array('status'=>'error', 'error'=>tr('Unknown error, please try again later')));
+		}
+        
     }
 }

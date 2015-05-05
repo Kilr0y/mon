@@ -1,0 +1,297 @@
+<script>
+onload_functions.push('apply_onkeypress_event()');
+</script>
+
+<fieldset>
+	<!-- IF ERROR -->
+	<div class="alert alert-info fade in">
+       {ERROR}
+    </div>
+	<!-- ENDIF -->
+
+	<!-- IF S_PRIVMSGS and not S_SHOW_DRAFTS -->
+		<div class="clearfix">
+		<!-- IF S_ALLOW_MASS_PM -->
+			<!-- IF .to_recipient -->
+				<div class="controls controls-row">
+					<label class="control-label">{L_TO}:</label>
+					<div class="tagsinput">
+						<!-- BEGIN to_recipient -->
+							<!-- IF not to_recipient.S_FIRST_ROW and to_recipient.S_ROW_COUNT mod 4 eq 0 --></div><div class="tagsinput"><!-- ENDIF -->
+							<!-- IF to_recipient.IS_GROUP --><span class="tag"><span><a href="{to_recipient.U_VIEW}"><strong>{to_recipient.NAME}</strong></a></span>&nbsp;<!-- ELSE --><span class="tag"><span>{to_recipient.NAME_FULL}</span><!-- ENDIF -->
+							<!-- IF not S_EDIT_POST --><input type="submit" name="remove_{to_recipient.TYPE}[{to_recipient.UG_ID}]" value="x" title="{L_USER_REMOVE_PLACEHOLDER}" class="btn-link" /></span>&nbsp;<!-- ENDIF -->
+						<!-- END to_recipient -->
+					</div>
+				</div>
+				<div class="space10"></div>
+			<!-- ENDIF -->
+			<!-- IF .bcc_recipient -->
+				<div class="controls controls-row">
+					<label class="control-label">{L_BCC}:</label>
+					<div class="tagsinput">
+						<!-- BEGIN bcc_recipient -->
+							<!-- IF not bcc_recipient.S_FIRST_ROW and bcc_recipient.S_ROW_COUNT mod 4 eq 0 --></div><div class="tagsinput"><!-- ENDIF -->
+							<!-- IF bcc_recipient.IS_GROUP --><span class="tag"><span><a href="{bcc_recipient.U_VIEW}"><strong>{bcc_recipient.NAME}</strong></a></span><!-- ELSE --><span class="tag"><span>{bcc_recipient.NAME_FULL}</span><!-- ENDIF -->
+							<!-- IF not S_EDIT_POST --><input type="submit" name="remove_{bcc_recipient.TYPE}[{bcc_recipient.UG_ID}]" value="x" title="{L_GROUP_REMOVE_PLACEHOLDER}" class="btn-link" /></span>&nbsp;<!-- ENDIF -->
+						<!-- END bcc_recipient -->
+					</div>
+				</div>
+				<div class="space10"></div>
+			<!-- ENDIF -->
+			<!-- IF not S_EDIT_POST -->
+			
+		<div class="controls controls-row">
+			<div class="input-group col-md-6">
+			<input type="text" placeholder="" id="username_list" name="username_list" class="form-control" tabindex="1"> 
+			<span class="input-group-btn">
+			<button class="btn btn-default" name="add_to" value="{L_ADD}" type="submit" title="{L_ADD}"><i class="fa fa-plus"></i> {L_ADD}</button>
+            <button class="btn btn-default" name="add_bcc" value="{L_ADD_BCC}" type="submit" title="{L_ADD_BCC}"><i class="fa fa-plus"></i> [BCC]</button>
+			<a href="{U_FIND_USERNAME}" class="btn btn-default" onclick="find_username(this.href); return false;" rel="tooltip" data-placement="right" title="{L_FIND_USERNAME}"><i class="fa fa-user"></i></a>
+			</span>
+			</div>
+		</div>
+
+			<!-- ENDIF -->
+		<!-- ELSE -->
+			<div>
+				<div><label class="control-label" for="username_list">{L_TO}:</label><!-- IF not S_EDIT_POST --><br /><span><a href="{U_FIND_USERNAME}" onclick="find_username(this.href); return false">{L_FIND_USERNAME}</a></span><!-- ENDIF --></div>
+				<!-- IF .to_recipient -->
+					<div id="tagsinput" class="tagsinput">
+						<!-- BEGIN to_recipient -->
+							<!-- IF not to_recipient.S_FIRST_ROW and to_recipient.S_ROW_COUNT mod 4 eq 0 --></div><div id="tagsinput" class="tagsinput"><!-- ENDIF -->
+							<!-- IF to_recipient.IS_GROUP --><span class="tag"><span><a href="{to_recipient.U_VIEW}"><strong>{to_recipient.NAME}</strong></a></span><!-- ELSE --><span class="tag"><span>{to_recipient.NAME_FULL}</span><!-- ENDIF -->
+							<!-- IF not S_EDIT_POST --><input type="submit" name="remove_{to_recipient.TYPE}[{to_recipient.UG_ID}]" value="x" class="btn-link" /></span>&nbsp;<!-- ENDIF -->
+						<!-- END to_recipient -->
+					</div>
+				<!-- ENDIF -->
+                
+				<!-- IF not S_EDIT_POST -->
+				<div><input class="inputbox" type="text" name="username_list" id="username_list" size="20" value="" /> <input type="submit" name="add_to" value="{L_ADD}" class="btn" /></div>
+				<!-- ENDIF -->
+			</div>
+		<!-- ENDIF -->
+		</div>
+
+		<!-- IF S_GROUP_OPTIONS -->
+			<div class="control-group"> 
+			<label class="control-label" for="group_list">{L_USERGROUPS}:</label>
+				<div class="controls controls-row"> 
+					<div class="selector"> 
+					<select class="selectpicker" data-selected-text-format="count" data-container="body" name="group_list[]" id="group_list" multiple="multiple" size="4">{S_GROUP_OPTIONS}</select>
+					</div>
+				</div>
+			</div>
+		<!-- ENDIF -->
+
+
+	<!-- ENDIF -->
+
+	<!-- IF S_DELETE_ALLOWED -->
+	<div class="control-group"> 
+	   <label class="control-label" for="delete">{L_DELETE_POST}:</label>
+	<div class="controls controls-row"> 
+       <div class="radio"><input type="checkbox" name="delete" id="delete"><label for="delete">{L_DELETE_POST_WARN}</label></div>
+	</div> 
+	</div>
+	<!-- ENDIF -->
+
+	<!-- IF S_SHOW_TOPIC_ICONS or S_SHOW_PM_ICONS -->
+	<div class="control-group"> 
+	   <label class="control-label" for="icon">{L_ICON}:</label>
+	<div class="controls controls-row"> 
+      <div class="radio"><input type="radio" name="icon" id="icon" value="0" checked="checked" tabindex="1"><label for="icon"><!-- IF S_SHOW_TOPIC_ICONS -->{L_NO_TOPIC_ICON}<!-- ELSE -->{L_NO_PM_ICON}<!-- ENDIF --></label></div>
+    <!-- BEGIN topic_icon --><div class="radio"><input type="radio" name="icon" id="icon-{topic_icon.ICON_ID}" value="{topic_icon.ICON_ID}" {topic_icon.S_ICON_CHECKED} tabindex="1"><label for="icon-{topic_icon.ICON_ID}"><img src="{topic_icon.ICON_IMG}" width="{topic_icon.ICON_WIDTH}" height="{topic_icon.ICON_HEIGHT}" alt="" title="" /></label></div><!-- END topic_icon -->
+	</div> 
+	</div>
+	<!-- ENDIF -->
+
+	<!-- IF not S_PRIVMSGS and S_DISPLAY_USERNAME -->
+	<div class="control-group"> 
+	   <label class="control-label" for="username">{L_USERNAME}:</label>
+	<div class="controls controls-row"> 
+	<div class="input-icon left">
+	  <i class="fa fa-user"></i>
+       <input type="text" class="form-control input-sm" placeholder="" tabindex="1" name="username" id="username" value="{USERNAME}">
+	 </div> 
+	</div> 
+	</div>
+	<!-- ENDIF -->
+
+	<!-- IF S_POST_ACTION or S_PRIVMSGS or S_EDIT_DRAFT -->
+
+	<div class="control-group"> 
+	<label class="control-label" for="subject">{L_SUBJECT}:</label>
+	<div class="row">
+	 <div class="<!-- IF S_EDIT_DRAFT -->col-md-12<!-- ELSE -->col-xs-12 col-lg-8<!-- ENDIF -->">
+       <input type="text" class="form-control input-sm" placeholder="{L_SUBJECT}:" name="subject" id="subject" maxlength="<!-- IF S_NEW_MESSAGE -->60<!-- ELSE -->64<!-- ENDIF -->" tabindex="2" value="{SUBJECT}{DRAFT_SUBJECT}">
+	 </div> 
+	 </div> 
+	 </div>
+	 
+	<!-- IF CAPTCHA_TEMPLATE and S_CONFIRM_CODE -->
+		<!-- DEFINE $CAPTCHA_TAB_INDEX = 3 -->
+		<!-- INCLUDE {CAPTCHA_TEMPLATE} -->
+	<!-- ENDIF -->
+	<!-- ENDIF -->
+
+	<!-- INCLUDE posting_buttons.html -->
+	
+	 <div class="space10"></div>
+	
+ <div class="row">
+    <div class="<!-- IF S_EDIT_DRAFT -->col-md-12<!-- ELSE -->col-md-8<!-- ENDIF -->"> 
+      <textarea class="form-control" rows="10" <!-- IF S_UCP_ACTION and not S_PRIVMSGS and not S_EDIT_DRAFT -->name="signature" id="signature" <!-- ELSE -->name="message" id="message"<!-- ENDIF --> tabindex="4" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onfocus="initInsertions();" placeholder="{L_POST_IT_UP_PLACEHOLDER}" class="form-control">{MESSAGE}{DRAFT_MESSAGE}{SIGNATURE}</textarea>
+	</div>
+
+	<div class="col-md-4">
+		<!-- IF S_SMILIES_ALLOWED and .smiley -->
+			<strong>{L_SMILIES}
+		  <!-- IF S_SHOW_SMILEY_LINK and S_SMILIES_ALLOWED -->
+			<a class="btn-link btn-xs" href="{U_MORE_SMILIES}" onclick="popup(this.href, 450, 350, '_phpbbsmilies'); return false;" title="{L_MORE_SMILIES}"><i class="fa fa-plus"></i></a>
+		  <!-- ENDIF -->
+			</strong><br />
+			<!-- BEGIN smiley -->
+				<a href="#" onclick="insert_text('{smiley.A_SMILEY_CODE}', true); return false;"><img src="{smiley.SMILEY_IMG}" width="{smiley.SMILEY_WIDTH}" height="{smiley.SMILEY_HEIGHT}" alt="{smiley.SMILEY_CODE}" title="{smiley.SMILEY_DESC}" /></a>
+			<!-- END smiley -->
+		<!-- ENDIF -->
+
+		<!-- IF BBCODE_STATUS -->
+		<!-- IF .smiley --><hr /><!-- ENDIF -->
+		{BBCODE_STATUS}<br />
+		<!-- IF S_BBCODE_ALLOWED -->
+			{IMG_STATUS}<br />
+			{FLASH_STATUS}<br />
+			{URL_STATUS}<br />
+		<!-- ENDIF -->
+		{SMILIES_STATUS}
+		<!-- ENDIF -->
+		<!-- IF S_EDIT_DRAFT || S_DISPLAY_REVIEW -->
+			<!-- IF S_DISPLAY_REVIEW --><hr /><!-- ENDIF -->
+			<!-- IF S_EDIT_DRAFT --><strong><a href="{S_UCP_ACTION}">{L_BACK_TO_DRAFTS}</a></strong><!-- ENDIF -->
+			<!-- IF S_DISPLAY_REVIEW --><strong><a href="#review">{L_TOPIC_REVIEW}</a></strong><!-- ENDIF -->
+		<!-- ENDIF -->
+	</div>
+ </div>
+</fieldset>
+
+<!-- IF $EXTRA_POSTING_OPTIONS eq 1 -->
+
+	<!-- IF not S_SHOW_DRAFTS -->
+		
+	</div>
+	<!-- ENDIF -->
+
+	<!-- IF S_HAS_ATTACHMENTS -->
+	<div class="side-segment"><h3>{L_POSTED_ATTACHMENTS}</h3></div>
+	<div class="well">
+		<fieldset>
+			<!-- BEGIN attach_row -->
+	    <div class="control-group"> 
+	         <label class="control-label" for="comment_list_{attach_row.ASSOC_INDEX}">{L_FILE_COMMENT}:</label>
+			<textarea class="form-control" name="comment_list[{attach_row.ASSOC_INDEX}]" id="comment_list_{attach_row.ASSOC_INDEX}" placeholder="{L_FILE_COMMENT_PLACEHOLDER}">{attach_row.FILE_COMMENT}</textarea>
+			
+		   <div class="controls controls-row">
+			<span class="help-block"><i class="fa fa-file"></i> <a href="{attach_row.U_VIEW_ATTACHMENT}">{attach_row.FILENAME}</a></span>
+			 <div class="btn-group btn-group-sm"> 
+				<!-- IF S_INLINE_ATTACHMENT_OPTIONS -->
+				<button type="button" value="{L_PLACE_INLINE}" onclick="attach_inline({attach_row.ASSOC_INDEX}, '{attach_row.A_FILENAME}');" class="btn btn-default"><i class="fa fa-indent"></i> {L_PLACE_INLINE}</button>
+				<!-- ENDIF -->
+				<button type="submit" name="delete_file[{attach_row.ASSOC_INDEX}]" value="{L_DELETE_FILE}" class="btn btn-default"><i class="fa fa-times"></i> {L_DELETE_FILE}</button>
+			 </div>
+			  <div class="space10"></div>
+	        </div>
+			
+		</div>
+			{attach_row.S_HIDDEN}
+			<!-- END attach_row -->
+		</fieldset>
+	</div>
+	<!-- ENDIF -->
+
+	<!-- IF not S_SHOW_DRAFTS and not $SIG_EDIT eq 1 -->
+		<fieldset class="form-actions">
+			{S_HIDDEN_ADDRESS_FIELD}
+			{S_HIDDEN_FIELDS}
+			<!-- IF S_HAS_DRAFTS --><button type="submit" class="btn btn-default" data-loading-text="{L_LOADING}<i class='fa fa-spin fa-spinner fa-lg icon-white'></i>" accesskey="d" tabindex="8" name="load" value="{L_LOAD_DRAFT}" onclick="load_draft = true;">{L_LOAD_DRAFT}</button><!-- ENDIF -->&#32;
+			<!-- IF S_SAVE_ALLOWED --><button type="submit" class="btn btn-default" data-loading-text="{L_SAVING}<i class='fa fa-spin fa-spinner fa-lg icon-white'></i>" accesskey="k" tabindex="7" name="save" value="{L_SAVE_DRAFT}">{L_SAVE_DRAFT}</button><!-- ENDIF -->
+			<button type="submit" class="btn btn-default" data-loading-text="{L_LOADING}<i class='fa fa-spin fa-spinner fa-lg icon-white'></i>" tabindex="5" name="preview" value="{L_PREVIEW}" <!-- IF not S_PRIVMSGS --> onclick="document.getElementById('postform').action += '#preview';"<!-- ENDIF --> >{L_PREVIEW}</button>
+			<button type="submit" class="btn btn-default" data-loading-text="{L_LOADING}<i class='fa fa-spin fa-spinner fa-lg icon-white'></i>" accesskey="s" tabindex="6" name="post" value="{L_SUBMIT}" >{L_SUBMIT}</button>
+		</fieldset>
+	<!-- ENDIF -->
+	
+<div class="space10"></div>
+
+		<div class="panel has-nav-tabs panel-default"><!-- panel has-nav-tabs no-border with tab start tag here posting_layout.html -->
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#options-panel-below"><span>{L_OPTIONS}</span></a></li>
+				<!-- IF S_SHOW_ATTACH_BOX --><li class=""><a data-toggle="tab" href="#posting-attach-body-html"><span>{L_ADD_ATTACHMENT}</span></a></li><!-- ENDIF -->
+				<!-- IF S_SHOW_POLL_BOX || S_POLL_DELETE --><li class=""><a data-toggle="tab" href="#posting-poll-html"><span>{L_ADD_POLL}</span></a></li><!-- ENDIF -->
+			</ul>
+		
+		
+    <div class="tab-content panel-content">
+	   <!-- IF not S_SHOW_DRAFTS and not $SIG_EDIT eq 1 -->
+		<div class="panel-body tab-pane active" id="options-panel-below">
+		<fieldset>
+			<!-- IF S_BBCODE_ALLOWED -->
+			<input type="checkbox" name="disable_bbcode" id="disable_bbcode"{S_BBCODE_CHECKED}><label class="check-control" for="disable_bbcode">{L_DISABLE_BBCODE}</label>
+			<!-- ENDIF -->
+			<!-- IF S_SMILIES_ALLOWED -->
+			<input type="checkbox" name="disable_smilies" id="disable_smilies"{S_SMILIES_CHECKED}><label class="check-control" for="disable_smilies">{L_DISABLE_SMILIES}</label>
+			<!-- ENDIF -->
+			<!-- IF S_LINKS_ALLOWED -->
+			<input type="checkbox" name="disable_magic_url" id="disable_magic_url"{S_MAGIC_URL_CHECKED}><label class="check-control" for="disable_magic_url">{L_DISABLE_MAGIC_URL}</label>
+			<!-- ENDIF -->
+			<!-- IF S_SIG_ALLOWED -->
+			<input type="checkbox" name="attach_sig" id="attach_sig"{S_SIGNATURE_CHECKED}><label class="check-control" for="attach_sig">{L_ATTACH_SIG}</label>
+			<!-- ENDIF -->
+			<!-- IF S_NOTIFY_ALLOWED -->
+			<input type="checkbox" name="notify" id="notify"{S_NOTIFY_CHECKED}><label class="check-control" for="notify">{L_NOTIFY_REPLY}</label>
+			<!-- ENDIF -->
+			<!-- IF S_LOCK_TOPIC_ALLOWED -->
+			<input type="checkbox" name="lock_topic" id="lock_topic"{S_LOCK_TOPIC_CHECKED}><label class="check-control" for="lock_topic">{L_LOCK_TOPIC}</label>
+			<!-- ENDIF -->
+			<!-- IF S_LOCK_POST_ALLOWED -->
+			<input type="checkbox" name="lock_post" id="lock_post"{S_LOCK_POST_CHECKED}><label class="check-control" for="lock_post">{L_LOCK_POST} [{L_LOCK_POST_EXPLAIN}]</label>
+			<!-- ENDIF -->
+			<!-- IF S_TYPE_TOGGLE or S_TOPIC_TYPE_ANNOUNCE or S_TOPIC_TYPE_STICKY -->
+			<hr class="dashed" />
+			<!-- ENDIF -->
+			
+			<!-- IF S_TYPE_TOGGLE -->
+		    <div class="control-group"> 
+	         <label class="control-label" for="topic_type-0"><!-- IF S_EDIT_POST -->{L_CHANGE_TOPIC_TO}<!-- ELSE -->{L_POST_TOPIC_AS}<!-- ENDIF -->:</label>
+	         <div class="controls controls-row"> 
+             <!-- BEGIN topic_type -->
+			  <input type="radio" name="topic_type" id="topic_type-{topic_type.VALUE}" value="{topic_type.VALUE}"{topic_type.S_CHECKED}><label class="radio-inline" for="topic_type-{topic_type.VALUE}">{topic_type.L_TOPIC_TYPE}</label>
+			 <!-- END topic_type -->
+	         </div> 
+			 <div class="space10"></div>
+	        </div>
+			<!-- ENDIF -->
+
+			<!-- IF S_TOPIC_TYPE_ANNOUNCE or S_TOPIC_TYPE_STICKY -->
+			<div class="control-group"> 
+	         <label class="control-label" for="topic_time_limit">{L_STICK_TOPIC_FOR}:</label><span class="help-block">{L_STICK_TOPIC_FOR_EXPLAIN}</span>
+			<div class="input-group col-xs-8 col-sm-2 col-md-2">
+		       <input type="text" class="form-control input-sm" placeholder="" name="topic_time_limit" id="topic_time_limit" maxlength="3" value="{TOPIC_TIME_LIMIT}">
+		      <span class="input-group-addon">{L_DAYS}</span>
+	         </div>
+			 <div class="space10"></div>
+	       </div>
+			<!-- ENDIF -->
+
+			<!-- IF S_EDIT_REASON -->
+			<div class="control-group"> 
+	         <label class="control-label" for="edit_reason">{L_EDIT_REASON}:</label>
+	        <div class="row"> 
+			<div class="col-xs-8 col-sm-5 col-md-5"> 
+             <input type="text" class="form-control input-sm" placeholder="{L_EDIT_LINK_PLACEHOLDER}" name="edit_reason" id="edit_reason" value="{EDIT_REASON}">
+	        </div>
+			</div>
+			</div>
+			<!-- ENDIF -->
+		</fieldset>
+		<!-- ENDIF -->
+
+<!-- ENDIF -->

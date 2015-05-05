@@ -31,7 +31,7 @@
 					<table width="100%">
 					<tr>
                         <td align="center">
-                            <h1>'.tr('Loading, please wait').'</h1>
+                            <h1><?=tr('Loading, please wait')?></h1>
                             <br />                            
                             <div class="base64-loadgif"></div>
 					    </td>

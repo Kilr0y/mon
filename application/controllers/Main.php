@@ -8,6 +8,13 @@ class Main extends CI_Controller {
         //loading cache by default        
         $this->load->driver('cache', array('adapter'=>$this->config->item('cache_adapter')));
         
+        //taking session language
+        $lang = $this->session->userdata('lang');
+        if (!$lang) $lang = 'en';
+        
+        //loading library
+        $this->lang->load('all', $lang);        
+        
         /*
         $this->load->driver('cache', array('adapter'=>'xcache'));
         
@@ -79,7 +86,8 @@ class Main extends CI_Controller {
 
             $data['hots'] = $this->items->get_hotest($cat_id);
             $data['cat'] = $cat_id;
-            $data['catname'] = strtolower($this->config->item('maincat_name')[$cat_id]);
+            $maincat_name = $this->config->item('maincat_name');
+            $data['catname'] = strtolower($maincat_name[$cat_id]);
 
             $page_str['page'] = $this->load->view('hot', $data, true);
 
@@ -197,9 +205,72 @@ class Main extends CI_Controller {
             
             echo '$route["' . strtolower($v['name']) . '/' . $v['segment'] . '"] = "main/subcategory/'.$v['subid'].'";' . "<br />";
             
-        }
-        
+        }        
     }
+    
+    public function login_phpbb(){
+        global $phpbb_root_path, $phpEx, $user, $db, $config, $cache, $template;
+        define('IN_PHPBB', true);
+        $phpbb_root_path = './forum/'; //the path to your phpbb relative to this script
+        $phpEx = substr(strrchr(__FILE__, '.'), 1);
+        include("forum/config.php");
+        include("forum/common.php"); //the path to your phpbb relative to this script
+        
+        // Start session management
+        $user->session_begin();
+        $auth->acl($user->data);
+        $user->setup();
+        
+    
+        $username = request_var('username', 'kilroy');
+        $password = request_var('password', '');
+    
+        if(isset($username) )
+        {
+          $result=$auth->login($username, $password, true);
+          if ($result['status'] == LOGIN_SUCCESS) {
+            echo "You're logged in";
+          } else {
+            echo $user->lang[$result['error_msg']];
+          }
+        }
+    }
+    
+    public function create_phpbb(){
+        global $phpbb_root_path, $phpEx, $user, $db, $config, $cache, $template;
+        define('IN_PHPBB', true);
+        $phpbb_root_path = './forum/'; //the path to your phpbb relative to this script
+        $phpEx = substr(strrchr(__FILE__, '.'), 1);
+        include("forum/config.php");
+        include("forum/common.php"); //the path to your phpbb relative to this script
+        include("forum/includes/functions_user.php");
+        // Start session management
+        $user->session_begin();
+        $auth->acl($user->data);
+        //$user->setup();
+        $user_row = array(
+            'username' => 'Kilroy',
+            'user_password' => md5('password'), 
+            'user_email' => 'Email',
+            'group_id' => 2,
+            'user_timezone' => '1.00',
+            'user_dst' => 0,
+            'user_lang' => en,
+            'user_type' => 0,
+            'user_actkey' => '',
+            'user_dateformat' => 'd M Y H:i',
+            'user_style' => $not_sure_what_this_is,
+            'user_regdate' => time(),
+        );
+        
+        $phpbb_user_id = user_add($user_row);
+        
+        if ($phpbb_user_id){
+            echo 'User created';
+        } else 
+            echo 'User creation error';
+     
+     }   
     
     
 }

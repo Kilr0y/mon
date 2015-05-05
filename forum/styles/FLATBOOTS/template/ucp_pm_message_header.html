@@ -1,0 +1,32 @@
+<form id="viewfolder" method="post" action="{S_PM_ACTION}">
+<fieldset class="framed-ucp">
+<legend>{L_TITLE}<!-- IF CUR_FOLDER_NAME -->: {CUR_FOLDER_NAME}<!-- ENDIF --></legend>
+
+<!-- IF FOLDER_STATUS and FOLDER_MAX_MESSAGES neq 0 --><p>{FOLDER_STATUS}</p>
+<div class="progress progress-striped<!-- IF FOLDER_PERCENT eq 100 --> active<!-- ENDIF -->">
+  <div role="progressbar" aria-valuenow="{FOLDER_PERCENT}" aria-valuemin="0" aria-valuemax="100" style="width: {FOLDER_PERCENT}%;" class="progress-bar<!-- IF FOLDER_PERCENT gt 80 --> progress-bar-danger<!-- ELSE --> progress-bar-info<!-- ENDIF -->"></div>
+</div>
+<!-- ENDIF -->
+
+<!-- IF U_POST_REPLY_PM or U_POST_NEW_TOPIC or U_FORWARD_PM -->
+	<div class="pull-left">
+		 <div class="btn-group">
+			<!-- IF U_POST_REPLY_PM --><a class="btn btn-default" title="" href="{U_POST_REPLY_PM}"><i class="fa fa-reply"></i> {L_POST_REPLY_PM}</a>
+			<!-- ELSEIF U_POST_NEW_TOPIC --><a class="btn btn-default" href="{U_POST_NEW_TOPIC}" accesskey="n" title=""><i class="fa fa-plus"></i> {L_UCP_PM_COMPOSE}</a><!-- ENDIF -->
+			<!-- IF U_FORWARD_PM --><a class="btn btn-default" title="" href="{U_FORWARD_PM}"><i class="fa fa-forward"></i> {L_POST_FORWARD_PM}</a><!-- ENDIF -->
+			<!-- IF U_POST_REPLY_PM and S_PM_RECIPIENTS gt 1 --><a class="btn btn-default" title="" href="{U_POST_REPLY_ALL}"><i class="fa fa-group"></i> {L_REPLY_TO_ALL}</a><!-- ENDIF -->			
+		 </div> 
+	</div>
+<!-- ENDIF -->
+
+<!-- IF TOTAL_MESSAGES or S_VIEW_MESSAGE -->
+<div class="pull-right">
+      <ul class="pagination pagination-sm">
+	  <!-- IF S_VIEW_MESSAGE --><li><a href="{U_CURRENT_FOLDER}">{L_RETURN_TO} {CUR_FOLDER_NAME}</a></li><!-- ENDIF -->
+	    <!-- IF PREVIOUS_PAGE --><li><a href="{PREVIOUS_PAGE}">{L_PREVIOUS}</a></li><!-- ENDIF -->
+        <!-- IF PAGE_NUMBER --><!-- IF PAGINATION -->{PAGINATION}<!-- ELSE --><a><li>{PAGE_NUMBER}</a></li><!-- ENDIF --><!-- ENDIF -->
+      	<!-- IF NEXT_PAGE --><li><a href="{NEXT_PAGE}">{L_NEXT}</a></li><!-- ENDIF -->
+	  </ul>
+</div> 
+<!-- ENDIF -->
+<div class="space10"></div>

@@ -47,6 +47,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link		http://codeigniter.com/user_guide/libraries/language.html
  */
 class CI_Lang {
+    
+    /**
+	 * List of translations
+	 *
+	 * @var	array
+	 */
+    public $language_name = false; 
 
 	/**
 	 * List of translations
@@ -171,6 +178,7 @@ class CI_Lang {
 
 		$this->is_loaded[$langfile] = $idiom;
 		$this->language = array_merge($this->language, $lang);
+        $this->language_name = $idiom;
 
 		log_message('info', 'Language file loaded: language/'.$idiom.'/'.$langfile);
 		return TRUE;
@@ -194,7 +202,9 @@ class CI_Lang {
 		// Because killer robots like unicorns!
 		if ($value === FALSE && $log_errors === TRUE)
 		{
-			log_message('error', 'Could not find the language line "'.$line.'"');
+		    $language = '';
+			log_message('error', 'Could not find the language line: "'.$line.'", language ' . $this->language_name);
+            $value = $line;
 		}
 
 		return $value;

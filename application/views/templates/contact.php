@@ -1,38 +1,42 @@
-<?php
-require_once("config.php");
-?>
-
 <div id="lightbox_contact" class="lightbox" style="display:none"> 
-   <table class="lightbox_table">
-   <tr>
-   <td class="lightbox_table_cell" align="center">
-      <div id="lightbox_content" class="lightbox_content" style="width:800px;">
-	      <div class="lightbox_inner" id="lightbox_inner">
-					<table width="100%">
-					<tr><td align="center">
-						<h1><?=tr('Please feel free to send us a message.')?></h1><?=tr('E-Mail and message fields are required')?>!<br /><br /><br />
-						<div class="error"></div>
-						<form id="contact_form" action="bot.php" method="post">
-    						<input type="hidden" name="ref" value="<?=$_SERVER["HTTP_REFERER"]?>">
-    						<input type="hidden" name="type" value="<?=$_GET["type"]?>">
-    						<input type="hidden" name="modal" value="true" />     
-                            <input type="hidden" name="username" />                   
-    						<table>
-    							<tr><td><?=tr('Email')?>:</td><td> <input id="contact_email" name="mail" size="50"></td></tr>
-    							<tr><td><?=tr('Subject')?>:</td><td> <input name="subject" size="50" value="<?=$subject?>" <?=$sub_disabled?> ></td></tr>
-    							<tr><td><?=tr('Username')?>:</td><td> <input name="user" value="<?=$_SESSION["logged_user"]?>" size="50" <?=$user_disabled?> ></td></tr>
-    						</table>
-    						<?=tr('Message')?>:<br>
-    						<textarea name="message" cols="80" rows="15"></textarea><br>    						
-						</form>
-                        <span id="good"><input id="contact_submit" type="Submit" value="<?=tr('Send Mail')?>" disabled></span>
-					</td></tr>
-					</table>        
-        </div> 
-      </div>
-   </td>
-   </tr>
-   </table>
+    <table class="lightbox_table">
+        <tr>
+            <td class="lightbox_table_cell" align="center">
+                <div id="lightbox_content" class="lightbox_content" style="width:800px;">
+                    <div class="lightbox_inner" id="lightbox_inner">
+                        <table width="100%">
+                            <tr><td align="center">
+                                <div class="text_1"><?=tr('Feel free to send us a message')?></div>
+                                <?=tr('E-Mail and message fields are required')?>!<br /><br />
+                                <div class="error"></div>
+						        <form id="contact_form" action="bot.php" method="post">
+    						        <input type="hidden" name="ref" value="<?=$_SERVER["HTTP_REFERER"]?>">    						        
+    						        <input type="hidden" name="modal" value="true" />     
+                                    <input type="hidden" name="type" value="contact" />
+                                    <input type="hidden" name="username" />  
+                                    <div style="text-align: left; width: 600px;">
+                                        <input type="hidden" name="modal" value="true">
+                                        <div class="form-group">
+                                            <label><?=tr('Email')?></label>
+                                            <input id="contact_email" class="form-control" name="mail" size="50" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-weight: normal;"><?=tr('Subject')?></label>
+                                            <input name="subject" class="form-control" size="50" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label><?=tr('Message')?></label>
+                                            <textarea name="message" class="form-control" cols="60" rows="10"></textarea>
+                                        </div> 
+                                    </div>					                						
+				                </form>
+                            <span id="good"><input id="contact_submit" class="btn btn-default" type="Submit" value="<?=tr('Send Mail')?>" disabled></span></td></tr>
+					    </table>        
+                    </div> 
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <script>
@@ -49,13 +53,13 @@ require_once("config.php");
         e.preventDefault();
         var post_data = $('#contact_form').serialize();
         lightboxAction('lightbox_loading');
-        $.post('contact.php', post_data, function(data){
+        $.post('<?=base_url('ajax/contact')?>', post_data, function(data){
             if (data.status == 'ok'){
                 if (data.message != undefined)
                     set_lightbox_message(data.message);
                 lightboxAction('lightbox_message');
-            } else if (data.status == 'error'){                
-                $('#lightbox_contact .error').text(data.error);
+            } else if (data.status == 'error'){  
+                showNotification(data.error, 'error');                
                 lightboxAction('lightbox_contact');
             }
         }, 'json');        
