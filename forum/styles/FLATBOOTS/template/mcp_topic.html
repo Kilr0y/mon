@@ -1,0 +1,196 @@
+<!-- INCLUDE mcp_header.html -->
+<div class="side-segment"><h3><a href="{U_VIEW_TOPIC}">{L_TOPIC}: {TOPIC_TITLE}</a></h3></div>
+
+<form id="mcp" method="post" action="{S_MCP_ACTION}">
+
+<div class="panel has-nav-tabs panel-default">
+	<ul class="nav nav-tabs">
+	 <li class="active"><a href="#display-panel" data-toggle="tab" data-original-title="" title="">{L_DISPLAY_OPTIONS}</a></li>
+	 <li class=""><a href="#split-panel" data-toggle="tab" data-original-title="" title="">{L_SPLIT_TOPIC}</a></li>
+	 <li class=""><a href="#merge-panel" data-toggle="tab" data-original-title="" title="">{L_MERGE_POSTS}</a></li>
+    </ul>
+	
+<div class="tab-content panel-content">
+  <div id="display-panel" class="tab-pane panel-body active">
+    <fieldset>
+	<div class="control-group"> 
+	   <label class="control-label" for="posts_per_page">{L_POSTS_PER_PAGE}:</label><span class="help-block">{L_POSTS_PER_PAGE_EXPLAIN}</span>
+	<div class="controls controls-row"> 
+       <input type="text" class="form-control input-sm" placeholder="" name="posts_per_page" id="posts_per_page" value="{POSTS_PER_PAGE}">
+	</div> 
+	</div>
+	
+ <label class="control-label" for="">{L_DISPLAY_POSTS}:</label>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+			<div class="col-md-4 col-sm-4"> 
+                <label for="bday_day">{L_DISPLAY}:</label>
+            <div class="control-row">
+                {S_SELECT_SORT_DAYS}
+            </div>
+			</div>
+	 
+	        <div class="col-md-4 col-sm-4"> 
+                <label for="bday_day">{L_SORT_BY} </label>
+            <div class="control-row">
+                {S_SELECT_SORT_KEY}
+            </div>
+			</div>
+
+			<div class="col-md-4 col-sm-4"> 
+                 <label for="bday_day">{L_SORT_BY}</label>
+                <div class="control-row">
+				 <div class="input-group">
+                    {S_SELECT_SORT_DIR}
+				<span class="input-group-btn">
+                    <button class="btn btn-default" name="sort" type="submit">{L_GO}</button>
+				</span>
+				</div>
+				</div>   
+			</div>
+        </div>
+	</div>
+</fieldset>
+</div>
+  
+<div id="split-panel" class="tab-pane panel-body">
+<!-- IF S_CAN_SPLIT -->
+<fieldset>
+	 <p>{L_SPLIT_TOPIC_EXPLAIN}</p>
+	<!-- IF S_SHOW_TOPIC_ICONS -->
+	<div class="control-group"> 
+	   <label class="control-label" for="icon">{L_TOPIC_ICON}:</label>
+	<div class="controls controls-row"> 
+       <div class="radio"><input type="radio" name="icon" id="icon" value="0" checked="checked"><label for="dst1">{L_NO_TOPIC_ICON}</label></div>
+	<!-- BEGIN topic_icon --><div class="radio"><input type="radio" name="icon" id="icon-{topic_icon.ICON_ID}" value="{topic_icon.ICON_ID}" {topic_icon.S_ICON_CHECKED} ><label for="icon-{topic_icon.ICON_ID}"><img src="{topic_icon.ICON_IMG}" width="{topic_icon.ICON_WIDTH}" height="{topic_icon.ICON_HEIGHT}" alt="" title="" /></label></div><!-- END topic_icon -->
+	</div> 
+	</div>
+	<!-- ENDIF -->
+
+	<div class="control-group"> 
+	   <label class="control-label" for="subject">{L_SPLIT_SUBJECT}:</label>
+	<div class="controls controls-row"> 
+       <input type="text" class="form-control input-sm" placeholder="" name="subject" id="subject" maxlength="64" tabindex="2" value="{SPLIT_SUBJECT}" title="{L_SPLIT_SUBJECT}">
+	</div> 
+	</div>
+	
+    <div class="controls">
+	    <label class="control-label">{L_SPLIT_FORUM}:</label>
+	<div class="input-group col-md-4">
+        <select class="selectpicker" data-container="body" data-width="auto" data-style="btn btn-default form-control" name="to_forum_id">{S_FORUM_SELECT}</select>
+	<span class="input-group-btn">
+		<button class="btn btn-default" name="sort" type="submit">{L_GO}</button>
+	 </span>
+	 </div>
+   </div>
+</fieldset>
+<!-- ENDIF -->
+</div>
+  
+<div id="merge-panel" class="tab-pane panel-body">
+<!-- IF S_CAN_MERGE -->
+<fieldset>
+ <p>{L_MERGE_TOPIC_EXPLAIN}</p>
+	<div class="control-group"> 
+	   <label class="control-label" for="to_topic_id">{L_MERGE_TOPIC_ID}:</label>
+	<div class="controls controls-row"> 
+       <input type="text" class="form-control" placeholder="" name="to_topic_id" id="to_topic_id" value="{TO_TOPIC_ID}">
+	</div> 
+	<a href="{U_SELECT_TOPIC}" >{L_SELECT_TOPIC}</a>
+	<!-- IF TO_TOPIC_INFO -->{TO_TOPIC_INFO}<!-- ENDIF -->
+	</div>	
+</fieldset>
+<!-- ENDIF -->
+</div>
+
+</div>
+
+
+
+</div>
+
+<div class="clearfix">
+	<div class="side-segment"><h3>{L_TOPIC_REVIEW}: {TOPIC_TITLE}</h3></div>
+	<div class="pull-right" id="review" style="margin-top:-35px;">
+	<a href="#review" onclick="viewableArea(getElementById('topicreview'), true); var rev_text = getElementById('review').getElementsByTagName('a').item(0).firstChild; if (rev_text.data == '{LA_EXPAND_VIEW}'){rev_text.data = '{LA_COLLAPSE_VIEW}'; } else if (rev_text.data == '{LA_COLLAPSE_VIEW}'){rev_text.data = '{LA_EXPAND_VIEW}'};">{L_EXPAND_VIEW}</a>
+	</div>
+	<div class="space10"></div>
+</div>
+
+<div class="well well-sm text-muted">
+	<div id="topicreview">
+		<!-- BEGIN postrow -->
+		<div class="post">
+			<div class="postbody" id="pr{postrow.POST_ID}">
+			  <div class="clearfix">
+				<div class="pull-right">
+				<a class="btn btn-xs btn-default" href="{postrow.U_POST_DETAILS}" title="{L_POST_DETAILS}"><i class="fa fa-question-circle"></i></span></a>
+				<input type="checkbox" id="post_id_list_select_{postrow.POST_ID}" name="post_id_list[]" value="{postrow.POST_ID}"<!-- IF postrow.S_CHECKED --> checked="checked"<!-- ENDIF --> ><label for="post_id_list_select_{postrow.POST_ID}"></label>
+				</div>
+
+				<div class="side-segment"><h3><a href="{postrow.U_POST_DETAILS}">{postrow.POST_SUBJECT}</a></h3></div>
+				<p><a href="#pr{postrow.POST_ID}">&#35;{postrow.POST_ID}</a> {L_POSTED} {L_POST_BY_AUTHOR} <strong>{postrow.POST_AUTHOR_FULL}</strong> &#45; {postrow.POST_DATE}<!-- IF postrow.U_MCP_DETAILS --> [ <a href="{postrow.U_MCP_DETAILS}">{L_POST_DETAILS}</a> ]<!-- ENDIF --></p>
+			  </div>
+			  
+				<!-- IF postrow.S_POST_UNAPPROVED or postrow.S_POST_REPORTED -->
+				<div class="alert alert-info fade in">
+				<!-- IF postrow.S_POST_UNAPPROVED --><i class="fa fa-question-circle"></i> <a href="{postrow.U_MCP_APPROVE}"><strong>{L_POST_UNAPPROVED}</strong></a><br /><!-- ENDIF -->
+				<!-- IF postrow.S_POST_REPORTED --><i class="fa fa-warning"></i> <a href="{postrow.U_MCP_REPORT}"><strong>{L_POST_REPORTED}</strong></a><!-- ENDIF -->
+				</div>
+				<!-- ENDIF -->
+
+				<div class="content" id="message_{postrow.POST_ID}">{postrow.MESSAGE}</div>
+                <div class="space10"></div>
+				<!-- IF postrow.S_HAS_ATTACHMENTS -->
+					<div class="attachbox">
+						<h5>{L_ATTACHMENTS}</h5>
+						<!-- BEGIN attachment -->
+							<span>{postrow.attachment.DISPLAY_ATTACHMENT}</span>
+						<!-- END attachment -->
+					</div>
+				<!-- ENDIF -->
+			</div>
+		</div>
+		<!-- END postrow -->
+	</div>
+</div>
+
+<div class="clearfix">
+	<div class="pull-right">
+    <!-- IF PAGINATION or TOTAL_POSTS -->
+		<ul class="pagination pagination-sm">
+	        <!-- IF PREVIOUS_PAGE --><li><a href="{PREVIOUS_PAGE}">{L_PREVIOUS}</a></li><!-- ENDIF -->
+	        <!-- IF TOTAL_TOPICS --><li class="active"><a>{TOTAL_TOPICS}</a></li><!-- ENDIF -->
+            <!-- IF PAGE_NUMBER --><!-- IF PAGINATION --><li><a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a></li> {PAGINATION}<!-- ELSE --> <li><a>{PAGE_NUMBER}</a></li><!-- ENDIF --><!-- ENDIF -->
+	        <!-- IF NEXT_PAGE --><li><a href="{NEXT_PAGE}">{L_NEXT}</a></li><!-- ENDIF -->
+	    </ul>
+	<!-- ENDIF -->	
+	</div>
+
+<div class="row">
+<div class="col-md-6 pull-left">
+<fieldset>
+   <div class="input-group">
+	<select class="selectpicker" data-container="body" data-width="auto" data-style="btn btn-default form-control" name="action">
+		<option value="" selected="selected">{L_SELECT_ACTION}</option>
+		<!-- IF S_CAN_APPROVE --><option value="approve">{L_APPROVE_POSTS}</option><!-- ENDIF -->
+		<!-- IF S_CAN_LOCK --><option value="lock_post">{L_LOCK_POST_POSTS} [ {L_LOCK_POST_EXPLAIN} ]</option><option value="unlock_post">{L_UNLOCK_POST_POSTS}</option><!-- ENDIF -->
+		<!-- IF S_CAN_DELETE --><option value="delete_post">{L_DELETE_POSTS}</option><!-- ENDIF -->
+		<!-- IF S_CAN_MERGE --><option value="merge_posts"<!-- IF S_MERGE_VIEW --> selected="selected"<!-- ENDIF -->>{L_MERGE_POSTS}</option><!-- ENDIF -->
+		<!-- IF S_CAN_SPLIT --><option value="split_all"<!-- IF S_SPLIT_VIEW --> selected="selected"<!-- ENDIF -->>{L_SPLIT_POSTS}</option><option value="split_beyond">{L_SPLIT_AFTER}</option><!-- ENDIF -->
+		<!-- IF S_CAN_SYNC --><option value="resync">{L_RESYNC}</option><!-- ENDIF -->
+	</select>
+	<span class="input-group-btn">
+	<a href="javascript:;" onclick="marklist('mcp', 'post', true); return false;" class="btn btn-default" title="" data-original-title="{L_MARK_ALL}"><i class="fa fa-check-square-o"></i></a>
+	<a href="javascript:;" onclick="marklist('mcp', 'post', false); return false;" class="btn btn-default" title="" data-original-title="{L_UNMARK_ALL}"><i class="fa fa-square-o"></i></a>
+	<button class="btn btn-default" type="submit" value="{L_SUBMIT}" name="mcp_topic_submit" >{L_SUBMIT}</button>
+  </span>
+  </div>
+{S_HIDDEN_FIELDS}
+{S_FORM_TOKEN}
+</fieldset>
+ </div>
+  </div>
+ </div>
+</form>
+<!-- INCLUDE mcp_footer.html -->

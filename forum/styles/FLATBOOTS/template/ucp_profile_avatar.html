@@ -1,0 +1,14 @@
+<!-- INCLUDE ucp_header.html -->
+<form id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+<!-- INCLUDE ucp_avatar_options.html -->
+<div class="space10"></div>
+<div class="form-actions"> 
+	{S_HIDDEN_FIELDS}
+	<!-- IF S_DISPLAY_GALLERY --><button type="submit" name="display_gallery" value="{L_DISPLAY_GALLERY}" class="btn btn-default" autocomplete="off" data-loading-text="{L_LOADING}<i class='fa fa-spin fa-spinner fa-lg icon-white'></i>">{L_DISPLAY_GALLERY}</button>&nbsp; <!-- ENDIF -->
+	<!-- IF S_IN_AVATAR_GALLERY --><button type="submit" name="cancel" value="{L_CANCEL}" class="btn btn-default">{L_CANCEL}</button><!-- ELSE -->
+	<button type="reset" value="{L_RESET}" name="reset" class="btn btn-default">{L_RESET}</button> <!-- ENDIF -->&nbsp; 
+	<button type="submit" class="btn btn-default" name="submit" value="{L_SUBMIT}" autocomplete="off" data-loading-text="{L_LOADING}<i class='fa fa-spin fa-spinner fa-lg icon-white'></i>">{L_SUBMIT}</button>
+	{S_FORM_TOKEN}
+</div> 
+</form>
+<!-- INCLUDE ucp_footer.html -->

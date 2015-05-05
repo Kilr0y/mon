@@ -1,0 +1,29 @@
+	  </main>
+	</div><!-- page-body id in header -->
+  </div> <!-- padding_0_40 in header -->
+ </div> <!-- content-forum in header -->
+</div> <!-- wrap - corners container in header -->
+
+<div class="container">
+  <div class="copyright">
+	<small class="pull-left">
+		<!-- IF TRANSLATION_INFO -->{TRANSLATION_INFO}<!-- ENDIF -->
+		<!-- IF DEBUG_OUTPUT -->{DEBUG_OUTPUT}<!-- ENDIF -->
+		| {L_BBOOTS_VERSION}
+	</small>
+	<small class="pull-right">
+		{S_TIMEZONE}
+	</small>
+  </div>
+</div>
+
+<!-- injected via a module or an include -->
+<script>
+    // some function that depends on bootstrap and jquery
+	head.ready(function () {
+	   $.fn.tooltip&&$('[rel="tooltip"]').tooltip();$.fn.popover&&$('[rel="popover"]').popover();$(".selectpicker").selectpicker();$(".selectpicker").tooltip("disable");$(".btn-group [title]").tooltip({container:"body"});$("button[data-loading-text]").click(function(){var e=$(this);e.button("loading");setTimeout(function(){e.button("reset")},3e3)});jQuery(function(e){e("a").tooltip({html:true,container:"body"})});$(".btn-group [title]").tooltip({container:"body"})
+    });
+</script>
+
+</body>
+</html>

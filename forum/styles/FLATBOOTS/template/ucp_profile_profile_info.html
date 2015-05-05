@@ -1,0 +1,134 @@
+<!-- INCLUDE ucp_header.html -->
+<form id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+<div class="tab-pane active">
+	<fieldset class="framed-ucp">
+	 <legend>{L_TITLE}</legend>
+	   <p>{L_PROFILE_INFO_NOTICE}</p>
+	
+	<!-- IF ERROR -->
+	<div class="alert alert-info fade in">
+       <i class="fa fa-warning"></i> <strong>{L_INFO_BOX}</strong> {ERROR}
+    </div>
+	<!-- ENDIF -->
+	
+<!-- I REFUSE TO USE THIS OLD STUFF 
+	
+    <div class="control-group"> 
+	   <label for="icq" class="control-label">{L_UCP_ICQ}:</label>
+	<div class="controls controls-row"> 
+       <input type="text" name="icq" id="icq" maxlength="15" value="{ICQ}" placeholder="Ex:669490231" class="form-control input-sm">
+	</div> 
+	</div> 	
+	
+    <div class="control-group"> 
+	    <label for="aim" class="control-label">{L_UCP_AIM}:</label>
+	<div class="controls controls-row"> 
+       <input type="text" name="aim" id="aim" maxlength="255" value="{AIM}" placeholder="AOL email" class="form-control input-sm">
+	</div> 
+	</div> 
+	
+    <div class="control-group"> 
+	   <label for="msn" class="control-label">{L_UCP_MSNM}:</label>
+	<div class="controls controls-row"> 
+       <input type="text" name="msn" id="msn" maxlength="255" value="{MSN}" placeholder="MSN e-mail address" class="form-control input-sm">
+	</div> 
+	</div> 
+	
+    <div class="control-group"> 
+	   	<label for="yim" class="control-label">{L_UCP_YIM}:</label>
+	<div class="controls controls-row"> 
+       <input type="text" name="yim" id="yim" maxlength="255" value="{YIM}" placeholder="Yahoo e-mail address" class="form-control input-sm">
+	</div> 
+	</div> 
+	
+    <div class="control-group"> 
+	    <label for="jabber" class="control-label">{L_UCP_JABBER}:</label>
+	<div class="controls controls-row"> 
+       <input type="text" name="jabber" id="jabber" maxlength="255" value="{JABBER}" placeholder="Jabber e-mail address" class="form-control input-sm">
+	</div> 
+	</div> 
+	
+	I REFUSE TO USE THIS OLD STUFF  -->
+
+    <div class="control-group"> 
+	    <label for="website" class="control-label">{L_WEBSITE}:</label>
+	<div class="controls controls-row"> 
+       <input type="text" name="website" id="website" maxlength="255" value="{WEBSITE}" placeholder="http://www.your-website.com/" class="form-control input-sm">
+	</div> 
+	</div> 
+
+    <div class="control-group"> 
+	    <label for="location" class="control-label">{L_LOCATION}:</label>
+	<div class="controls controls-row"> 
+       <input type="text" name="location" id="location" maxlength="255" value="{LOCATION}" placeholder="Your location" class="form-control input-sm">
+	</div> 
+	</div> 
+
+    <div class="control-group"> 
+	    <label for="occupation" class="control-label">{L_OCCUPATION}:</label>
+	<div class="controls controls-row"> 
+       <textarea class="form-control input-sm" name="occupation" id="occupation" rows="2" placeholder="Describe your occupation with 4 words...">{OCCUPATION}</textarea>
+	</div> 
+	</div> 
+
+    <div class="control-group"> 
+	    <label for="interests" class="control-label">{L_INTERESTS}:</label>
+	<div class="controls controls-row"> 
+       <textarea class="form-control input-sm" name="interests" id="interests" rows="2" placeholder="Describe your interests with 4 words...">{INTERESTS}</textarea>
+	</div> 
+	</div> 
+	
+ <!-- IF S_BIRTHDAYS_ENABLED -->
+    <div class="control-group"> 
+        <label for="width" class="control-label">{L_BIRTHDAY}:</label><span class="help-block">{L_BIRTHDAY_EXPLAIN}</span>
+    <div class="controls controls-row"> 
+    
+	<div class="clearfix"> 
+     <div class="col-md-2">
+            <label for="bday_day" class="control-label">{L_DAY}</label>
+        <div class="controls">
+            <div class="selector"><select data-width="auto" name="bday_day" id="bday_day" data-container="body" class="selectpicker">{S_BIRTHDAY_DAY_OPTIONS}</select></div>  
+        </div>
+     </div>
+     <div class="col-md-2">
+            <label for="bday_month" class="control-label">{L_MONTH}</label>
+        <div class="controls">
+			<div class="selector"><select data-width="auto" name="bday_month" id="bday_month" data-container="body" class="selectpicker">{S_BIRTHDAY_MONTH_OPTIONS}</select></div>
+        </div>
+     </div>
+     <div class="col-md-2">
+           <label for="bday_year" class="control-label">{L_YEAR}</label>
+        <div class="controls">
+			 <div class="selector"><select data-width="auto" name="bday_year" id="bday_year" data-container="body" class="selectpicker">{S_BIRTHDAY_YEAR_OPTIONS}</select></div>
+        </div>
+     </div>
+	</div>
+	 
+    </div> 
+	</div> 
+ <!-- ENDIF -->	
+ 
+	<!-- BEGIN profile_fields -->
+	<div id="cprofile" class="control-group"> 
+	    <label class="control-label" <!-- IF profile_fields.FIELD_ID --> for="{profile_fields.FIELD_ID}"<!-- ENDIF -->>{profile_fields.LANG_NAME}:<!-- IF profile_fields.S_REQUIRED --> *<!-- ENDIF --></label><!-- IF profile_fields.LANG_EXPLAIN --><span class="help-block">{profile_fields.LANG_EXPLAIN}</span><!-- ENDIF -->
+	<div class="controls controls-row"> 
+       {profile_fields.FIELD}
+	</div> 
+	<!-- IF profile_fields.ERROR --><span class="error">{profile_fields.ERROR}</span><!-- ENDIF -->
+	</div> 
+	<!-- END profile_fields -->
+	</fieldset>
+
+</div>
+
+    <div class="space10"></div>
+	<div class="form-actions"> 
+	{S_HIDDEN_FIELDS}
+	<button type="reset" value="{L_RESET}" name="reset" class="btn btn-default">{L_RESET}</button> 
+	<button type="submit" name="submit" value="{L_SUBMIT}" class="btn btn-default" autocomplete="off" data-loading-text="{L_LOADING}<i class='fa fa-spin fa-spinner fa-lg icon-white'></i>">{L_SUBMIT}</button>
+	{S_FORM_TOKEN}
+	</div>
+	
+</form>
+
+<!-- INCLUDE ucp_footer.html -->

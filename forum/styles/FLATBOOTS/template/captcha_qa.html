@@ -1,0 +1,22 @@
+<!-- IF S_TYPE == 1 -->
+	<div class="side-segment"><h3>{L_CONFIRMATION}</h3></div>
+<div class="well">
+	<fieldset>
+<!-- ENDIF -->
+<div class="clearfix">
+<label class="control-label" for="answer">{QA_CONFIRM_QUESTION}:</label><span class="help-block">{L_CONFIRM_QA_EXPLAIN_ALT}</span>
+<div class="space10"></div>
+<div class="<!-- IF S_CONFIRM_REFRESH -->input-group<!-- ELSE -->nothing<!-- ENDIF -->">
+     <input class="form-control input-sm" type="text" tabindex="{$CAPTCHA_TAB_INDEX}" name="qa_answer" id="answer" size="45" title="{L_ANSWER}" placeholder="Ex:Max Pane"/>
+    <!-- IF S_CONFIRM_REFRESH -->
+	<div class="input-group-btn">
+	 <button type="submit" name="refresh_vc" id="refresh_vc" class="btn btn-default" value="{L_VC_REFRESH}" title="{L_VC_REFRESH}" ><i class="fa fa-retweet"></i></button>
+    </div>
+	<!-- ENDIF -->
+</div>
+ <input type="hidden" name="qa_confirm_id" id="qa_confirm_id" value="{QA_CONFIRM_ID}" />
+</div>
+<!-- IF S_TYPE == 1 -->
+	</fieldset>
+</div>
+<!-- ENDIF -->

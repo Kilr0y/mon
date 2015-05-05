@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}">
+<head>
+
+<meta charset="{S_CONTENT_ENCODING}">
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+{META}
+<title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
+
+<script type="text/javascript">
+// <![CDATA[
+
+	var jump_page = '{LA_JUMP_PAGE}:';
+	var on_page = '{ON_PAGE}';
+	var per_page = '{PER_PAGE}';
+	var base_url = '{A_BASE_URL}';
+	var style_cookie = 'phpBBstyle';
+	var onload_functions = new Array();
+	var onunload_functions = new Array();
+	var style_cookie_settings = '{A_COOKIE_SETTINGS}';
+
+	/**
+	* New function for handling multiple calls to window.onload and window.unload by pentapenguin
+	*/
+	window.onload = function()
+	{
+		for (var i = 0; i < onload_functions.length; i++)
+		{
+			eval(onload_functions[i]);
+		}
+	}
+
+	window.onunload = function()
+	{
+		for (var i = 0; i < onunload_functions.length; i++)
+		{
+			eval(onunload_functions[i]);
+		}
+	}
+
+// ]]>
+</script>
+<script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/forum_fn.js"></script>
+
+
+<!-- CSS files start here-->
+<link href="{T_STYLESHEET_LINK}" rel="stylesheet">
+<!-- Google free font here -->
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
+<!-- CSS files -->
+
+<!-- Scripts start here after the jquery.js -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/headjs/1.0.3/head.min.js"></script>
+<script>
+// this loads jquery asyncrounously & in parallel
+head.load("//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js", "{T_THEME_PATH}/bootstrap/js/bootstrap.min.js", "{T_THEME_PATH}/bootstrap/js/bootstrap-select.min.js");
+</script>
+
+
+
+<!-- DEFINE $POPUP = 1 -->
+
+</head>
+
+<body id="phpbb" class="{S_CONTENT_DIRECTION}">
+
+<div id="wrap" class="corners container">
+  <div id="content-forum">
+    <div class="padding_0_40">
+	<div id="page-body">
+	 <main role="main">

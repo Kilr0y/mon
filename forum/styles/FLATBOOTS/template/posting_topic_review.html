@@ -1,0 +1,57 @@
+<div class="clearfix">
+  <div class="pull-right" id="review">
+	<a href="#review" onclick="viewableArea(getElementById('topicreview'), true); var rev_text = getElementById('review').getElementsByTagName('a').item(0).firstChild; if (rev_text.data == '{LA_EXPAND_VIEW}'){rev_text.data = '{LA_COLLAPSE_VIEW}'; } else if (rev_text.data == '{LA_COLLAPSE_VIEW}'){rev_text.data = '{LA_EXPAND_VIEW}'};">{L_EXPAND_VIEW}</a>
+  </div>
+<div class="side-segment"><h3>{L_TOPIC_REVIEW}: {TOPIC_TITLE}</h3></div>
+</div>
+
+<div id="topicreview">
+<script>
+// <![CDATA[
+	bbcodeEnabled = {S_BBCODE_ALLOWED};
+// ]]>
+</script>
+	<!-- BEGIN topic_review_row -->
+
+	<!-- IF topic_review_row.S_IGNORE_POST -->
+	<div class="well post-ignore">
+		<div class="inner">
+			{topic_review_row.L_IGNORE_POST}
+	<!-- ELSE -->
+<div class="post text-muted">
+	<!-- ENDIF -->
+	<div class="well" id="pr{topic_review_row.POST_ID}">
+		<h3><a href="#pr{topic_review_row.POST_ID}">{topic_review_row.POST_SUBJECT}</a> <!-- IF S_IS_BOT --><span class="pull-right post-id hidden-xs"><i class="fa fa-file"></i></span><!-- ELSE --><span class="pull-right post-id hidden-xs"><a href="{topic_review_row.U_MINI_POST}" title="{L_JUMP_TO_POST}"><i class="fa fa-file"></i></a></span><!-- ENDIF --></h3>
+	<div class="clearfix">
+		<div class="text-muted pull-left">
+		  {L_POST_BY_AUTHOR}<strong> {topic_review_row.POST_AUTHOR_FULL}</strong> &raquo; {topic_review_row.POST_DATE}
+		 </div>
+			
+		<div class="pull-right">
+			<!-- IF topic_review_row.POSTER_QUOTE and topic_review_row.DECODED_MESSAGE -->
+			<a class="btn btn-sm btn-default" href="#postingbox" onclick="addquote({topic_review_row.POST_ID}, '{topic_review_row.POSTER_QUOTE}', '{LA_WROTE}');" title="{L_QUOTE} {topic_review_row.POST_AUTHOR}"><i class="fa fa-comment"></i></a>
+			<!-- ENDIF -->
+			
+			<!-- IF topic_review_row.U_MCP_DETAILS -->
+			<a class="btn btn-sm btn-default" href="{topic_review_row.U_MCP_DETAILS}" title="{L_POST_DETAILS}"><i class="fa fa-question-circle"></i></a>
+			<!-- ENDIF -->
+		</div>
+	</div>
+			<div class="content clearfix">{topic_review_row.MESSAGE}</div>
+
+			<!-- IF topic_review_row.S_HAS_ATTACHMENTS -->
+				<div class="attachbox">
+					<h5>{L_ATTACHMENTS}</h5>
+					<!-- BEGIN attachment -->
+						<span>{topic_review_row.attachment.DISPLAY_ATTACHMENT}</span>
+					<!-- END attachment -->
+				</div>
+			<!-- ENDIF -->
+
+			<!-- IF topic_review_row.POSTER_QUOTE and topic_review_row.DECODED_MESSAGE -->
+				<div id="message_{topic_review_row.POST_ID}" style="display: none;">{topic_review_row.DECODED_MESSAGE}</div>
+			<!-- ENDIF -->
+	</div>
+</div>
+	<!-- END topic_review_row -->
+</div>

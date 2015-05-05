@@ -1,0 +1,306 @@
+<!-- INCLUDE overall_header.html -->
+<form method="post" action="{S_PROFILE_ACTION}" id="viewprofile">
+ <div class="side-segment"><h3>{PAGE_TITLE}</h3></div>
+
+ <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-profile text-muted">
+                <div class="panel-heading text-center bg-profile">
+				 <div class="pull-left pos-abs l-25">
+					<a href="{U_UCP_PROFILE}" title="{L_UCP_PROFILE}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
+				 </div>
+				 <div class="pull-right pos-abs r-25">
+					<!-- IF U_ACP or U_USER_BAN -->
+					<div class="btn-group">
+						<div class="dropdown">
+						  <a href="#" data-toggle="dropdown" class="btn btn-xs btn-primary" title="{L_MANAGE}"><i class="fa fa-cog"></i></a>
+							<ul class="dropdown-menu dropdown-menu-right">
+								<!-- IF U_USER_ADMIN --><li><a href="{U_USER_ADMIN}">{L_USER_ADMIN}</a></li><!-- ENDIF -->
+								<!-- IF U_USER_BAN --><li><a href="{U_USER_BAN}">{L_USER_BAN}</a></li><!-- ENDIF -->
+								<!-- IF U_SWITCH_PERMISSIONS --><li><a href="{U_SWITCH_PERMISSIONS}">{L_USE_PERMISSIONS}</a></li><!-- ENDIF -->
+								<!-- IF U_RESTORE_PERMISSIONS --><li><a href="{U_RESTORE_PERMISSIONS}">{L_RESTORE_PERMISSIONS}</a></li><!-- ENDIF -->
+							</ul>
+						</div>
+					</div>
+					<!-- ENDIF -->
+				 </div>
+				 
+				 <div class="profile-avatar">
+				  <!-- IF AVATAR_IMG -->{AVATAR_IMG}<!-- ENDIF -->
+				  <!-- IF not AVATAR_IMG -->
+				   <img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" />
+			      <!-- ENDIF -->
+				 </div>
+
+                    <h4><!-- IF USER_COLOR --><span style="color: {USER_COLOR}; font-weight: bold;"><!-- ELSE --><!-- ENDIF --> {USERNAME}</h4>
+                    <p><!-- IF RANK_TITLE --> {RANK_TITLE}<!-- ENDIF --></p> 
+                    <p><!-- IF RANK_IMG -->{RANK_IMG}<!-- ENDIF --></p>
+					  <!-- <small>@SiteSplat</small> -->				
+                </div>
+				<!-- IF INTERESTS -->
+				<div class="panel-body"> 
+                <div class="text-center"> 
+				    <h5>{L_INTERESTS}</h5>
+                    <p>{INTERESTS}</p>
+                </div>
+				</div>
+				<!-- ENDIF -->
+				<div class="panel-footer no-padding"> 
+				 <div class="clearfix">
+				 <!-- IF S_USER_LOGGED_IN and S_ZEBRA -->
+				 <!-- IF U_REMOVE_FRIEND -->
+				 <div class="col-md-12 partition-green padding-10 text-center">
+						<a class="btn btn-block btn-white" title="" href="{U_REMOVE_FRIEND}"><i class="fa fa-times"></i> <i class="fa fa-heart"></i> {L_REMOVE_FRIEND}</a>
+				 </div>
+					<!-- ELSEIF U_REMOVE_FOE -->
+					<div class="col-md-12 partition-blue padding-10 text-center">
+						<a class="btn btn-block btn-white" title="" href="{U_REMOVE_FOE}"><i class="fa fa-times"></i> <i class="fa fa-bug"></i> {L_REMOVE_FOE}</a>
+					</div>
+					<!-- ELSE -->
+					<!-- IF U_ADD_FRIEND -->
+					 <div class="col-md-6 partition-green padding-10 text-center">
+						<a class="btn btn-block btn-white" title="" href="{U_ADD_FRIEND}"><i class="fa fa-plus"></i> <i class="fa fa-heart"></i> {L_ADD_FRIEND}</a>
+					</div>
+					<!-- ENDIF -->
+					<!-- IF U_ADD_FOE -->
+					<div class="col-md-6 partition-blue padding-10 text-center">
+						<a class="btn btn-block btn-white" title="" href="{U_ADD_FOE}"><i class="fa fa-plus"></i> <i class="fa fa-bug"></i> {L_ADD_FOE}</a>
+					</div>
+					<!-- ENDIF -->
+			    <!-- ENDIF -->
+		        <!-- ENDIF --> 
+				</div>
+				</div>
+            </div>
+    	</div>
+	
+	    <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {L_BIO}<!-- IF S_USER_INACTIVE --> <span class="label label-default">{L_USER_IS_INACTIVE}: {USER_INACTIVE_REASON}</span><!-- ENDIF --></strong></div>
+                <div class="panel-body">
+                    <div class="media">
+                        <div class="media-body">
+                            <ul class="list-unstyled list-info text-muted">
+                                <li>
+                                    <span class="icon glyphicon glyphicon-user"></span>
+                                    <label>{L_USERNAME}</label>
+                                    <!-- IF USER_COLOR --><span style="color: {USER_COLOR}; font-weight: bold;"><!-- ELSE --><!-- ENDIF --> {USERNAME}</span>
+                                </li>
+								<li>
+                                    <span class="icon glyphicon glyphicon-globe"></span>
+                                    <label>{L_USER_STATUS}</label>
+                                     <!-- IF S_ONLINE -->{L_ONLINE}<!-- ELSE -->{L_OFF_LINE}<!-- ENDIF -->
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-map-marker"></span>
+                                    <label>{L_LOCATION}</label>
+                                    <!-- IF LOCATION -->{LOCATION}<!-- ELSE --><!-- ENDIF -->
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-home"></span>
+                                    <label>{L_AGE}</label>
+                                    <!-- IF AGE !== '' --> {AGE}<!-- ELSE --><!-- ENDIF -->
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-briefcase"></span>
+                                    <label>{L_OCCUPATION}</label>
+                                    <!-- IF OCCUPATION -->{OCCUPATION}<!-- ENDIF -->
+                                </li>
+                                <li>
+                                    <span class="icon glyphicon glyphicon-link"></span>
+                                    <label>{L_WEBSITE}</label>
+                                   <!-- IF U_WWW --><a href="{U_WWW}" title="{L_VISIT_WEBSITE}: {U_WWW}">{U_WWW}</a><!-- ENDIF -->
+                                </li>
+                                <!-- BEGIN custom_fields -->
+								<li>
+                                    <span class="icon glyphicon glyphicon-cog"></span>
+                                    <label>{custom_fields.PROFILE_FIELD_NAME}</label>
+                                    {custom_fields.PROFILE_FIELD_VALUE}
+                                </li>
+								<!-- END custom_fields -->	
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+				<div class="panel-footer">
+				    <div class="clearfix">
+						<ul class="mini-profile-contact pull-right">
+							<!-- IF U_EMAIL --><li><a class="default-contact" href="{U_EMAIL}" title="{L_SEND_EMAIL_USER} {USERNAME}"><i class="fa fa-send"></i></a></li><!-- ENDIF -->
+							<!-- IF U_PM --><li><a class="default-contact" href="{U_PM}" title="{L_SEND_PRIVATE_MESSAGE}"><i class="fa fa-envelope"></i></a></li><!-- ENDIF -->
+							<!-- IF U_MSN or USER_MSN --><li><a class="default-contact" href="{U_MSN}" onclick="popup(this.href, 550, 320); return false;" title="{L_SEND_MSNM_MESSAGE}"><i class="fa fa-windows"></i></a></li><!-- ENDIF -->
+							<!-- IF U_YIM or USER_YIM --><li><a class="default-contact" href="{U_YIM}" onclick="popup(this.href, 780, 550); return false;" title="{L_SEND_YIM_MESSAGE}"><i class="fa fa-yahoo"></i></a></li><!-- ENDIF -->
+							<!-- IF U_AIM or USER_AIM --><li><a class="default-contact" href="{U_AIM}" onclick="popup(this.href, 550, 320); return false;" title="{L_SEND_AIM_MESSAGE}"><i class="fa fa-comment"></i></a></li><!-- ENDIF -->
+							<!-- IF U_ICQ or USER_ICQ --><li><a class="default-contact" href="{U_ICQ}" onclick="popup(this.href, 550, 320); return false;" title="{L_SEND_ICQ_MESSAGE}"><i class="fa fa-comment"></i></a></li><!-- ENDIF -->
+							<!-- IF U_JABBER and S_JABBER_ENABLED --><li><a class="default-contact" href="{U_JABBER}" onclick="popup(this.href, 550, 320); return false;" title="{L_SEND_JABBER_MESSAGE}"><i class="fa fa-comment"></i></a></li><!-- ENDIF -->
+						</ul>
+					</div>
+			    </div>
+            </div>
+        </div>
+	
+ </div>
+ 
+<div class="clearfix">
+<div class="side-segment"><h3>{L_USER_FORUM}</h3></div>
+
+ <section class="ui-timeline text-muted">
+            <article class="tl-item">
+                <div class="tl-body">
+                    <div class="tl-entry">
+                        <div class="tl-caption">
+                            <a class="btn btn-primary btn-block" href="#">{L_JOINED}</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="tl-item">
+                <div class="tl-body">
+                    <div class="tl-entry">
+                        <div class="tl-time">{JOINED}</div>
+                        <div class="tl-icon square-icon sm bg-info"><i class="fa fa-automobile"></i></div>
+                        <div class="tl-content">
+                            <h4 class="tl-tile text-primary">{USERNAME} {L_MEMBERLIST_P_JOINED}</h4>
+                            <p>{L_MEMBERLIST_P_EXPL}</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="tl-item alt">
+                <div class="tl-body">
+                    <div class="tl-entry">
+                        <div class="tl-time">{VISITED}</div>
+                        <div class="tl-icon square-icon sm bg-warning"><i class="fa fa-eye"></i></div>
+                        <div class="tl-content">
+                            <h4 class="tl-tile text-danger">{L_VISITED}</h4>
+                            <p>{L_MEMBERLIST_P_DATE_EXPL}</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+			
+			<article class="tl-item">
+                <div class="tl-body">
+                    <div class="tl-entry">
+                        <div class="tl-time">3 hours ago</div>
+                        <div class="tl-icon square-icon sm bg-success"><i class="fa fa-comments"></i></div>
+                        <div class="tl-content">
+                            <h4 class="tl-tile text-warning">{L_TOTAL_POSTS}</h4>
+                            <p>{POSTS} <!-- IF S_DISPLAY_SEARCH -->| <strong><a href="{U_SEARCH_USER}">{L_SEARCH_USER_POSTS}</a></strong><!-- ENDIF --> <!-- IF POSTS_PCT -->({POSTS_PCT} / {POSTS_DAY})<!-- ENDIF --> <!-- IF POSTS_IN_QUEUE and U_MCP_QUEUE -->(<a href="{U_MCP_QUEUE}">{L_POSTS_IN_QUEUE}</a>)<!-- ELSEIF POSTS_IN_QUEUE -->({L_POSTS_IN_QUEUE})<!-- ENDIF --></p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+			
+			<!-- IF S_SHOW_ACTIVITY and POSTS -->
+			<article class="tl-item alt">
+                <div class="tl-body">
+                    <div class="tl-entry">
+                        <div class="tl-time">7 hours ago</div>
+                        <div class="tl-icon square-icon sm bg-primary"><i class="fa fa-check"></i></div>
+                        <div class="tl-content">
+                            <h4 class="tl-tile text-success">{L_ACTIVE_IN_FORUM}</h4>
+                            <p><!-- IF ACTIVE_FORUM != '' --> <a href="{U_ACTIVE_FORUM}">{ACTIVE_FORUM}</a> ({ACTIVE_FORUM_POSTS} / {ACTIVE_FORUM_PCT})<!-- ELSE --> - <!-- ENDIF --></p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+			
+			
+			<article class="tl-item">
+                <div class="tl-body">
+                    <div class="tl-entry">
+                        <div class="tl-time">3 hours ago</div>
+                        <div class="tl-icon square-icon sm bg-info"><i class="fa fa-fire"></i></div>
+                        <div class="tl-content">
+                            <h4 class="tl-tile text-warning">{L_ACTIVE_IN_TOPIC}</h4>
+                            <p><!-- IF ACTIVE_TOPIC != '' --> <a href="{U_ACTIVE_TOPIC}">{ACTIVE_TOPIC}</a> ({ACTIVE_TOPIC_POSTS} / {ACTIVE_TOPIC_PCT})<!-- ELSE --> - <!-- ENDIF --></p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+			<!-- ENDIF -->
+			
+		   <!-- IF S_WARNINGS -->
+            <article class="tl-item alt">
+                <div class="tl-body">
+                    <div class="tl-entry">
+                        <div class="tl-time">3 hours ago</div>
+                        <div class="tl-icon square-icon sm bg-success"><i class="fa fa-bomb"></i></div>
+                        <div class="tl-content">
+                            <h4 class="tl-tile text-warning">{L_WARNINGS}</h4>
+                            <p>{WARNINGS} <!-- IF U_NOTES or U_WARN --> [ <!-- IF U_NOTES --><a href="{U_NOTES}">{L_VIEW_NOTES}</a><!-- ENDIF --> <!-- IF U_WARN --><!-- IF U_NOTES --> | <!-- ENDIF --><a href="{U_WARN}">{L_WARN_USER}</a><!-- ENDIF --> ]<!-- ENDIF --></p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <!-- ENDIF -->
+
+			<article class="tl-item">
+                <div class="tl-body">
+                    <div class="tl-entry">
+                        <div class="tl-caption">
+                            <a class="btn btn-danger btn-block" href="javascript:;">{L_END_TIMELINE}</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+		<!-- Last articles
+		    <article class="tl-item">
+                <div class="tl-body">
+                    <div class="tl-entry">
+                        <div class="tl-time">10 hours ago</div>
+                        <div class="tl-icon square-icon sm bg-primary"><i class="fa fa-clock-o"></i></div>
+                        <div class="tl-content">
+                            <h4 class="tl-tile text-info">Accusantium sint</h4>
+                            <p>Ipsam, minus, quam, sit officiis accusantium sint voluptates voluptatibus minima cum non quos corrupti dolorem eligendi modi eius magnam unde!</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+		
+            <article class="tl-item alt">
+                <div class="tl-body">
+                    <div class="tl-entry">
+                        <div class="tl-time">9:10 AM</div>
+                        <div class="tl-icon square-icon sm bg-info"><i class="fa fa-gift"></i></div>
+                        <div class="tl-content">
+                            <h4 class="tl-tile text-primary">Sed cumque temporibus</h4>
+                            <p>Deserunt sed cumque temporibus. Doloribus, iste, sit recusandae fugiat assumenda ea magni at doloremque ipsum amet molestias error mollitia maxime ad alias eos id cumque corporis placeat nisi a quaerat nemo magnam ab numquam ratione facere dolorum. Cumque, dolores, sint molestiae eaque quibusdam illo error!</p>
+                        </div>
+                    </div>
+                </div>
+            </article>	
+        Last articles -->
+		
+        </section>
+ 
+ 
+ 
+</div>
+
+<!-- IF SIGNATURE -->
+   <div class="clearfix">
+    <div class="side-segment"><h3>{L_SIGNATURE}</h3></div>
+     <div class="panel">
+	 <div class="panel-body">
+      <div class="signature" style="border-top:none; margin-top: 0;">{SIGNATURE}</div>
+    </div>
+	</div>
+   </div>
+<!-- ENDIF -->
+
+</form>
+
+<div class="row">
+<!-- INCLUDE jumpbox.html -->
+</div>
+
+<!-- INCLUDE jump_links.html -->
+
+
+<!-- INCLUDE overall_footer.html -->

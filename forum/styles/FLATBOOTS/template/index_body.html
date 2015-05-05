@@ -1,0 +1,47 @@
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDE forumlist_body.html -->
+
+<!-- IF S_USER_LOGGED_IN -->
+<div class="panel panel-forum panel-stats">
+ <div class="panel-heading">{L_SITESPLAT_STATISTICS}</div>
+ <div class="panel-body">
+    <div class="row">
+	 <div class="col-md-12 col-sm-12 col-xs-12">
+	  <div class="col-md-2 col-sm-2 col-xs-4 text-center">
+	    <span class="output text-acqua">{SITESPLAT_CURRENTLY_ONLINE} <a data-toggle="collapse" data-target=".sorting" href="javascript:void(0);" title="Toggle list"><i class="fa fa-angle-double-down"></i></a></span><strong>{L_SITESPLAT_USERS_ONLINE}</strong>
+	   </div>
+	   <div class="col-md-2 col-sm-2 col-xs-4 text-center">
+	    <span class="output text-seppia">{SITESPLAT_RECORD_ONLINE}</span><strong>{L_SITESPLAT_MOST_USERS_ONLINE}</strong>
+	   </div>
+	   <div class="col-md-2 col-sm-2 col-xs-4 text-center">
+	    <span class="output text-melograno">{SITESPLAT_TOTAL_POSTS}</span><strong>{L_SITESPLAT_TOTAL_POSTS}</strong>
+	   </div>
+	   <div class="col-md-2 col-sm-2 col-xs-4 text-center">
+	    <span class="output text-drank">{SITESPLAT_TOTAL_TOPICS}</span><strong>{L_SITESPLAT_TOTAL_TOPICS}</strong>
+	   </div>
+	   <div class="col-md-2 col-sm-2 col-xs-4 text-center">
+	    <span class="output text-orange">{SITESPLAT_TOTAL_USERS}</span><strong>{L_SITESPLAT_TOTAL_USERS}</strong>
+	   </div>
+	   <div class="col-md-2 col-sm-2 col-xs-4 text-center">
+	    <span class="output text-red">{SITESPLAT_NEWEST_USER}</span><strong>{L_SITESPLAT_NEWEST_MEMBER}</strong>
+	   </div>
+	  </div>
+	</div>
+ </div>
+ <!-- IF S_DISPLAY_ONLINE_LIST -->
+	<div class="panel-footer sorting collapse">
+	  <div class="clearfix">
+		<span class="stats-heading">{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN}) <!-- IF U_VIEWONLINE --><a href="{U_VIEWONLINE}" title="{L_WHO_IS_ONLINE}"><i class="fa fa-question-circle"></i></a><!-- ENDIF --></span>
+		<!-- IF LEGEND --><br /><small>{L_LEGEND}: {LEGEND}</small><!-- ENDIF -->
+		<p>{LOGGED_IN_USER_LIST}</p>
+	 </div>
+	 <!-- IF S_DISPLAY_BIRTHDAY_LIST and BIRTHDAY_LIST -->
+		<p><!-- IF BIRTHDAY_LIST -->{L_BIRTHDAYS}, {L_CONGRATULATIONS}:<strong>{BIRTHDAY_LIST}</strong><!-- ELSE -->{L_NO_BIRTHDAYS}<!-- ENDIF --></p>
+	 <!-- ENDIF -->
+	</div>
+ <!-- ENDIF -->
+</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->
+
