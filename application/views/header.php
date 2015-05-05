@@ -73,16 +73,36 @@
                       <li><a href="<?=site_url('pictures')?>"><i class="fa fa-photo fa-lg"></i>&nbsp;Pictures</a></li>
                       <li><a href="<?=site_url('other')?>"><i class="fa fa-list fa-lg"></i>&nbsp;Others</a></li>                      
                     </ul>
-                  </div>  
-                    
+                  </div>
               </ul>
             </li>
             <li><a href="#contact"><i class="fa fa-upload fa-lg"></i>&nbsp;&nbsp;Upload</a></li>
-            <li><a href="#contact"><i class="fa fa-comments-o fa-lg"></i>&nbsp;&nbsp;Community</a></li>
-            <li><a href="#contact"><i class="fa fa-question fa-lg"></i>&nbsp;&nbsp;FAQ</a></li>
+            
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <i class="fa fa-users fa-lg"></i>&nbsp;&nbsp;Community
+                </a>
+                <ul class="dropdown-menu community-menu" role="menu">
+                    <li><a href="<?=base_url('forum')?>"><i class="fa fa-comments-o fa-lg"></i>&nbsp;&nbsp;Forum</a></li>
+                    <li><a href="#"><i class="fa fa-pencil fa-lg"></i>&nbsp;&nbsp;Blog</a></li>
+                    <li><a href="#"><i class="fa fa-question fa-lg"></i>&nbsp;&nbsp;FAQ</a></li>                                           
+                </ul>
+            </li>
+
               <?php if ($this->session->userdata('user_id')): ?>
                   <li><a class="lightbox_button" data-name="feedback" href="#"><i class="fa fa-thumbs-o-up fa-lg"></i>&nbsp;&nbsp;Feedback</a></li>
-                  <li><a href="#"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;<?=$this->session->userdata('user_login')?></a></li>
+                  <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                          <i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;<?=$this->session->userdata('user_login')?>
+                      </a>
+                      <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Profile</a></li>
+                          <li><a href="#">Settings</a></li>
+                          <li><a href="#">My Uploads</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#" id="logout-submit">Logout</a></li>                        
+                      </ul>
+                   </li>
               <?php else: ?>
                   <li><a class="lightbox_button" data-name="login" href="#contact"><i class="fa fa-sign-in fa-lg"></i>&nbsp;&nbsp;Login</a></li>
               <?php endif ?>

@@ -21,5 +21,27 @@ class User extends CI_Model{
         $data = $result->row_array();
         return $data;
     }
+    
+    public function get_user_data_by_id($id){
+        $this->db->where('id', $id);
+        $result = $this->db->get('user');
+        $data = $result->row_array();
+        return $data;
+    }
+    
+    public function get_user_by_social($social_id, $social_type){
+        $this->db->where('social_id', $social_id);
+        $this->db->where('social_type', $social_type);
+        $result = $this->db->get('user');
+        $data = $result->row_array();
+        return $data;
+    }
+    
+    public function get_last_id(){
+        $query = "SELECT id FROM `user` ORDER BY id DESC LIMIT 1";
+        $result = $this->db->query($query);
+        $data = $result->row_array();
+        return $data;
+    }
 
 }

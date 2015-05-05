@@ -41,6 +41,8 @@ $config['magnet_link'] = '&tr=udp%3A%2F%2Ftracker.istole.it%3A80%2Fannounce&tr=u
 $config['cache_enabled'] = true;
 $config['cache_adapter'] = 'xcache';
 
+$config['track_language_errors'] = true;    //if language item not found, error will be loged
+
 
 
 
@@ -100,7 +102,7 @@ $config['pagination'] = array(
 );
 
 
-// Names of main cattrgories
+// Names of main categories
 $config['maincat_name'] = array(
     CAT_MOVIES => 'Movies',
     CAT_MUSIC => 'Music',
@@ -308,7 +310,7 @@ $config['directory_trigger'] = 'd';
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 1;
 
 /*
 |--------------------------------------------------------------------------

@@ -47,8 +47,8 @@ body{
 .nav-column {
     float: left;
 }
-.nav-column li{
-    
+.community-menu i{
+    width: 22px;
 }
 
 .hot_img {
