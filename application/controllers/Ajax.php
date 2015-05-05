@@ -141,4 +141,16 @@ class Ajax extends CI_Controller {
             echo 'not exists';
         }
     }
+
+    public function report(){
+        $this->load->database();
+        $data = array(
+            'user_id'=>$_POST['user_id'],
+            'reason'=>$_POST['reason'],
+            'torrent_id'=>$_POST['torrent_id'],
+            'date'=>date("Y-m-d H:i:s")
+        );
+        $this->db->insert('torrent_report', $data);
+        echo 'ok';
+    }
 }
