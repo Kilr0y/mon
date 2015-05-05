@@ -37,6 +37,7 @@ class General {
     	$title = str_ireplace(']', ')', $title);
     	$title = str_ireplace('/', '', $title);
     	$title = str_ireplace('%', '', $title);
+        $title = str_ireplace('!', '', $title);
         $title = str_replace(urlencode("'"), '', $title);
     	$title = str_ireplace(urlencode("{"), '(', $title);
     	$title = str_ireplace(urlencode("}"), '(', $title);

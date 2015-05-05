@@ -70,6 +70,28 @@ $route['pictures'] = 'main/category/10';
 $route['other'] = 'main/category/9';
 $route['adult'] = 'main/category/11';
 
+
+$route['item/movies/(:num)'] = 'item/index/1/$1';
+$route['item/movies/(:num)/(:any)'] = 'item/index/1/$1';
+$route['item/books/(:num)'] = 'item/index/7/$1';
+$route['item/books/(:num)/(:any)'] = 'item/index/7/$1';
+$route['item/games/(:num)'] = 'item/index/4/$1';
+$route['item/games/(:num)/(:any)'] = 'item/index/4/$1';
+$route['item/anime/(:num)'] = 'item/index/6/$1';
+$route['item/anime/(:num)/(:any)'] = 'item/index/6/$1';
+$route['item/tv/(:num)'] = 'item/index/8/$1';
+$route['item/tv/(:num)/(:any)'] = 'item/index/8/$1';
+$route['item/music/(:num)'] = 'item/index/3/$1';
+$route['item/music/(:num)/(:any)'] = 'item/index/3/$1';
+$route['item/software/(:num)'] = 'item/index/5/$1';
+$route['item/software/(:num)/(:any)'] = 'item/index/5/$1';
+$route['item/pictures/(:num)'] = 'item/index/10/$1';
+$route['item/pictures/(:num)/(:any)'] = 'item/index/10/$1';
+$route['item/other/(:num)'] = 'item/index/9/$1';
+$route['item/other/(:num)/(:any)'] = 'item/index/9/$1';
+$route['item/adult/(:num)'] = 'item/index/11/$1';
+$route['item/adult/(:num)/(:any)'] = 'item/index/11/$1';
+
 $route['hot'] = 'main/hot/1';
 
 $route['hot/movies'] = 'main/hot/1';

@@ -37,7 +37,7 @@
                         <a href="<?=$magnet?>" class="btn btn-success"><?php if ($torrent['verified']) echo '<i class="fa fa-check" data-toggle="tooltip" data-placement="bottom" title="Verified torrent"></i> '?>Download via magnet</a>
                     <?php endif ?>
                     <a href="<?=$magnet?>" class="btn btn-success w40" data-toggle="tooltip" data-placement="bottom" title="Magnet link"><i class="fa fa-magnet"></i></a>
-                    <a href="#" class="btn btn-warning w40" data-toggle="tooltip" data-placement="bottom" title="Report"><i class="fa fa-exclamation"></i></a>
+                    <a href="#" id="report_button" class="btn btn-warning w40 lightbox_button" data-torrent_id="<?=$torrent['id']?>" data-name="<?= $this->session->userdata('user_id') ? 'report' : 'login'?>" data-toggle="tooltip" data-placement="bottom" title="Report"><i class="fa fa-exclamation"></i></a>
                 </div> 
             </div>
             <div class="clearfix"></div>

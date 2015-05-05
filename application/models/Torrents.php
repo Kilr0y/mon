@@ -85,29 +85,6 @@ class Torrents extends CI_Model {
         return $data;        
     }
 
-    public function get_hotest($cat_id = 1, $limit = 0){
-        if (empty($limit))
-            $limit = $this->config->item('hot_per_page');
-
-        switch ($cat_id){
-            case CAT_MOVIES:
-            case CAT_ANIME:
-            case CAT_TV:
-                $query = "
-                    SELECT h.hot_position, m.title, m.poster, t.id
-                    FROM hot h
-                    JOIN movie m ON h.id = m.id
-                    LEFT JOIN torrents t ON m.imdb_id = t.imdb_id
-                    WHERE h.maincat = \"$cat_id\"
-                    ORDER BY h.hot_position
-                    LIMIT 0, $limit";
-                break;
-        }
-        $result = $this->db->query($query);
-        $data = $result->result_array();
-        return $data;
-    }
-
     public function get_related_torrents($id, $title){
         
         $limit = $this->config->item('related_items_count');
