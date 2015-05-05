@@ -28,6 +28,10 @@ $config['magnet_link'] = '&tr=udp%3A%2F%2Ftracker.istole.it%3A80%2Fannounce&tr=u
 
 
 
+/***** EMAIL CONFIG ********/
+$config['mail_to'] = 'monova.org@gmail.com';
+$config['mail_to_name'] = 'monova.org';
+$config['mail_max_posts'] = 5;
 
 
 

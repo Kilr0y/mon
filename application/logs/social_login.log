@@ -1,0 +1,274 @@
+[05-01-2015 01:22:10][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:22:10][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:22:10][176.104.57.209] MESSAGE: Starting login process, type: vk
+[05-01-2015 01:22:10][176.104.57.209] MESSAGE: Redirecting user to social site, type: vk
+[05-01-2015 01:22:10][176.104.57.209] MESSAGE: Response came from type: vk
+[05-01-2015 01:22:10][176.104.57.209] MESSAGE: Access token received, type: vk
+[05-01-2015 01:22:11][176.104.57.209] MESSAGE: User data received, type: vk
+[05-01-2015 01:22:11][176.104.57.209] MESSAGE: stdClass Object
+(
+    [response] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [uid] => 11234914
+                    [first_name] => Александр
+                    [last_name] => Андреев
+                )
+
+        )
+
+)
+
+[05-01-2015 01:23:08][176.104.57.209] MESSAGE: Response came from type: vk
+[05-01-2015 01:23:08][176.104.57.209] ERROR: Access token doesn't received, type: vk
+[05-01-2015 01:23:11][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:23:11][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:23:11][176.104.57.209] MESSAGE: Starting login process, type: vk
+[05-01-2015 01:23:11][176.104.57.209] MESSAGE: Redirecting user to social site, type: vk
+[05-01-2015 01:23:12][176.104.57.209] MESSAGE: Response came from type: vk
+[05-01-2015 01:23:12][176.104.57.209] MESSAGE: Access token received, type: vk
+[05-01-2015 01:23:12][176.104.57.209] MESSAGE: User data received, type: vk
+[05-01-2015 01:23:12][176.104.57.209] MESSAGE: stdClass Object
+(
+    [response] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [uid] => 11234914
+                    [first_name] => Александр
+                    [last_name] => Андреев
+                )
+
+        )
+
+)
+
+[05-01-2015 01:23:12][176.104.57.209] MESSAGE: Searching user "11234914" type "5" in database
+[05-01-2015 01:23:12][176.104.57.209] MESSAGE: User "11234914" type "5" not found, creating
+[05-01-2015 01:23:12][176.104.57.209] MESSAGE: Creating user with login "���������_�������"
+[05-01-2015 01:26:26][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:26:26][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:26:26][176.104.57.209] MESSAGE: Starting login process, type: vk
+[05-01-2015 01:26:26][176.104.57.209] MESSAGE: Redirecting user to social site, type: vk
+[05-01-2015 01:26:26][176.104.57.209] MESSAGE: Response came from type: vk
+[05-01-2015 01:26:26][176.104.57.209] MESSAGE: Access token received, type: vk
+[05-01-2015 01:26:26][176.104.57.209] MESSAGE: User data received, type: vk
+[05-01-2015 01:26:26][176.104.57.209] MESSAGE: stdClass Object
+(
+    [response] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [uid] => 11234914
+                    [first_name] => Александр
+                    [last_name] => Андреев
+                )
+
+        )
+
+)
+
+[05-01-2015 01:26:26][176.104.57.209] MESSAGE: Searching user "11234914" type "5" in database
+[05-01-2015 01:26:26][176.104.57.209] MESSAGE: User "11234914" type "5" not found, creating
+[05-01-2015 01:27:00][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:27:00][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:27:00][176.104.57.209] MESSAGE: Starting login process, type: vk
+[05-01-2015 01:27:00][176.104.57.209] MESSAGE: Redirecting user to social site, type: vk
+[05-01-2015 01:27:00][176.104.57.209] MESSAGE: Response came from type: vk
+[05-01-2015 01:27:00][176.104.57.209] MESSAGE: Access token received, type: vk
+[05-01-2015 01:27:00][176.104.57.209] MESSAGE: User data received, type: vk
+[05-01-2015 01:27:00][176.104.57.209] MESSAGE: stdClass Object
+(
+    [response] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [uid] => 11234914
+                    [first_name] => Александр
+                    [last_name] => Андреев
+                )
+
+        )
+
+)
+
+[05-01-2015 01:27:00][176.104.57.209] MESSAGE: Searching user "11234914" type "5" in database
+[05-01-2015 01:27:00][176.104.57.209] MESSAGE: User "11234914" type "5" not found, creating
+[05-01-2015 01:27:33][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:27:33][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:27:33][176.104.57.209] MESSAGE: Starting login process, type: vk
+[05-01-2015 01:27:33][176.104.57.209] MESSAGE: Redirecting user to social site, type: vk
+[05-01-2015 01:27:33][176.104.57.209] MESSAGE: Response came from type: vk
+[05-01-2015 01:27:33][176.104.57.209] MESSAGE: Access token received, type: vk
+[05-01-2015 01:27:33][176.104.57.209] MESSAGE: User data received, type: vk
+[05-01-2015 01:27:33][176.104.57.209] MESSAGE: stdClass Object
+(
+    [response] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [uid] => 11234914
+                    [first_name] => Александр
+                    [last_name] => Андреев
+                )
+
+        )
+
+)
+
+[05-01-2015 01:27:33][176.104.57.209] MESSAGE: Searching user "11234914" type "5" in database
+[05-01-2015 01:27:33][176.104.57.209] MESSAGE: User "11234914" type "5" not found, creating
+[05-01-2015 01:28:32][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:28:32][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:28:32][176.104.57.209] MESSAGE: Starting login process, type: vk
+[05-01-2015 01:28:32][176.104.57.209] MESSAGE: Redirecting user to social site, type: vk
+[05-01-2015 01:28:32][176.104.57.209] MESSAGE: Response came from type: vk
+[05-01-2015 01:28:32][176.104.57.209] MESSAGE: Access token received, type: vk
+[05-01-2015 01:28:32][176.104.57.209] MESSAGE: User data received, type: vk
+[05-01-2015 01:28:32][176.104.57.209] MESSAGE: stdClass Object
+(
+    [response] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [uid] => 11234914
+                    [first_name] => Александр
+                    [last_name] => Андреев
+                )
+
+        )
+
+)
+
+[05-01-2015 01:28:32][176.104.57.209] MESSAGE: Searching user "11234914" type "5" in database
+[05-01-2015 01:28:32][176.104.57.209] MESSAGE: User "11234914" type "5" not found, creating
+[05-01-2015 01:29:05][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:29:05][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:29:05][176.104.57.209] MESSAGE: Starting login process, type: vk
+[05-01-2015 01:29:05][176.104.57.209] MESSAGE: Redirecting user to social site, type: vk
+[05-01-2015 01:29:06][176.104.57.209] MESSAGE: Response came from type: vk
+[05-01-2015 01:29:06][176.104.57.209] MESSAGE: Access token received, type: vk
+[05-01-2015 01:29:06][176.104.57.209] MESSAGE: User data received, type: vk
+[05-01-2015 01:29:06][176.104.57.209] MESSAGE: stdClass Object
+(
+    [response] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [uid] => 11234914
+                    [first_name] => Александр
+                    [last_name] => Андреев
+                )
+
+        )
+
+)
+
+[05-01-2015 01:29:06][176.104.57.209] MESSAGE: Searching user "11234914" type "5" in database
+[05-01-2015 01:29:06][176.104.57.209] MESSAGE: User "11234914" type "5" not found, creating
+[05-01-2015 01:30:04][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:30:04][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:30:04][176.104.57.209] MESSAGE: Starting login process, type: vk
+[05-01-2015 01:30:04][176.104.57.209] MESSAGE: Redirecting user to social site, type: vk
+[05-01-2015 01:30:04][176.104.57.209] MESSAGE: Response came from type: vk
+[05-01-2015 01:30:04][176.104.57.209] MESSAGE: Access token received, type: vk
+[05-01-2015 01:30:04][176.104.57.209] MESSAGE: User data received, type: vk
+[05-01-2015 01:30:04][176.104.57.209] MESSAGE: stdClass Object
+(
+    [response] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [uid] => 11234914
+                    [first_name] => Александр
+                    [last_name] => Андреев
+                )
+
+        )
+
+)
+
+[05-01-2015 01:30:04][176.104.57.209] MESSAGE: Searching user "11234914" type "5" in database
+[05-01-2015 01:30:04][176.104.57.209] MESSAGE: User "11234914" type "5" not found, creating
+[05-01-2015 01:30:34][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:30:34][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:30:34][176.104.57.209] MESSAGE: Starting login process, type: vk
+[05-01-2015 01:30:34][176.104.57.209] MESSAGE: Redirecting user to social site, type: vk
+[05-01-2015 01:30:34][176.104.57.209] MESSAGE: Response came from type: vk
+[05-01-2015 01:30:34][176.104.57.209] MESSAGE: Access token received, type: vk
+[05-01-2015 01:30:35][176.104.57.209] MESSAGE: User data received, type: vk
+[05-01-2015 01:30:35][176.104.57.209] MESSAGE: stdClass Object
+(
+    [response] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [uid] => 11234914
+                    [first_name] => Александр
+                    [last_name] => Андреев
+                )
+
+        )
+
+)
+
+[05-01-2015 01:30:35][176.104.57.209] MESSAGE: Searching user "11234914" type "5" in database
+[05-01-2015 01:30:35][176.104.57.209] MESSAGE: User "11234914" type "5" not found, creating
+[05-01-2015 01:30:35][176.104.57.209] MESSAGE: Creating user with login "александр_андреев"
+[05-01-2015 01:30:35][176.104.57.209] MESSAGE: User "александр_андреев" successfully created
+[05-01-2015 01:30:35][176.104.57.209] MESSAGE: Redirecting user back to: http://kilr0y.pp.ua/dev/monova/hot
+[05-01-2015 01:31:10][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:31:10][176.104.57.209] MESSAGE: -----------------------------------------------------
+[05-01-2015 01:31:10][176.104.57.209] MESSAGE: Starting login process, type: vk
+[05-01-2015 01:31:10][176.104.57.209] MESSAGE: Redirecting user to social site, type: vk
+[05-01-2015 01:31:10][176.104.57.209] MESSAGE: Response came from type: vk
+[05-01-2015 01:31:10][176.104.57.209] MESSAGE: Access token received, type: vk
+[05-01-2015 01:31:10][176.104.57.209] MESSAGE: User data received, type: vk
+[05-01-2015 01:31:10][176.104.57.209] MESSAGE: stdClass Object
+(
+    [response] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [uid] => 11234914
+                    [first_name] => Александр
+                    [last_name] => Андреев
+                )
+
+        )
+
+)
+
+[05-01-2015 01:31:10][176.104.57.209] MESSAGE: Searching user "11234914" type "5" in database
+[05-01-2015 01:31:10][176.104.57.209] MESSAGE: User "11234914" type "5" found in database, login him as александр_андреев
+[05-01-2015 01:31:10][176.104.57.209] MESSAGE: Redirecting user back to: http://kilr0y.pp.ua/dev/monova/hot
+[05-01-2015 23:02:11][176.104.48.207] MESSAGE: -----------------------------------------------------
+[05-01-2015 23:02:11][176.104.48.207] MESSAGE: -----------------------------------------------------
+[05-01-2015 23:02:11][176.104.48.207] MESSAGE: Starting login process, type: vk
+[05-01-2015 23:02:11][176.104.48.207] MESSAGE: Redirecting user to social site, type: vk
+[05-01-2015 23:02:11][176.104.48.207] MESSAGE: Response came from type: vk
+[05-01-2015 23:02:12][176.104.48.207] MESSAGE: Access token received, type: vk
+[05-01-2015 23:02:12][176.104.48.207] MESSAGE: User data received, type: vk
+[05-01-2015 23:02:12][176.104.48.207] MESSAGE: stdClass Object
+(
+    [response] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [uid] => 11234914
+                    [first_name] => Александр
+                    [last_name] => Андреев
+                )
+
+        )
+
+)
+
+[05-01-2015 23:02:12][176.104.48.207] MESSAGE: Searching user "11234914" type "5" in database
+[05-01-2015 23:02:12][176.104.48.207] MESSAGE: User "11234914" type "5" found in database, login him as александр_андреев
+[05-01-2015 23:02:12][176.104.48.207] MESSAGE: Redirecting user back to: http://kilr0y.pp.ua/dev/monova/
+[05-04-2015 16:15:57][127.0.0.1] MESSAGE: -----------------------------------------------------
+[05-04-2015 16:15:57][127.0.0.1] MESSAGE: -----------------------------------------------------
+[05-04-2015 16:15:57][127.0.0.1] MESSAGE: Starting login process, type: vk
+[05-04-2015 16:15:57][127.0.0.1] MESSAGE: Redirecting user to social site, type: vk

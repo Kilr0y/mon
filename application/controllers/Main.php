@@ -86,7 +86,8 @@ class Main extends CI_Controller {
 
             $data['hots'] = $this->items->get_hotest($cat_id);
             $data['cat'] = $cat_id;
-            $data['catname'] = strtolower($this->config->item('maincat_name')[$cat_id]);
+            $maincat_name = $this->config->item('maincat_name');
+            $data['catname'] = strtolower($maincat_name[$cat_id]);
 
             $page_str['page'] = $this->load->view('hot', $data, true);
 
