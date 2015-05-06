@@ -19,22 +19,22 @@ class Torrent extends CI_Controller {
         
         //checking if torrent id is set
         if (empty($id)){
-             redirect(base_url());
+             ci_redirect(base_url());
         }
         
         //taking main torrent data
         $this->load->model('torrents');
         $torrent = $this->torrents->get_torrent_by_id($id);
         if (empty($torrent)){
-            redirect(base_url());
+            ci_redirect(base_url());
         }
         $data['torrent'] = $torrent;
 
         //check adult access
         if ($torrent['maincat'] == CAT_ADULT && !isset($_COOKIE['adult']))
-            redirect(site_url('torrent/adult_confirm/'.$id));
-        
-        
+            ci_redirect(site_url('torrent/adult_confirm/'.$id));
+
+
 
         //if this is movie torrent, taking related film data
         if (! empty($torrent['imdb_id'])){
@@ -111,9 +111,9 @@ class Torrent extends CI_Controller {
     public function set_adult_cockie($id = ''){
         setcookie('adult', 'true', time() + ($this->config->item('adult_coockie_live')), '/');
         if ($id)
-            redirect(site_url('torrent/'.$id));
+            ci_redirect(site_url('torrent/'.$id));
         else
-            redirect(site_url('latest'));
+            ci_redirect(site_url('latest'));
     }
 
     

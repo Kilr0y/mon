@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source name="MySQL - monova@localhost" uuid="b8ea254f-5377-4582-872a-6a24968107ed">
-    <database-info product="MySQL" version="5.6.17" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+  <data-source name="MySQL - piggy.mysql.ukraine.com.ua" uuid="b8ea254f-5377-4582-872a-6a24968107ed">
+    <database-info product="MySQL" version="5.1.72-cll-lve" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>
     </database-info>
-    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
-    <schema name="" catalog="monova"/>
-    <table name="activitylog" schema="" catalog="monova" type="TABLE">
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <schema name="" catalog="piggy_monova"/>
+    <table name="activitylog" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id_log" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="id_user" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
       <column name="action" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
@@ -16,7 +16,7 @@
       <primary-key name="PRIMARY" columns="id_log"/>
       <index name="id_user" unique="false" columns="id_user"/>
     </table>
-    <table name="api_usage" schema="" catalog="monova" type="TABLE">
+    <table name="api_usage" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="api" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
       <column name="key" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
@@ -25,7 +25,7 @@
       <column name="date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="ban" schema="" catalog="monova" type="TABLE">
+    <table name="ban" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="ip" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
       <column name="reason" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
@@ -34,7 +34,7 @@
       <index name="ip" unique="true" columns="ip"/>
       <index name="reason" unique="false" columns="reason"/>
     </table>
-    <table name="categories" schema="" catalog="monova" type="TABLE">
+    <table name="categories" schema="" catalog="piggy_monova" type="TABLE">
       <column name="catid" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
       <column name="name" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
       <column name="subid" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" autoIncrement="true"/>
@@ -47,7 +47,7 @@
       <index name="name" unique="false" columns="name"/>
       <index name="subid" unique="false" columns="subid,subname"/>
     </table>
-    <table name="comments" schema="" catalog="monova" type="TABLE">
+    <table name="comments" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="ip_poster" sqlType="VARCHAR" precision="16" scale="0" nullable="false" jdbcType="12"/>
       <column name="post" sqlType="VARCHAR" precision="1000" scale="0" nullable="false" jdbcType="12"/>
@@ -61,37 +61,43 @@
       <index name="id_reported" unique="false" columns="reported,id"/>
       <index name="ip_poster" unique="false" columns="ip_poster"/>
     </table>
-    <table name="description" schema="" catalog="monova" type="TABLE">
+    <table name="description" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
       <column name="descr" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="id"/>
       <index name="id" unique="false" columns="id"/>
     </table>
-    <table name="download_bypass" schema="" catalog="monova" type="TABLE">
+    <table name="download_bypass" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="type" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
       <column name="torrent_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="ignore" schema="" catalog="monova" type="TABLE">
+    <table name="hot" schema="" catalog="piggy_monova" type="TABLE">
+      <column name="maincat" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="item_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="position" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="item_id,maincat"/>
+    </table>
+    <table name="ignore" schema="" catalog="piggy_monova" type="TABLE">
       <column name="what" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="type" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
       <index name="type" unique="false" columns="type"/>
       <index name="what" unique="false" columns="what"/>
     </table>
-    <table name="last_id" schema="" catalog="monova" type="TABLE">
+    <table name="last_id" schema="" catalog="piggy_monova" type="TABLE">
       <column name="name" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <index name="name" unique="true" columns="name"/>
     </table>
-    <table name="logs" schema="" catalog="monova" type="TABLE">
+    <table name="logs" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
       <column name="type" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="info" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="maillog" schema="" catalog="monova" type="TABLE">
+    <table name="maillog" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="ip" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
@@ -99,7 +105,7 @@
       <primary-key name="PRIMARY" columns="id"/>
       <index name="ip" unique="false" columns="ip"/>
     </table>
-    <table name="movie" schema="" catalog="monova" type="TABLE">
+    <table name="movie" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="imdb_id" sqlType="VARCHAR" precision="12" scale="0" nullable="true" jdbcType="12"/>
       <column name="title" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
@@ -117,14 +123,14 @@
       <column name="cast" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="movie_screenshot" schema="" catalog="monova" type="TABLE">
+    <table name="movie_screenshot" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="imdb_id" sqlType="VARCHAR" precision="12" scale="0" nullable="true" jdbcType="12"/>
       <column name="torrent_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="link" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="ratings" schema="" catalog="monova" type="TABLE">
+    <table name="ratings" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="total_votes" sqlType="SMALLINT UNSIGNED" precision="5" scale="0" nullable="false" jdbcType="5" def="MA=="/>
       <column name="total_value" sqlType="SMALLINT UNSIGNED" precision="5" scale="0" nullable="false" jdbcType="5" def="MA=="/>
@@ -135,7 +141,7 @@
       <index name="total_votes" unique="false" columns="total_votes,total_value"/>
       <index name="total_votes_2" unique="false" columns="total_votes"/>
     </table>
-    <table name="reports" schema="" catalog="monova" type="TABLE">
+    <table name="reports" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
       <column name="user" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
       <column name="ip_reporter" sqlType="VARCHAR" precision="16" scale="0" nullable="false" jdbcType="12"/>
@@ -143,7 +149,13 @@
       <column name="content" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <index name="id" unique="false" columns="id"/>
     </table>
-    <table name="search" schema="" catalog="monova" type="TABLE">
+    <table name="screenshots" schema="" catalog="piggy_monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="torrent_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="torrent_id" unique="false" columns="torrent_id"/>
+    </table>
+    <table name="search" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="search" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
       <column name="count" sqlType="MEDIUMINT UNSIGNED" precision="8" scale="0" nullable="false" jdbcType="4" def="MQ=="/>
@@ -151,7 +163,7 @@
       <index name="search" unique="true" columns="search"/>
       <index name="count" unique="false" columns="count"/>
     </table>
-    <table name="stats" schema="" catalog="monova" type="TABLE">
+    <table name="stats" schema="" catalog="piggy_monova" type="TABLE">
       <column name="file" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
       <column name="date" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
       <column name="hour" sqlType="VARCHAR" precision="3" scale="0" nullable="false" jdbcType="12"/>
@@ -160,7 +172,7 @@
       <index name="date" unique="false" columns="date"/>
       <index name="file" unique="false" columns="file"/>
     </table>
-    <table name="stats_ip" schema="" catalog="monova" type="TABLE">
+    <table name="stats_ip" schema="" catalog="piggy_monova" type="TABLE">
       <column name="date" sqlType="VARCHAR" precision="12" scale="0" nullable="false" jdbcType="12"/>
       <column name="ip" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
       <column name="count" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
@@ -168,7 +180,7 @@
       <index name="date" unique="false" columns="date"/>
       <index name="ip" unique="false" columns="ip"/>
     </table>
-    <table name="subscriptions" schema="" catalog="monova" type="TABLE">
+    <table name="subscriptions" schema="" catalog="piggy_monova" type="TABLE">
       <column name="subs_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="user" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
@@ -177,7 +189,15 @@
       <index name="id" unique="false" columns="id"/>
       <index name="user" unique="false" columns="user"/>
     </table>
-    <table name="torrentban" schema="" catalog="monova" type="TABLE">
+    <table name="torrent_report" schema="" catalog="piggy_monova" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="reason" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="torrent_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="date" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="torrentban" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="hash" sqlType="VARCHAR" precision="40" scale="0" nullable="false" jdbcType="12"/>
       <column name="reason" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
@@ -185,7 +205,7 @@
       <primary-key name="PRIMARY" columns="id"/>
       <index name="hash" unique="true" columns="hash"/>
     </table>
-    <table name="torrents" schema="" catalog="monova" type="TABLE">
+    <table name="torrents" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="MEDIUMINT UNSIGNED" precision="8" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="ip" sqlType="VARCHAR" precision="17" scale="0" nullable="false" jdbcType="12" def="J1Vua25vd24n"/>
       <column name="last_non_zero" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
@@ -232,7 +252,7 @@
       <index name="verified" unique="false" columns="verified"/>
       <index name="verified_by" unique="false" columns="verified_by"/>
     </table>
-    <table name="trackerban" schema="" catalog="monova" type="TABLE">
+    <table name="trackerban" schema="" catalog="piggy_monova" type="TABLE">
       <column name="tracker" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="reason" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -240,14 +260,14 @@
       <primary-key name="PRIMARY" columns="id"/>
       <index name="tracker" unique="true" columns="tracker"/>
     </table>
-    <table name="trackers" schema="" catalog="monova" type="TABLE">
+    <table name="trackers" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="torrent_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="tracker" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
       <index name="torrent_id" unique="false" columns="torrent_id"/>
     </table>
-    <table name="user" schema="" catalog="monova" type="TABLE">
+    <table name="user" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="login" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
       <column name="pass" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
@@ -280,7 +300,7 @@
       <index name="social_id" unique="false" columns="social_id"/>
       <index name="verified" unique="false" columns="verified"/>
     </table>
-    <table name="users" schema="" catalog="monova" type="TABLE">
+    <table name="users" schema="" catalog="piggy_monova" type="TABLE">
       <column name="id" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" autoIncrement="true"/>
       <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
@@ -289,7 +309,7 @@
       <column name="del_limit" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MjA="/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="verification" schema="" catalog="monova" type="TABLE">
+    <table name="verification" schema="" catalog="piggy_monova" type="TABLE">
       <column name="user" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="last_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <index name="user" unique="true" columns="user"/>
