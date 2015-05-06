@@ -32,7 +32,16 @@
                             <option <?php if ($verf) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=$sort&verified=1&page=1")?>">Verified</option>
                             <option <?php if (!$verf) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=$sort&verified=0&page=1")?>">All</option>
                         </select>
-                        torrents                        
+                        Sort by:
+                        <select id="sort">
+                            <option <?php if ($sort == 1) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=1&verified=$verf&page=1")?>">Date</option>
+                            <option <?php if ($sort == 2) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=2&verified=$verf&page=1")?>">Name</option>
+                            <option <?php if ($sort == 3) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=3&verified=$verf&page=1")?>">Comments</option>
+                            <option <?php if ($sort == 4) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=4&verified=$verf&page=1")?>">Rating</option>
+                            <option <?php if ($sort == 5) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=5&verified=$verf&page=1")?>">Size</option>
+                            <option <?php if ($sort == 6) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=6&verified=$verf&page=1")?>">Seeds</option>
+                            <option <?php if ($sort == 7) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=7&verified=$verf&page=1")?>">Peers</option>
+                        </select>
                     </div>
                 </h3>
                 <?php $table_data = $torrents ?>

@@ -57,6 +57,10 @@ $(document).ready(function(){
     $('#verified_subcat').change(function(){
         window.location.href = $(this).val();
     });
+
+    $('#sort').change(function(){
+        window.location.href = $(this).val();
+    });
     
     //USER CLICK ON RATING STARS
     $('#star_rating').on("rating.change", function(event, value, caption) {

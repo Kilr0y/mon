@@ -27,12 +27,21 @@
                 <h3 style="position: relative;">
                     Search Results
                     <div style="position: absolute; right: 0; bottom: 0; font-size: 14px;">
-                        Show  
+                        Show:
                         <select id="verified_subcat">
                             <option <?php if ( $verf) echo 'selected' ?> value="<?=$links['search-verf']?>">Verified</option>
                             <option <?php if (!$verf) echo 'selected' ?> value="<?=$links['search-not-verf']?>">All</option>
                         </select>
-                        torrents                        
+                        Sort by:
+                        <select id="sort">
+                            <option <?php if ($sort == 1) echo 'selected' ?> value="<?=$links['sort_by_date']?>">Date</option>
+                            <option <?php if ($sort == 2) echo 'selected' ?> value="<?=$links['sort_by_name']?>">Name</option>
+                            <option <?php if ($sort == 3) echo 'selected' ?> value="<?=$links['sort_by_comments']?>">Comments</option>
+                            <option <?php if ($sort == 4) echo 'selected' ?> value="<?=$links['sort_by_rating']?>">Rating</option>
+                            <option <?php if ($sort == 5) echo 'selected' ?> value="<?=$links['sort_by_size']?>">Size</option>
+                            <option <?php if ($sort == 6) echo 'selected' ?> value="<?=$links['sort_by_seeds']?>">Seeds</option>
+                            <option <?php if ($sort == 7) echo 'selected' ?> value="<?=$links['sort_by_peers']?>">Peers</option>
+                        </select>
                     </div>
                 </h3>
                 <ul class="nav nav-tabs" style="float: right;">

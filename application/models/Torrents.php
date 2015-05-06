@@ -11,7 +11,7 @@ class Torrents extends CI_Model {
         
         //taking full torrent data in one call
         $query = "
-            SELECT t.*, r.total_votes, r.total_value, r.used_ips, d.descr, UNIX_TIMESTAMP(t.added) as added_time
+            SELECT t.*, (IFNULL(CEIL(r.total_value / r.total_votes), '0')) as rating, r.used_ips, d.descr, UNIX_TIMESTAMP(t.added) as added_time
             FROM torrents t
             LEFT JOIN ratings r ON t.id = r.id
             LEFT JOIN description d ON t.id = d.id
@@ -50,7 +50,7 @@ class Torrents extends CI_Model {
         }      
         
         $query = "
-            SELECT t.*, r.total_votes, r.total_value, UNIX_TIMESTAMP(t.added) as added_time 
+            SELECT t.*, (IFNULL(CEIL(r.total_value / r.total_votes), '0')) as rating, UNIX_TIMESTAMP(t.added) as added_time
             FROM torrents t
             LEFT JOIN ratings r ON t.id = r.id
             WHERE maincat = \"$cat_id\" $verified 
@@ -74,7 +74,7 @@ class Torrents extends CI_Model {
         }      
         
         $query = "
-            SELECT t.*, r.total_votes, r.total_value, UNIX_TIMESTAMP(t.added) as added_time 
+            SELECT t.*, (IFNULL(CEIL(r.total_value / r.total_votes), '0')) as rating, UNIX_TIMESTAMP(t.added) as added_time
             FROM torrents t
             LEFT JOIN ratings r ON t.id = r.id
             WHERE subcat = \"$sub_id\" $verified 
@@ -92,7 +92,7 @@ class Torrents extends CI_Model {
         
         $title = str_replace('@', '', $title);
         $query = "
-            SELECT t.*, r.total_votes, r.total_value, UNIX_TIMESTAMP(t.added) as added_time,
+            SELECT t.*, (IFNULL(CEIL(r.total_value / r.total_votes), '0')) as rating, UNIX_TIMESTAMP(t.added) as added_time,
                 MATCH(torrentname) AGAINST ('+$title' IN BOOLEAN MODE) AS relevance 
             FROM `torrents` t
             LEFT JOIN ratings r ON t.id = r.id
@@ -125,13 +125,13 @@ class Torrents extends CI_Model {
         $sort = $this->_get_sort_string($sort_val);
         
         $query = "
-            SELECT t.*, r.total_votes, r.total_value, UNIX_TIMESTAMP(t.added) as added_time,
+            SELECT t.*, (IFNULL(CEIL(r.total_value / r.total_votes), '0')) as rating, UNIX_TIMESTAMP(t.added) as added_time,
                 MATCH(torrentname) AGAINST ('$term' IN BOOLEAN MODE) AS relevance 
             FROM `torrents` t
             LEFT JOIN ratings r ON t.id = r.id
             WHERE MATCH(torrentname) AGAINST ('$term' IN BOOLEAN MODE)
                 $cat_str $verified
-            ORDER BY relevance DESC
+            $sort
             LIMIT $offset, $limit
         ";
         $result = $this->db->query($query);

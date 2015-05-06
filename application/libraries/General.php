@@ -51,14 +51,7 @@ class General {
     		
     	return $title;
     }
-    
-    public function get_rate_string($total_value, $total_votes){
-        $rating = '0';
-        if (! empty($total_value) && ! empty($total_votes)){
-            $rating = ceil ($total_value / $total_votes);
-        } 
-        return $rating;
-    }
+
     
     function torsize($size){ //MAIN SITEWIDE SIZE FUNCTION (HEX)
 		if ($size >= 1099511627776)		{$size = number_format($size / 1099511627776, 2) . ' TB';}		

@@ -61,16 +61,23 @@ class Search extends CI_Controller {
         
         //Generating category filters
         $data['links'] = array(
-            'search-all' =>      site_url("search?term=$term&page=1&sort=$sort&verified=$verf"),
-            'search-movies' =>   site_url("search?term=$term&cat=1&page=1&sort=$sort&verified=$verf"),
-            'search-tv' =>       site_url("search?term=$term&cat=8&page=1&sort=$sort&verified=$verf"),
-            'search-anime' =>    site_url("search?term=$term&cat=6&page=1&sort=$sort&verified=$verf"),
-            'search-music' =>    site_url("search?term=$term&cat=3&page=1&sort=$sort&verified=$verf"),
-            'search-books' =>    site_url("search?term=$term&cat=7&page=1&sort=$sort&verified=$verf"),
-            'search-games' =>    site_url("search?term=$term&cat=4&page=1&sort=$sort&verified=$verf"),
-            'search-soft' =>     site_url("search?term=$term&cat=5&page=1&sort=$sort&verified=$verf"),
-            'search-verf' =>     site_url("search?term=$term&cat=$cat&page=1&sort=$sort&verified=1"),
-            'search-not-verf' => site_url("search?term=$term&cat=$cat&page=1&sort=$sort&verified=0"),
+            'search-all' =>         site_url("search?term=$term&page=1&sort=$sort&verified=$verf"),
+            'search-movies' =>      site_url("search?term=$term&cat=1&page=1&sort=$sort&verified=$verf"),
+            'search-tv' =>          site_url("search?term=$term&cat=8&page=1&sort=$sort&verified=$verf"),
+            'search-anime' =>       site_url("search?term=$term&cat=6&page=1&sort=$sort&verified=$verf"),
+            'search-music' =>       site_url("search?term=$term&cat=3&page=1&sort=$sort&verified=$verf"),
+            'search-books' =>       site_url("search?term=$term&cat=7&page=1&sort=$sort&verified=$verf"),
+            'search-games' =>       site_url("search?term=$term&cat=4&page=1&sort=$sort&verified=$verf"),
+            'search-soft' =>        site_url("search?term=$term&cat=5&page=1&sort=$sort&verified=$verf"),
+            'search-verf' =>        site_url("search?term=$term&cat=$cat&page=1&sort=$sort&verified=1"),
+            'search-not-verf' =>    site_url("search?term=$term&cat=$cat&page=1&sort=$sort&verified=0"),
+            'sort_by_date' =>       site_url("search?term=$term&cat=$cat&page=1&sort=1&verified=$verf"),
+            'sort_by_name' =>       site_url("search?term=$term&cat=$cat&page=1&sort=2&verified=$verf"),
+            'sort_by_comments' =>   site_url("search?term=$term&cat=$cat&page=1&sort=3&verified=$verf"),
+            'sort_by_rating' =>     site_url("search?term=$term&cat=$cat&page=1&sort=4&verified=$verf"),
+            'sort_by_size' =>       site_url("search?term=$term&cat=$cat&page=1&sort=5&verified=$verf"),
+            'sort_by_seeds' =>      site_url("search?term=$term&cat=$cat&page=1&sort=6&verified=$verf"),
+            'sort_by_peers' =>      site_url("search?term=$term&cat=$cat&page=1&sort=7&verified=$verf"),
         );
         
         

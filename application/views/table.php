@@ -20,7 +20,7 @@
                 </td>
                 <td><?=$v['verified'] ? '<i class="fa fa-check">' : ''?></td>
                 <td><?=$v['comments'] ?></td>
-                <td><?=$this->general->get_rate_string($v['total_value'], $v['total_votes']) ?></td>
+                <td><?=$v['rating'] ?></td>
                 <td class="hidden-xs hidden-sm"><?=$this->general->torsize($v['size'])?></td>
                 <td class="hidden-xs hidden-sm"><?=$this->general->ago($v['added_time'])?></td>
                 <td><?=$v['seeds']?></td>
