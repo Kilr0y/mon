@@ -53,8 +53,7 @@
             if (data == 'ok') {
                 $('#lightbox_report textarea[name=reason]').val('');
                 $('#lightbox_report').hide();
-            } else
-                alert('Some report error. Pleas try later');
+            }
         });
     });
 </script>

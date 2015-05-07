@@ -49,5 +49,11 @@
     <?php endforeach?>
 </div>
 
+<nav class="text-center">
+    <ul class="pagination pagination-lg">
+        <?=$pagination?>
+    </ul>
+</nav>
+
 <?php include('footer_links.php') ?>
 

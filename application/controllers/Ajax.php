@@ -2,26 +2,26 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ajax extends CI_Controller {
-    
+
     public function __construct(){
         parent::__construct();
-        //loading cache by default        
+        //loading cache by default
         //$this->load->driver('cache', array('adapter'=>$this->config->item('cache_adapter')));
-        
-        
+
+
         //lets check if this is not bot
         if( ! empty($_POST['username'])){  //username field should stay empty
             echo json_encode(array('status'=>'error', 'error'=>'Unknown error'));
             die();
         }
-        
-        
+
+
         //taking session language
         $lang = $this->session->userdata('lang');
         if (!$lang) $lang = 'en';
-        
+
         //loading library
-        $this->lang->load('all', $lang);        
+        $this->lang->load('all', $lang);
     }
 
     public function get_autocomplete(){
@@ -167,6 +167,20 @@ class Ajax extends CI_Controller {
         } else {
             echo 'not exists';
         }
+    }
+
+    public function report(){
+        if (empty($_POST['user_id']) || empty($_POST['reason']) || empty($_POST['torrent_id']))
+            die();
+        $this->load->database();
+        $data = array(
+            'user_id'=>(int)$_POST['user_id'],
+            'reason'=>$_POST['reason'],
+            'torrent_id'=>(int)$_POST['torrent_id'],
+            'date'=>date("Y-m-d H:i:s")
+        );
+        $this->db->insert('torrent_report', $data);
+        echo 'ok';
     }
     
     // TODO: Add limit of mails per user/session

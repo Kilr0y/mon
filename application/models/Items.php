@@ -9,9 +9,13 @@ class Items extends CI_Model
         $this->load->database();
     }
 
-    public function get_hotest($cat_id = 1, $limit = 0){
+    public function get_hotest($cat_id = 1, $page = 1, $limit = 0){
         if (empty($limit))
             $limit = $this->config->item('hot_per_page');
+        $max_pages = $this->config->item('hot_page_count');
+        if ($page > $max_pages) $page = $max_pages;
+
+        $from = ($page-1) * $limit;
 
         switch ($cat_id){
             case CAT_MOVIES:
@@ -23,12 +27,33 @@ class Items extends CI_Model
                     JOIN movie m ON h.item_id = m.id
                     WHERE h.maincat = \"$cat_id\"
                     ORDER BY h.position
-                    LIMIT 0, $limit";
+                    LIMIT $from, $limit";
                 break;
         }
         $result = $this->db->query($query);
         $data = $result->result_array();
         return $data;
+    }
+
+    public function get_hot_count($cat_id){
+        switch ($cat_id){
+            case CAT_MOVIES:
+            case CAT_ANIME:
+            case CAT_TV:
+                $query = "
+                    SELECT COUNT(*) as count
+                    FROM hot h
+                    JOIN movie m ON h.item_id = m.id
+                    WHERE h.maincat = \"$cat_id\"
+                    ";
+                break;
+        }
+        $result = $this->db->query($query);
+        $data = $result->row_array();
+
+        $max_count = $this->config->item('hot_per_page') * $this->config->item('hot_page_count');
+        $count = $data['count'] <= $max_count ? $data['count'] : $max_count;
+        return $count;
     }
 
     public function get_movie_data($item_id){

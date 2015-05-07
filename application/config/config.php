@@ -12,6 +12,7 @@ $config['latest_per_category'] = 10;
 $config['category_per_page'] = 25;
 $config['search_per_page'] = 25;
 $config['hot_per_page'] = 12;
+$config['hot_page_count'] = 3;
 $config['related_items_count'] = 5;
 $config['related_verified_only'] = true;
 

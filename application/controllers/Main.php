@@ -73,25 +73,37 @@ class Main extends CI_Controller {
         
         echo $this->load->view('header', $header, true);
         echo $page_str['page'];        
-        echo $this->load->view('footer', null, true);        
+        echo $this->load->view('footer', null, true);
+
     }
 
     public function hot($cat_id = 1){
         $this->load->library('general');
         $header = $this->general->get_header_array('hot');
         $header['title'] = $this->config->item('site_title');
+        $page = $this->input->get('page') ? $this->input->get('page') : '1';
 
-        if (! $this->config->item('cache_enabled') || ! $page_str = $this->cache->get('hot_cat_'.$cat_id)) {
+        if (! $this->config->item('cache_enabled') || ! $page_str = $this->cache->get("hot_$cat_id-$page")) {
             $this->load->model('items');
 
-            $data['hots'] = $this->items->get_hotest($cat_id);
+            $data['hots'] = $this->items->get_hotest($cat_id, $page);
             $data['cat'] = $cat_id;
             $maincat_name = $this->config->item('maincat_name');
             $data['catname'] = strtolower($maincat_name[$cat_id]);
 
+            //building pagination
+            $this->load->library('pagination');
+            $pagination = $this->config->item('pagination');
+
+            $pagination['base_url'] = site_url("hot/".$data['catname']);
+            $pagination['total_rows'] = $this->items->get_hot_count($cat_id);;
+            $pagination['per_page'] = $this->config->item('hot_per_page');
+            $this->pagination->initialize($pagination);
+            $data['pagination'] = $this->pagination->create_links();
+
             $page_str['page'] = $this->load->view('hot', $data, true);
 
-            $this->cache->save('hot_cat_'.$cat_id, $page_str);
+            $this->cache->save("hot_$cat_id-$page", $page_str);
         }
 
         echo $this->load->view('header', $header, true);
