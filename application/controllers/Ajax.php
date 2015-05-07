@@ -247,4 +247,20 @@ class Ajax extends CI_Controller {
 		}
         
     }
+
+    public function set_lang(){
+        if (empty($_POST['lang']))
+            die();
+        $this->load->library('session');
+        switch($_POST['lang']){
+            case 'en':
+                $this->session->set_userdata(array('lang'=>'en'));
+                echo 'ok';
+                break;
+            case 'it':
+                $this->session->set_userdata(array('lang'=>'it'));
+                echo 'ok';
+                break;
+        }
+    }
 }
