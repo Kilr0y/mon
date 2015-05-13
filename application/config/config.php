@@ -47,6 +47,8 @@ $config['cache_adapter'] = 'xcache';
 
 $config['track_language_errors'] = true;    //if language item not found, error will be loged
 
+$config['supported_languages'] = array('en', 'it');
+
 
 
 

@@ -1,7 +1,6 @@
-<?
-	global $lang;
+<?php
 
-	$lang[] = "";
+	$lang = array();
 
 	$lang['monova.org : Download Movies, TV, Music, Software, Games, Anime & Adult Torrents!'] = "monova.org : Scarica Film, Serie TV, Musica, Programmi, Giochi, Torrent Anime & Adulti!";
 	$lang["monova.org Home"] = "monova.org Home";
@@ -444,4 +443,3 @@
 	$lang["Torrentname"] = "Nome Torrent";
 	$lang["Modify"] = "Modifica";
 	$lang["Edit Torrent Details"] = "Modifica Dettagli Torrent";
-?>

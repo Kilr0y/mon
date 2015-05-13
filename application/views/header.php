@@ -76,7 +76,7 @@
                   </div>
               </ul>
             </li>
-            <li><a href="#contact"><i class="fa fa-upload fa-lg"></i>&nbsp;&nbsp;Upload</a></li>
+            <li><a href="#" class="lightbox_button" data-name="upload"><i class="fa fa-upload fa-lg"></i>&nbsp;&nbsp;Upload</a></li>
             
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

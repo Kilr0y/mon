@@ -1,7 +1,5 @@
 <?php
-require_once('./config.php');
-
-global $base_uri;
+$base_uri = base_url();
 
 function generateRandomString($length = 10) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -12,20 +10,20 @@ function generateRandomString($length = 10) {
     return $randomString;
 }
 
-$dstyle9 = (isset($modal['id']) && $modal['id'] == 'upload' && $modal['show'] == 'inline') ? 'inline' : 'none';
+get_instance()->load->model('category');
+$result = get_instance()->category->get_all_categories();
 
 //get categories for upload form
-$result = do_query("SELECT * FROM categories ORDER BY name, subname ASC");  
+//$result = do_query("SELECT * FROM categories ORDER BY name, subname ASC");  
 $options = '<option value="">('.tr('Choose').')</option>';  
-while ($row = mysql_fetch_assoc($result))
-{
-$options .=  "<option value=\"";
-$options .=  $row['subid'];
-$options .=  "\">";
-$options .=  htmlentities (tr($row['name']));
-$options .=  " &raquo; ";
-$options .=  htmlentities (tr($row['subname']));
-$options .=  "</option>";
+foreach ($result as $row){
+    $options .=  "<option value=\"";
+    $options .=  $row['subid'];
+    $options .=  "\">";
+    $options .=  htmlentities (tr($row['name']));
+    $options .=  " &raquo; ";
+    $options .=  htmlentities (tr($row['subname']));
+    $options .=  "</option>";
 }
 
 //small bot protection
@@ -35,7 +33,7 @@ $_SESSION['upload_unique_str'] = $unique;
 
 ?>
 
-<div id="lightbox_upload" class="lightbox" style="display:<?=$dstyle9?>"> 
+<div id="lightbox_upload" class="lightbox" style="display: none;"> 
     <table class="lightbox_table">
     <tr>
     <td class="lightbox_table_cell" align="center">
@@ -45,22 +43,29 @@ $_SESSION['upload_unique_str'] = $unique;
 			    <input type="hidden" name="modal" value="true">
                 <input type="hidden" name="username" value="" />
                 <input type="hidden" name="hash" value="<?=$unique?>" />
-                <h1>Torrent Upload</h1>      
+                <div class="text_1" style="text-align: center;">Torrent Upload</div>      
                 <br />          
 			    <table class="small_table">			        
 				    <tr>
+                        
                         <td width="35%"><b><?=tr('Select Torrent File')?>:</b></td> 
-                        <td><input class="hidden" type="file" name="torrent">                            
-                            <div class="upload_torrent_button"><input disabled /><div>Browse</div></div>                            
+                        <td>
+                            <input class="hidden" type="file" name="torrent" />                                       
+                            <div class="input-group upload_torrent_button">
+                                <input type="text" class="form-control" /> 
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><?=tr('Browse')?></button>
+                                </span>
+                            </div>                
                         </td>                        
                     </tr>
                     <tr>
                         <td width="35%"><b><?=tr('Select Category')?>:</b></td> 
-                        <td><select class="select" name="type"><?=$options?></select></td>                        
+                        <td><select class="form-control" name="type"><?=$options?></select></td>                        
                     </tr>
                     <tr>
                         <td width="35%"><b><?=tr('Enter Upload Name')?>:</b></td> 
-                        <td><input class="input" name="filename"></td>                        
+                        <td><input class="form-control" name="filename"></td>                        
                     </tr>
                     <tr>
                         <td width="35%"><b><?=tr('Private Tracker')?>?:</b></td> 
@@ -68,12 +73,11 @@ $_SESSION['upload_unique_str'] = $unique;
                     </tr>
                     <tr>
                         <td width="35%"><?=tr('Password (optional)')?>:</td> 
-                        <td><input class="input" id="password" name="password" /></td>
+                        <td><input class="form-control" id="password" name="password" /></td>
                     </tr>
                 </table>
                 <div class="info">
-                    <center><b>DO NOT UPLOAD:</b></center>
-					<br/>
+                    <center><b>DO NOT UPLOAD:</b></center>					
                     <ul>
                         <li>spam or fake content</li>
                         <li>illegal or offensive content</li>
@@ -86,21 +90,26 @@ $_SESSION['upload_unique_str'] = $unique;
                     <tr>
                         <td width="25%"><?=tr('Description')?> (<?=tr('optional')?>):</td> 
                         <td>
-                            <div class="toolbar_small"><?=show_toolbar('descform', 'info', true)?></div>
-                            <textarea name="info" rows="15" cols="50" ></textarea>
+                            <div class="toolbar_small" style="margin-top: 10px;"><?=show_toolbar('descform', 'info', true)?></div>
+                            <textarea class="form-control" name="info" rows="15" cols="50" style="margin-bottom: 7px;"></textarea>
                         </td>                       
                     </tr>
                     <tr>
                         <td width="25%"><?=tr('NFO File (optional)')?>:</td> 
                         <td>
-                            <input class="hidden" id="tfile" type="file" name="nfo" size="40"/>
-                            <div class="upload_torrent_button"><input disabled /><div>Browse</div></div>
+                            <input class="hidden" id="tfile" type="file" name="nfo" size="40"/>                                     
+                            <div class="input-group upload_torrent_button">
+                                <input type="text" class="form-control" /> 
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><?=tr('Browse')?></button>
+                                </span>
+                            </div>
                         </td>
                     </tr>
 			    </table>
                 <br />
                 <div class="center"> 
-			        <input id="upload_submit" type="submit" value="<?=tr('Submit')?>">
+			        <input id="upload_submit" class="btn btn-success" type="submit" value="<?=tr('Submit')?>">
                 </div>
 			    </form>
             </div> 
@@ -112,7 +121,7 @@ $_SESSION['upload_unique_str'] = $unique;
 <script>
     $('#upload_submit').click(function(e){         
         if ($('html').is('.ie, .ie7, .ie8, .ie9') || (Function('/*@cc_on return document.documentMode===10@*/')())){  
-            $('#upload_form').attr('action', base_uri + 'upload.php');  
+            $('#upload_form').attr('action', "<?=base_url('ajax/upload')?>");  
             $('#upload_form').append('<input name="ie" value="1" type="hidden" /><input name="redirect_to" value="'+window.location.href+'" type="hidden" />');
             setTimeout(function(){
                 $('#upload_form').submit(); 
@@ -123,7 +132,7 @@ $_SESSION['upload_unique_str'] = $unique;
             var fdata = new FormData($('#upload_form')[0]);
             lightboxAction('lightbox_loading');     
             $.ajax({
-                url: base_uri + 'upload.php',
+                url: "<?=base_url('ajax/upload')?>",
                 type: 'POST',
                 success: function(data){
                     if (data.status == 'ok'){

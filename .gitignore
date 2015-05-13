@@ -1,0 +1,6 @@
+scraper/15minutes.php
+scraper/details_count_cleaner.php
+scraper/hour.php
+scraper/details_count_getter.php
+scraper/index.php
+scraper/udptscraper.php
