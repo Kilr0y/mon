@@ -26,7 +26,10 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <a href="<?=site_url()?>" title="Home" class="visible-xs-block " style="float: left; margin: 3px 0 0 15px;">
+            <img class="top-logo" src="<?=site_url()?>img/logo.png" />
+          </a> 
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">            
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -36,7 +39,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-left navbar-logo">
               <li>
-                <a href="<?=site_url()?>" title="Home"><img class="top-logo" src="<?=site_url()?>img/logo.png" /></a> 
+                <a href="<?=site_url()?>" title="Home" class="visible-sm-block visible-md-block visible-lg-block"><img class="top-logo" src="<?=site_url()?>img/logo.png" /></a> 
               </li>  
           </ul>
           <?php if ($page != 'index') : ?>       

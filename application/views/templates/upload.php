@@ -1,4 +1,5 @@
 <?php
+
 $base_uri = base_url();
 
 function generateRandomString($length = 10) {
@@ -25,7 +26,6 @@ foreach ($result as $row){
     $options .=  htmlentities (tr($row['subname']));
     $options .=  "</option>";
 }
-
 //small bot protection
 
 $unique = generateRandomString();
@@ -33,7 +33,79 @@ $_SESSION['upload_unique_str'] = $unique;
 
 ?>
 
-<div id="lightbox_upload" class="lightbox" style="display: none;"> 
+<div id="lightbox_upload" class="modal fade bs-example-modal-lg" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><?=tr('Torrent Upload')?></h4>
+      </div>
+      <div class="modal-body">
+        <form id="upload_form" name="descform" action="<?=$base_uri?>bot.php" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="modal" value="true">
+            <input type="hidden" name="username" value="" />
+            <input type="hidden" name="hash" value="<?=$unique?>" />
+            
+            <div class="form-group">
+                <label><?=tr('Select Torrent File')?>:</label>
+                <input class="hidden" type="file" name="torrent" />
+                
+                <input type="email" class="form-control upload_torrent_button" placeholder="<?=tr('Browse')?>" />
+            </div>
+            
+            <div class="form-group ">
+                <label><?=tr('Select Category')?>:</label>
+                <select class="form-control" name="type"><?=$options?></select>
+            </div>
+            
+            <div class="form-group ">
+                <label><?=tr('Enter Upload Name')?>:</label>
+                <input class="form-control" name="filename">
+            </div>
+            
+            
+            
+            <div class="form-group">
+                <label><?=tr('Private Tracker')?>?:</label><br />
+                <label style="font-weight: normal;">
+                    <input name="reg" type="radio" value="1" />&nbsp;<?=tr('Yes')?>
+                </label>&nbsp;&nbsp;&nbsp;
+                <label style="font-weight: normal;">
+                    <input name="reg" type="radio" value="0" checked />&nbsp;<?=tr('No')?>
+                </label>
+            </div>
+            
+            <div class="form-group">
+                <label><?=tr('Password (optional)')?>:</label>
+                <input class="form-control" id="password" name="password" />
+            </div>
+            
+            <div class="clearfix"></div>
+            
+            <div class="form-group">
+                <label><?=tr('Description')?> (<?=tr('optional')?>):</label>                
+                <div class="toolbar_small"><?=show_toolbar('descform', 'info', true)?></div>
+                <textarea class="form-control" name="info" rows="15" cols="50" style="margin-bottom: 7px;"></textarea>                
+            </div>
+            
+            <div class="form-group">
+                <label><?=tr('NFO File (optional)')?>:</label>
+                <input class="hidden" type="file" name="nfo" />
+                
+                <input type="email" class="form-control upload_torrent_button" placeholder="<?=tr('Browse')?>" />
+            </div>
+            
+            <input id="upload_submit" class="btn btn-success" type="submit" value="<?=tr('Submit')?>">
+               
+        </form>
+        <br /><br />
+        <div class="text_2"><?=tr('If you have any difficulties with upload, please')?> <a href="javascript:void('')" onclick="javascript:lightboxAction('lightbox_contact', true);"><span><u><?=tr('let us know')?></u></span></a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--div id="lightbox_upload" class="lightbox" style="display: none;"> 
     <table class="lightbox_table">
     <tr>
     <td class="lightbox_table_cell" align="center">
@@ -117,7 +189,7 @@ $_SESSION['upload_unique_str'] = $unique;
     </td>
     </tr>
     </table>
-</div>
+</div-->
 <script>
     $('#upload_submit').click(function(e){         
         if ($('html').is('.ie, .ie7, .ie8, .ie9') || (Function('/*@cc_on return document.documentMode===10@*/')())){  
@@ -152,13 +224,13 @@ $_SESSION['upload_unique_str'] = $unique;
         }        
     });
     
-    $('.upload_torrent_button').click(function(e){
-        e.preventDefault();
-        $(this).closest('td').find('.hidden').click();        
+    $('.upload_torrent_button').click(function(e){        
+        e.preventDefault();        
+        $(this).siblings('.hidden').click();        
     });
     
     
     $('.hidden').change(function(){
-        $(this).closest('td').find('.upload_torrent_button input').val($(this).val());
+        $(this).siblings('.upload_torrent_button').val($(this).val());
     });
 </script>

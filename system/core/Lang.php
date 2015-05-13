@@ -204,11 +204,14 @@ class CI_Lang {
 		$value = isset($this->language[$line]) ? $this->language[$line] : FALSE;
 
 		// Because killer robots like unicorns!
-		if ($value === FALSE && $log_errors === TRUE)
+		if ($value === FALSE)
 		{
-		    $language = '';
-			log_message('error', 'Could not find the language line: "'.$line.'", language ' . $this->language_name);
-            $value = $line;
+		    $value = $line;
+		    //$language = '';
+            
+            if ($log_errors === TRUE)
+			    log_message('error', 'Could not find the language line: "'.$line.'", language ' . $this->language_name);
+            
 		}
 
 		return $value;

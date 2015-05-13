@@ -456,15 +456,24 @@ body{
 /**** END OF LIGHTBOX *****/
 
 /**** Lightbox_login ******/
+#lightbox_login .links{
+    margin: 0 auto;
+    max-width: 400px;
+    display: -webkit-flex; /* Safari */
+
+    display: flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+}
+
+
 #lightbox_login .links,
 #lightbox_registration .links{
-    margin: 0 auto;
-    width: 400px;
+    
 }
 #lightbox_login .links a,
 #lightbox_registration .links a{
-    float: left;
-    margin: 0 15px;
+    display: block;
     width: 70px;
     height: 70px;
     text-align: center;
@@ -606,16 +615,21 @@ body{
     .jumbotron-wrapper{
         width: calc(100% - 30px);
     }
+    #navbar .navbar-form {
+        padding-left: 15px;
+    }
 }
 @media(min-width:768px){
     .jumbotron-wrapper{
         width: 720px;
     }
+    
 }
 @media(min-width:992px){
     .jumbotron-wrapper{
         width: 940px;
     }
+    
 }
 @media(min-width:1200px){
     .jumbotron-wrapper{
