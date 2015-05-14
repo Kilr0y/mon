@@ -169,6 +169,19 @@ class Ajax extends CI_Controller {
         }
     }
 
+    public function get_banner_content(){
+        $name = trim($_POST['name']);
+
+        if (! empty($name)){
+            $path = 'templates/' . $name;
+        }
+
+        if (file_exists(APPPATH . 'views/' . $path . '.php')){
+            $output = $this->load->view($path, null, true);
+            echo $output;
+        }
+    }
+
     public function report(){
         if (empty($_POST['user_id']) || empty($_POST['reason']) || empty($_POST['torrent_id']))
             die();

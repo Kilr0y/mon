@@ -15,6 +15,8 @@ class Search extends CI_Controller {
         
         $header = $this->general->get_header_array('search');
         $header['title'] = $this->config->item('site_title');
+        $this->load->library('user_agent');
+        $data['is_mobile'] = $this->agent->is_mobile();
         
         $term = trim($this->input->get('term'));
         

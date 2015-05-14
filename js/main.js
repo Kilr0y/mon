@@ -1,4 +1,5 @@
 var send_ga_events = false;
+var min_sidebanners_width_show =1200;
 
 $(document).ready(function(){
     //USER CLICK ON CLOUD TAGS ARROW
@@ -115,7 +116,28 @@ $(window).load(function(){
     if (parseInt($('#description_container').height()) <= 499){
         $('#show_description').click();
     }
+    $(window).resize();
 });
+
+$(window).resize(function(){
+    if ($(window).width() > min_sidebanners_width_show){
+        load_banners("side_banners");
+        $('#side_banners').show();
+    } else{
+        $('#side_banners').hide();
+    }
+
+});
+
+function load_banners(banner_name){
+    var banner_id = '#' + banner_name;
+    if ($(banner_id).length>0 && $(banner_id).attr('data-loaded') != 'true'){
+        $.post(base_uri + 'ajax/get_banner_content', {name: banner_name}, function(data){
+            $(banner_id).html(data);
+            $(banner_id).attr('data-loaded', 'true')
+        });
+    }
+}
 
 function init_lightbox(){
     $('.lightbox_table_cell').click(function(e){

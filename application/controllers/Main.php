@@ -48,15 +48,19 @@ class Main extends CI_Controller {
     
     public function latest(){
         $this->load->library('general');
+        $this->load->library('user_agent');
+        $is_mobile = $this->agent->is_mobile();
+        $data['is_mobile'] = $this->agent->is_mobile();
         $header = $this->general->get_header_array('latest');
         $header['title'] = $this->config->item('site_title');
 
 
         
-        if (! $this->config->item('cache_enabled') || ! $page_str = $this->cache->get('latest')){
+        if (! $this->config->item('cache_enabled') || ! $page_str = $this->cache->get("latest-$is_mobile")){
         
             $this->load->model('torrents');
-            
+            $data['is_mobile'] = $is_mobile;
+
             //taking movie list
             $data['movies'] = $this->torrents->get_latest_category(1, 1);
             $data['tv']     = $this->torrents->get_latest_category(8, 1);
@@ -78,13 +82,15 @@ class Main extends CI_Controller {
 
     public function hot($cat_id = 1){
         $this->load->library('general');
+        $this->load->library('user_agent');
         $header = $this->general->get_header_array('hot');
         $header['title'] = $this->config->item('site_title');
         $page = $this->input->get('page') ? $this->input->get('page') : '1';
+        $is_mobile = $this->agent->is_mobile();
 
-        if (! $this->config->item('cache_enabled') || ! $page_str = $this->cache->get("hot_$cat_id-$page")) {
+        if (! $this->config->item('cache_enabled') || ! $page_str = $this->cache->get("hot_$cat_id-$page-$is_mobile")) {
             $this->load->model('items');
-
+            $data['is_mobile'] = $is_mobile;
             $data['hots'] = $this->items->get_hotest($cat_id, $page);
             $data['cat'] = $cat_id;
             $maincat_name = $this->config->item('maincat_name');
@@ -115,11 +121,14 @@ class Main extends CI_Controller {
         
         //Generating header data
         $this->load->library('general');
+
         $header = $this->general->get_header_array('category');
         $header['title'] = $this->config->item('site_title'); 
         
         $data = array();
         $this->load->model('category');
+        $this->load->library('user_agent');
+        $data['is_mobile'] = $this->agent->is_mobile();
         $data['subcats'] = $this->category->get_subcats_by_id($cat_id);
         
         //taking current category data
@@ -142,6 +151,8 @@ class Main extends CI_Controller {
         
         //Generating header data
         $this->load->library('general');
+        $this->load->library('user_agent');
+        $data['is_mobile'] = $this->agent->is_mobile();
         $header = $this->general->get_header_array('subcategory');
         $header['title'] = $this->config->item('site_title'); 
         

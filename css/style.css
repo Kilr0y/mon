@@ -474,6 +474,12 @@ body{
     font-size: 13px;
     font-weight: bold;
 }
+
+#side_banners{
+    position: fixed;
+    right: 30px;
+    top: 300px;
+}
 /************************/
 
 /***** TOOLTIPS *******/

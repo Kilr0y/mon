@@ -15,6 +15,9 @@ class Torrent extends CI_Controller {
         //Generating header data
         $header = $this->general->get_header_array('torrent');        
         $header['title'] = $this->config->item('site_title');
+
+        $this->load->library('user_agent');
+        $data['is_mobile'] = $this->agent->is_mobile();
         
         
         //checking if torrent id is set
