@@ -11,6 +11,7 @@ class Main extends CI_Controller {
         //taking session language
         $lang = $this->session->userdata('lang');
         if (!$lang) $lang = 'en';
+        
         //loading library
         $this->lang->load('all', $lang);        
         

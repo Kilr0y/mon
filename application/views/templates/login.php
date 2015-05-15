@@ -9,7 +9,46 @@ $modal = array(
 );
 ?>
 
-<div id="lightbox_login" class="lightbox" style="display: none">
+<div id="lightbox_login" class="modal fade bs-example-modal-sm" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><?=tr('Login')?></h4>
+      </div>
+      <div class="modal-body">
+        <form action="<?=site_url('login')?>" method="post" >
+          <div style="text-align: left">
+            <input type="hidden" name="modal" value="true">
+            <div class="form-group">
+                <label><?=tr('Login')?></label>
+                <input type="email" class="form-control" name="login" placeholder="<?=tr('Login')?>">
+            </div>
+            <div class="form-group">
+                <label><?=tr('Password')?></label>
+                <input type="password" class="form-control" name="password" placeholder="<?=tr('Password')?>">
+            </div>
+          </div>
+          <button id="login-submit" type="submit" class="btn btn-default"><?=tr('Login')?></button>
+        </form>
+        <br /><br />
+        <div class="text_1"><?=tr('Alternatively, you can log in using:')?></div>
+        <br />
+        <div class="links">
+            <a class="login_fb" href="<?php echo $base_uri ?>login/social_login?login_type=facebook"></a>
+            <a class="login_tw" href="<?php echo $base_uri ?>login/social_login?login_type=twitter"></a>
+            <a class="login_gg" href="<?php echo $base_uri ?>login/social_login?login_type=google"></a>
+            <a class="login_vk" href="<?php echo $base_uri ?>login/social_login?login_type=vk"></a>
+        </div>
+        <div class="clearfix"></div>  
+        <br />
+        <div class="text_2"><?=tr('If you have any difficulties using social login, please')?> <a href="javascript:void('')" onclick="javascript:lightboxAction('lightbox_contact', true);"><span><u><?=tr('let us know')?></u></span></a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--div  class="lightbox" style="display: none">
     <input type="hidden" name="modal_enabled" value="<?=$modal['enabled']?>"/>
     <input type="hidden" name="modal_show" value="<?=$modal['show']?>"/>
     <input type="hidden" name="modal_id" value="<?=$modal['id']?>"/>
@@ -22,8 +61,7 @@ $modal = array(
                     <div class="lightbox_inner">
                         <div class="text_1">Login</div>
 
-                        <div id="lightbox_login_data" style="display: block; width: 300px;">
-                            <!--div id="lightbox_login_message" class="alert alert-danger" style="display: none"></div-->
+                        <div id="lightbox_login_data" style="display: block; width: 300px;">                            
 
                             <form action="<?=site_url('login')?>" method="post" >
                                 <div style="text-align: left">
@@ -39,11 +77,7 @@ $modal = array(
                                 </div>
                                 <button id="login-submit" type="submit" class="btn btn-default"><?=tr('Login')?></button>
                             </form>
-
-                            <!--br />
-
-                            <a href="#" onclick="javascript:lightboxAction('lightbox_registration');"><small><u>Create an Account</u></small></a> &nbsp;
-                            <a href="#" onclick="javascript:lightboxAction('lightbox_reset');"><small><u>Password Reset</u></small></a> &nbsp; -->
+                            
                         </div>
                         
                         <br /><br />
@@ -64,7 +98,7 @@ $modal = array(
             </td>
         </tr>
     </table>
-</div>
+</div-->
 <script>
     $.each($('#lightbox_login .links a'), function(){
         if (send_ga_events != undefined && send_ga_events) ga('send', 'event', 'button', 'click', 'social login');

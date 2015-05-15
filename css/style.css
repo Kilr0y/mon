@@ -311,6 +311,23 @@ body{
     color: blue;
 }
 
+
+#lightbox_report textarea{
+    resize: vertical;
+}
+
+#lightbox_report .description{
+    font-size: .9em;
+    margin: 10px 0;
+}
+
+#lightbox_contact textarea{
+    width: 600px;
+}
+
+
+
+/**** LIGHTBOX UPLOAD **********/
 #lightbox_upload .lightbox_inner{
     text-align: left;
 }
@@ -332,7 +349,7 @@ body{
 
 #lightbox_upload .info{
     text-align: left;
-    width: 350px; 
+    width: 300px; 
     float: right;
     margin-right: 20px;
 }
@@ -363,7 +380,7 @@ body{
     height: 22px;
     padding: 1px 5px;
 }
-
+/*
 #lightbox_upload .upload_torrent_button{
     width: 220px;
     cursor: pointer;
@@ -380,6 +397,7 @@ body{
     cursor: pointer;  
     padding: 1px 5px;
 }
+
 #lightbox_upload .upload_torrent_button div{
     width: 70px;
     height: 20px;
@@ -389,7 +407,7 @@ body{
     padding-top: 4px;
     cursor: pointer;
 }
-
+*/
 #lightbox_upload .toolbar_small input,
 #lightbox_upload .toolbar_small select{
     margin: 0 3px 4px 0;
@@ -400,31 +418,62 @@ body{
     margin: 0;
 }
 
-#lightbox_report textarea{
-    resize: vertical;
+.small_table tr td:first-child,
+.big_table tr td:first-child{
+    width: 140px;
+}
+.small_table tr{
+    height: 40px;
 }
 
-#lightbox_report .description{
-    font-size: .9em;
-    margin: 10px 0;
+.small_table{
+    width: 400px; margin-left: 20px; float: left;
+}
+.big_table{
+    margin-left: 20px;
+}
+.big_table tr{
+    margin-top: 10px;
 }
 
-#lightbox_contact textarea{
-    width: 600px;
+.clearfix{
+    float: none;
+    clear: both;
 }
+
+.center{
+    text-align: center;
+}
+
+
+
+
+
+
+
+
 
 /**** END OF LIGHTBOX *****/
 
 /**** Lightbox_login ******/
+#lightbox_login .links{
+    margin: 0 auto;
+    max-width: 400px;
+    display: -webkit-flex; /* Safari */
+
+    display: flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+}
+
+
 #lightbox_login .links,
 #lightbox_registration .links{
-    margin: 0 auto;
-    width: 400px;
+    
 }
 #lightbox_login .links a,
 #lightbox_registration .links a{
-    float: left;
-    margin: 0 15px;
+    display: block;
     width: 70px;
     height: 70px;
     text-align: center;
@@ -461,6 +510,7 @@ body{
 
 }
 
+#lightbox_upload .text_1,
 #lightbox_contact .text_1,
 #lightbox_login .text_1,
 #lightbox_registration .text_1,
@@ -468,6 +518,7 @@ body{
     font-size: 20px;
     font-weight: bold;
 }
+#lightbox_upload .text_2,
 #lightbox_contact .text_2,
 #lightbox_login .text_2,
 #lightbox_registration .text_2{
@@ -570,16 +621,21 @@ body{
     .jumbotron-wrapper{
         width: calc(100% - 30px);
     }
+    #navbar .navbar-form {
+        padding-left: 15px;
+    }
 }
 @media(min-width:768px){
     .jumbotron-wrapper{
         width: 720px;
     }
+    
 }
 @media(min-width:992px){
     .jumbotron-wrapper{
         width: 940px;
     }
+    
 }
 @media(min-width:1200px){
     .jumbotron-wrapper{

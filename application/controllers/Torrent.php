@@ -38,7 +38,6 @@ class Torrent extends CI_Controller {
             ci_redirect(site_url('torrent/adult_confirm/'.$id));
 
 
-
         //if this is movie torrent, taking related film data
         if (! empty($torrent['imdb_id'])){
             $this->load->model('movie');

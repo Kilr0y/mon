@@ -154,7 +154,12 @@ function lightboxAction(ele, first){
     init_lightbox();    
     
     if ($('#' + ele).length > 0){
-        $('#' + ele).css('display', 'inline');
+        if ($('#' + ele).hasClass('modal')){
+            $('#' + ele).modal();
+        } else {
+            $('#' + ele).css('display', 'inline');
+        }       
+        
     } else {
         $('#lightbox_loading').show();
         var name = ele.replace('lightbox_', '');

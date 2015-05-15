@@ -368,4 +368,68 @@ class Login extends CI_Controller{
         log_action('Redirecting user back to: ' . (isset($_SESSION['social_login_from']) ? $_SESSION['social_login_from'] : $base_uri), 'message');
         redirect_from();    
     }
+    
+    private function _login_phpbb($login){
+        global $phpbb_root_path, $phpEx, $user, $db, $config, $cache, $template;
+        define('IN_PHPBB', true);
+        $phpbb_root_path = './forum/'; //the path to your phpbb relative to this script
+        $phpEx = substr(strrchr(__FILE__, '.'), 1);
+        include("forum/config.php");
+        include("forum/common.php"); //the path to your phpbb relative to this script
+        
+        // Start session management
+        $user->session_begin();
+        $auth->acl($user->data);
+        $user->setup();
+        
+    
+        $username = request_var('username', $login);
+        $password = request_var('password', 'password');
+    
+        if(isset($username) )
+        {
+          $result=$auth->login($username, $password, true);
+          if ($result['status'] == LOGIN_SUCCESS) {
+            echo "You're logged in";
+          } else {
+            echo $user->lang[$result['error_msg']];
+          }
+        }
+    }
+    
+    private function _create_phpbb($login){
+        global $phpbb_root_path, $phpEx, $user, $db, $config, $cache, $template;
+        define('IN_PHPBB', true);
+        $phpbb_root_path = './forum/'; //the path to your phpbb relative to this script
+        $phpEx = substr(strrchr(__FILE__, '.'), 1);
+        include("forum/config.php");
+        include("forum/common.php"); //the path to your phpbb relative to this script
+        include("forum/includes/functions_user.php");
+        // Start session management
+        $user->session_begin();
+        $auth->acl($user->data);
+        //$user->setup();
+        $user_row = array(
+            'username' => $login,
+            'user_password' => md5('password'), 
+            'user_email' => 'Email',
+            'group_id' => 2,
+            'user_timezone' => '1.00',
+            'user_dst' => 0,
+            'user_lang' => en,
+            'user_type' => 0,
+            'user_actkey' => '',
+            'user_dateformat' => 'd M Y H:i',
+            'user_style' => $not_sure_what_this_is,
+            'user_regdate' => time(),
+        );
+        
+        $phpbb_user_id = user_add($user_row);
+        
+        if ($phpbb_user_id){
+            echo 'User created';
+        } else 
+            echo 'User creation error';
+     
+     }
 }

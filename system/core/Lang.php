@@ -94,6 +94,7 @@ class CI_Lang {
 	 */
 	public function load($langfile, $idiom = '', $return = FALSE, $add_suffix = TRUE, $alt_path = '')
 	{
+	    
 		if (is_array($langfile))
 		{
 			foreach ($langfile as $value)
@@ -123,6 +124,7 @@ class CI_Lang {
 		{
 			return;
 		}
+        
 
 		// Load the base file, so any others found can override it
 		$basepath = BASEPATH.'language/'.$idiom.'/'.$langfile;
@@ -130,6 +132,7 @@ class CI_Lang {
 		{
 			include($basepath);
 		}
+
 
 		// Do we have an alternative path to look in?
 		if ($alt_path !== '')
@@ -154,6 +157,7 @@ class CI_Lang {
 				}
 			}
 		}
+        
 
 		if ($found !== TRUE)
 		{
@@ -200,11 +204,14 @@ class CI_Lang {
 		$value = isset($this->language[$line]) ? $this->language[$line] : FALSE;
 
 		// Because killer robots like unicorns!
-		if ($value === FALSE && $log_errors === TRUE)
+		if ($value === FALSE)
 		{
-		    $language = '';
-			log_message('error', 'Could not find the language line: "'.$line.'", language ' . $this->language_name);
-            $value = $line;
+		    $value = $line;
+		    //$language = '';
+            
+            if ($log_errors === TRUE)
+			    log_message('error', 'Could not find the language line: "'.$line.'", language ' . $this->language_name);
+            
 		}
 
 		return $value;
