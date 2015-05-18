@@ -44,4 +44,13 @@ class User extends CI_Model{
         return $data;
     }
 
+    public function get_torrents($login){
+        $this->db->select('t.*, (IFNULL(CEIL(r.total_value / r.total_votes), 0)) as rating, UNIX_TIMESTAMP(t.added) as added_time', FALSE);
+        $this->db->where(array('verified_by'=>$login));
+        $this->db->join('ratings as r', 't.id = r.id', 'left');
+        $result = $this->db->get('torrents as t');
+        $data = $result->result_array();
+        return $data;
+    }
+
 }

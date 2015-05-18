@@ -1,5 +1,5 @@
 var send_ga_events = false;
-var min_sidebanners_width_show =1200;
+var min_sidebanners_width_show =1540;
 
 $(document).ready(function(){
     //USER CLICK ON CLOUD TAGS ARROW

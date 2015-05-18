@@ -58,6 +58,8 @@ $route['torrent/(:num)'] = 'torrent/index/$1';
 
 $route['torrent/download/(:num)'] = 'torrent/download/$1';
 
+$route['users/(:any)'] = 'users/index/$1';
+
 $route['latest'] = 'main/latest';
 $route['movies'] = 'main/category/1';
 $route['books'] = 'main/category/7';

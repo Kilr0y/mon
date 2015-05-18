@@ -153,6 +153,7 @@ class Main extends CI_Controller {
         //Generating header data
         $this->load->library('general');
         $this->load->library('user_agent');
+        $data = array();
         $data['is_mobile'] = $this->agent->is_mobile();
         $header = $this->general->get_header_array('subcategory');
         $header['title'] = $this->config->item('site_title'); 
@@ -161,7 +162,6 @@ class Main extends CI_Controller {
         
         
         //Generating page data
-        $data = array();
         $this->load->model('category');
         
         $data['category'] = $this->category->get_subcategory_by_id($id);

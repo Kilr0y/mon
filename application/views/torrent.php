@@ -13,7 +13,7 @@
                 <h2><?=$torrent['torrentname']?></h2>                
             </div>
             <div class="col-md-6 torrent_stats">
-                <h5 class="torrent_added">added on <span><?=date('M j, Y', strtotime($torrent['added']))?></span> by <a href="#"><?=$torrent['verified_by']?></a><?=$torrent['verified']?' <i class="fa fa-check" data-toggle="tooltip" data-placement="bottom" title="Verified user"></i>':''?></h5>                           
+                <h5 class="torrent_added">added on <span><?=date('M j, Y', strtotime($torrent['added']))?></span> by <a href="<?=site_url('users/'.$torrent['verified_by'])?>"><?=$torrent['verified_by']?></a><?=$torrent['verified']?' <i class="fa fa-check" data-toggle="tooltip" data-placement="bottom" title="Verified user"></i>':''?></h5>
             </div>
             <div class="col-md-6">
                 <div class="pull-right page-buttons">
