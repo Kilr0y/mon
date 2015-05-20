@@ -81,7 +81,34 @@ $(document).ready(function(){
         $(this).hide();
         if (send_ga_events) ga('send', 'event', 'button', 'click', 'open full description');
     });
-    
+
+    $('#favorite_button').click(function(){
+        if ($(this).attr('data-name') == 'login'){
+            lightboxAction('lightbox_login');
+        } else if ($(this).attr('data-name') == 'favorite'){
+            $.post(base_uri + 'ajax/trigger_favorites', {'torrent_id': $(this).attr('data-torrent_id')}, function(data){
+                if (data == 'added')
+                    $('#favorite_button').removeClass('off');
+                else if (data = 'deleted')
+                    $('#favorite_button').addClass('off');
+            });
+        }
+    });
+
+    $('.remove_favorite_button').click(function(){
+        var $row = $(this).closest('tr');
+        var $table_row =  $row.closest('.row');
+        $.post(base_uri + 'ajax/trigger_favorites', {'torrent_id': $(this).attr('data-torrent_id')}, function(data){
+            if (data = 'deleted'){
+                $row.remove();
+                if ($('tbody tr', $table_row).length==0)
+                    $table_row.remove();
+            }
+        });
+    });
+
+
+
     $('.lightbox_button').click(function(e){
         e.preventDefault();
         var name = $(this).attr('data-name');

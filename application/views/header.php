@@ -100,6 +100,7 @@
                       </a>
                       <ul class="dropdown-menu" role="menu">
                           <li><a href="#">Profile</a></li>
+                          <li><a href="<?=site_url('favorites')?>">Favorites</a></li>
                           <li><a href="#">Settings</a></li>
                           <li><a href="#">My Uploads</a></li>
                           <li class="divider"></li>

@@ -899,4 +899,16 @@ class Ajax extends CI_Controller {
         echo 'ok';  
               
     }
+
+    public function trigger_favorites(){
+        if (empty($_SESSION['user_id']) || empty($_POST['torrent_id']))
+            $result = 'error';
+        else{
+            $this->load->model('torrents');
+            $user_id = $_SESSION['user_id'];
+            $torrent_id = $_POST['torrent_id'];
+            $result = $this->torrents->trigger_favorites($user_id, $torrent_id);
+        }
+        echo $result;
+    }
 }

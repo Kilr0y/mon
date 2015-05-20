@@ -53,4 +53,38 @@ class User extends CI_Model{
         return $data;
     }
 
+    public function is_favorite($user_id, $torrent_id){
+        $result =$this->db
+            ->where(array('user_id'=>$user_id, 'torrent_id'=>$torrent_id))
+            ->get('favorites');
+        return boolval($result->num_rows());
+    }
+
+    public function get_favorites($user_id){
+        $result = $this->db
+            ->select('t.*, (IFNULL(CEIL(r.total_value / r.total_votes), 0)) as rating, UNIX_TIMESTAMP(t.added) as added_time', FALSE)
+            ->join('torrents as t', 'f.torrent_id = t.id', 'left')
+            ->join('ratings as r', 't.id = r.id', 'left')
+            ->where(array('f.user_id'=>$user_id))
+            ->order_by('t.maincat')
+            ->get('favorites as f');
+        $data = $result->result_array();
+        $favorites = array();
+        foreach ($data as $row)
+            $favorites[$row['maincat']][]= $row;
+
+        return $favorites;
+    }
+
+    public function get_favorites_in_cat($user_id, $maincat){
+        $result = $this->db
+            ->select('t.*, (IFNULL(CEIL(r.total_value / r.total_votes), 0)) as rating, UNIX_TIMESTAMP(t.added) as added_time', FALSE)
+            ->join('torrents as t', 'f.torrent_id = t.id', 'left')
+            ->join('ratings as r', 't.id = r.id', 'left')
+            ->where(array('f.user_id'=>$user_id, 't.maincat'=>$maincat))
+            ->get('favorites as f');
+        $favorites[$maincat] = $result->result_array();
+        return $favorites;
+    }
+
 }

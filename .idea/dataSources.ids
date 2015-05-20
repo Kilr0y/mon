@@ -73,6 +73,11 @@
       <column name="torrent_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
+    <table name="favorites" schema="" catalog="piggy_monova" type="TABLE">
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="torrent_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="user_id,torrent_id"/>
+    </table>
     <table name="hot" schema="" catalog="piggy_monova" type="TABLE">
       <column name="maincat" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
       <column name="item_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>

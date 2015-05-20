@@ -186,7 +186,29 @@ class Torrents extends CI_Model {
         return $sort;
         
     }
-    
+
+    public function trigger_favorites($user_id, $torrent_id){
+        $user_id = (int)$user_id;
+        $torrent_id = (int) $torrent_id;
+        //chek torrent exist
+        $result =$this->db
+            ->where(array('id'=>$torrent_id))
+            ->get('torrents');
+        if ($result->num_rows() == 0) return 'error';
+
+        $result =$this->db
+            ->where(array('user_id'=>$user_id, 'torrent_id'=>$torrent_id))
+            ->get('favorites');
+        if ($result->num_rows() == 0){
+            $this->db->insert('favorites', array('user_id'=>$user_id, 'torrent_id'=>$torrent_id));
+            return 'added';
+        } else {
+            $this->db->delete('favorites', array('user_id'=>$user_id, 'torrent_id'=>$torrent_id));
+            return 'deleted';
+        }
+        return 'error';
+    }
+
     
 
 }

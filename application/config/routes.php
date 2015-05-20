@@ -60,6 +60,19 @@ $route['torrent/download/(:num)'] = 'torrent/download/$1';
 
 $route['users/(:any)'] = 'users/index/$1';
 
+$route['favorites'] = 'users/favorites';
+$route['favorites/movies'] = 'users/favorites/1';
+$route['favorites/music'] = 'users/favorites/3';
+$route['favorites/games'] = 'users/favorites/4';
+$route['favorites/software'] = 'users/favorites/5';
+$route['favorites/anime'] = 'users/favorites/6';
+$route['favorites/books'] = 'users/favorites/7';
+$route['favorites/tv'] = 'users/favorites/8';
+$route['favorites/other'] = 'users/favorites/9';
+$route['favorites/pictures'] = 'users/favorites/10';
+$route['favorites/adult'] = 'users/favorites/11';
+
+
 $route['latest'] = 'main/latest';
 $route['movies'] = 'main/category/1';
 $route['books'] = 'main/category/7';

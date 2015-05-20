@@ -250,6 +250,16 @@ body{
     width: 100px;
 }
 
+.remove_favorite_button{
+    font-size: 14px;
+    color: #818181;
+    cursor: pointer;
+}
+
+.remove_favorite_button:hover{
+    color: #000000;
+}
+
 
 /***** LIGHTBOX **********/
 .lightbox {

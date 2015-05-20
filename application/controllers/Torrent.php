@@ -53,6 +53,13 @@ class Torrent extends CI_Controller {
         $this->load->model('category');
         $sub_id = $torrent['subcat'];        
         $data['category'] = $this->category->get_subcategory_by_id($sub_id);
+
+        //chek if it added to favorite
+        $this->load->model('user');
+        if (empty($_SESSION['user_id']))
+            $data['favorite'] = false;
+        else
+            $data['favorite'] = $this->user->is_favorite($_SESSION['user_id'], $id);
         
         //taking some data for rating 
         $data['ip'] = $_SERVER['REMOTE_ADDR'];
