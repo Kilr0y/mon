@@ -1,6 +1,7 @@
 
 <?php $is_mobile ? include('templates/mobile_top_banner_bar.php') : include('templates/top_banner_bar.php') ?>
 
+
 <ol class="breadcrumb">
     <li ><a href="<?=site_url()?>">Home</a></li>
     <li class="active">Favorites</li>
@@ -42,3 +43,5 @@
 </div>
 
 <?php include('footer_links.php') ?>
+
+

@@ -14,6 +14,7 @@
     <link href="<?php echo site_url()?>css/stars.css" rel="stylesheet" /> 
     <link href="<?php echo site_url()?>css/style.css" rel="stylesheet" /> 
     <link href="<?php echo site_url()?>css/details.css" rel="stylesheet"/>
+    <link href="<?php echo site_url()?>css/jquery.fancybox.css" rel="stylesheet" />
     
     <script>
         var base_uri = "<?php echo site_url()?>";

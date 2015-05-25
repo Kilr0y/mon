@@ -1,6 +1,10 @@
 
 <?php $is_mobile ? include('templates/mobile_top_banner_bar.php') : include('templates/top_banner_bar.php') ?>
-        
+
+<div id="floating_bar">
+    <h4><?=$torrent['torrentname']?></h4>
+</div>
+
         <ol class="breadcrumb">
             <li ><a href="<?=site_url()?>">Home</a></li> 
             <li ><a href="<?=site_url(strtolower($category['name']))?>"><?=$category['name']?></a></li>
@@ -28,7 +32,8 @@
                 </div> 
             </div>
             <div class="clearfix"></div>
-            
+            <div id="scroll_float"></div>
+
             <?php if (isset($movie)): ?>
                 <?php if (! empty($movie['poster_large'])): ?>
                 <div class="col-md-2 margin-bottom-10">
@@ -114,10 +119,16 @@
         <?php if ( ! empty($screenshots)): ?>
         <div class="row">
             <div class="col-md-12">
-                <h3>Screenshots</h3>
-                <div class="screenshots">
+                <h3>Media</h3>
+                <div class="media">
+                    <?php if (!empty($movie['trailer_imdb'])):?>
+
+                    <a href="<?=$movie['trailer_imdb']?>/imdb/embed?autoplay=true&width=640" data-fancybox-type="iframe" class="trailer">
+                        <img src="<?=site_url()?>img/imdb-icon.png" />
+                    </a>
+                    <?php endif?>
                     <?php foreach ($screenshots as $screen): ?>
-                    <a href="<?=$this->config->item('media_url') . $screen['link']?>" data-lightbox="screenshot">
+                    <a href="<?=$this->config->item('media_url') . $screen['link']?>" class="screenshot" rel="screens">
                         <img src="<?=$this->config->item('media_url') . $screen['link']?>" />
                     </a>
                     <?php endforeach ?>
@@ -129,11 +140,13 @@
         <?php if (! empty($torrent['descr'])): ?>
         <div class="row">
             <div class="col-md-12">
-                <h3>Description</h3>
-                <div id="description_container" class="description" style="max-height: 500px; overflow: hidden;">
+                <div id="description_container" class="description truncated" style="max-height: 500px; overflow: hidden;">
+                    <div class="description_header">
+                        <h3>Description<span class="truncator">+</span></h3>
+                    </div>
                     <?=$torrent['descr']?>
                 </div>
-                <div id="show_description" class="full_description_button transition_05">▼ View Full Description ▼</div>
+                <div id="description_buttom">Show more +</div>
             </div>
         </div>
         <?php endif ?>

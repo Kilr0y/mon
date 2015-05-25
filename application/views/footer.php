@@ -46,5 +46,6 @@
 <div id="lb"></div>
   </body>
   <script src="<?php echo site_url()?>js/plugins.js"></script>
+  <script src="<?php echo site_url()?>js/jquery.fancybox.js"></script>
   <script src="<?php echo site_url()?>js/main.js"></script>
 </html>

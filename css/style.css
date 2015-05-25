@@ -260,6 +260,89 @@ body{
     color: #000000;
 }
 
+.media a:hover{
+    text-decoration: none;
+}
+
+.media .screenshot img{
+    height: 100px;
+    margin: 2px 0;
+}
+
+.truncator{
+    float: right;
+    border-radius: 2px;
+    border: 1px solid #DFDFDF;
+    color: #000;
+    background: transparent linear-gradient(to bottom, #F5F5F5 0%, #DADADA 100%) repeat scroll 0% 0%;
+    font-weight: bold;
+    cursor: pointer;
+    box-sizing: border-box;
+    text-align: center;
+    width: 30px;
+    height: 0px;
+    padding: 0px 0px 25px;
+    line-height: 20px;
+}
+
+.description_header{
+    cursor: pointer;
+    border-bottom: 1px solid #DFDFDF;
+}
+
+#description_buttom{
+    font-weight: bold;
+    font-size: 14px;
+    color: #4076C7;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    margin-top: 10px;
+}
+
+#description_buttom:before{
+    border-top: 1px solid #DFDFDF;
+    height: 1px;
+    content: "";
+    width: calc(50% - 5em);
+    position: absolute;
+    left: 0px;
+    top: 10px;
+}
+
+#description_buttom:after{
+    border-top: 1px solid #DFDFDF;
+    height: 1px;
+    content: "";
+    width: calc(50% - 5em);
+    position: absolute;
+    left: auto;
+    right: 0px;
+    top: 10px;
+}
+
+
+#floating_bar{
+    width: 50%;
+    height: 40px;
+    background-color: #00A000;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    margin-left: -25%;
+    border-radius: 0 0 10px 10px;
+    z-index: 1020;
+    transition: top .5s;
+    text-align: center;
+    color: #ffffff;
+    line-height: 40px;
+}
+
+#floating_bar.show{
+    top: 50px;
+}
 
 /***** LIGHTBOX **********/
 .lightbox {

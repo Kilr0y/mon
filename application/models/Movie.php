@@ -13,6 +13,7 @@ class Movie extends CI_Model {
         $this->db->where('imdb_id', $imdb_id);
         $result = $this->db->get('movie');
         $data = $result->row_array();
+        $data['trailer_imdb'] = explode('?',$data['trailer_imdb'])[0];
         return $data;
                 
     }
