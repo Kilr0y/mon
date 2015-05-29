@@ -181,12 +181,14 @@ class Torrent extends CI_Controller {
         }
         $file_path = 'torrent/'.date('Y-m-d', $torrent['added_time']).'-'.$torrent['folder_id'].'/'.$torrent['hash'].'.monova';
         if ( !file_exists($file_path)){
-            die('File not found');
+            //die('File not found');
         }
+        $this->torrents->add_download_data($id, $_SESSION['user_id']);
         //building header and forcing download
         header("Content-Type: application/x-bittorrent");
 		header("Content-Disposition: attachment; filename=\"MONOVA.ORG $torrent[torrentname].torrent\"");
 		readfile($file_path);
+
         
     }
 }

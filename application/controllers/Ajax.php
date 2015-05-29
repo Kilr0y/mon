@@ -911,6 +911,24 @@ class Ajax extends CI_Controller {
         }
         echo $result;
     }
+
+    public function remove_feedback(){
+        $this->load->database();
+        if (empty($_SESSION['user_id']) || empty($_POST['torrent_id']))
+            $result = 'error';
+        else{
+            $where = array(
+                'user_id' => $_SESSION['user_id'],
+                'torrent_id' => $_POST['torrent_id']
+            );
+            $query = $this->db->get_where('feedback', $where);
+            if ($query->num_rows()){
+                $this->db->where($where)->update('feedback', array('commented'=>1));
+                $result = 'ok';
+            } else $result = 'error';
+        }
+        echo $result;
+    }
     
     //TODO: Need to limit number of chars for comment message
     public function add_comment(){
@@ -922,6 +940,7 @@ class Ajax extends CI_Controller {
             echo json_encode(array('status'=>'error'));
             die();
         }
+        $user_id = $this->session->userdata('user_id');
         
         //loading database class
         $this->load->database();
@@ -932,12 +951,25 @@ class Ajax extends CI_Controller {
             'post' => $comment_text,
             'added_time' => time(),
             'added_by' => $this->session->userdata('user_login'),
+            'user_id' => $user_id,
             'ip' => $this->input->ip_address(),
             'lang' => $this->session->userdata('lang') ? $this->session->userdata('lang') : 'en'            
         );
         $this->db->insert('torrent_comment', $insert);
         $insert_id = $this->db->insert_id();
-        
+
+        //update feedback data
+        $where = array(
+            'user_id'=>$user_id,
+            'torrent_id'=>$torrent_id);
+        $result = $this->db->get_where('feedback', $where);
+        if ($result->num_rows()){
+            $this->db
+                ->where($where)
+                ->update('feedback', array('commented'=>1));
+        } else{
+            $this->db->insert('feedback', $where + array('commented'=>1));
+        }
         echo json_encode(array('status'=>'ok', 'comment_id'=>$insert_id));
     }
     

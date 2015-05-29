@@ -233,6 +233,15 @@ body{
     text-align: left;
 }
 
+tr.feedback_torrent_row:hover{
+    background-color: rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+tr.feedback_comment_row{
+    display: none;
+}
+
 .breadcrumb{
     margin-bottom: 0;
 }
@@ -250,13 +259,13 @@ body{
     width: 100px;
 }
 
-.remove_favorite_button{
+.remove_favorite_button, .remove_feedback_button{
     font-size: 14px;
     color: #818181;
     cursor: pointer;
 }
 
-.remove_favorite_button:hover{
+.remove_favorite_button:hover, .remove_feedback_button:hover{
     color: #000000;
 }
 

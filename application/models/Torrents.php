@@ -209,6 +209,49 @@ class Torrents extends CI_Model {
         return 'error';
     }
 
+    public function add_download_data($torrent_id, $user_id){
+        $user_id = (int)$user_id;
+        $torrent_id = (int) $torrent_id;
+        //chek torrent exist
+        $result =$this->db
+            ->where(array('id'=>$torrent_id))
+            ->get('torrents');
+        if ($result->num_rows() == 0) return false;
+
+        $this->db->insert('torrent_download', array(
+            'user_id'       =>  $user_id,
+            'torrent_id'    =>  $torrent_id,
+            'added_time'    =>  time()
+        ));
+
+        //update feedback data
+        $where = array(
+            'user_id'=>$user_id,
+            'torrent_id'=>$torrent_id);
+        $result = $this->db->get_where('feedback', $where);
+        if ($result->num_rows() == 0){
+            $this->db->insert('feedback', $where + array('commented'=>0));
+        }
+        return true;
+    }
+
+    public function get_nocomment_torrents($user_id){
+        $user_id = (int)$user_id;
+        $query = "
+            SELECT t.*, (IFNULL(CEIL(r.total_value / r.total_votes), 0)) as rating, r.used_ips, d.descr, UNIX_TIMESTAMP(t.added) as added_time
+            FROM feedback f
+            LEFT JOIN torrents t ON f.torrent_id = t.id
+            LEFT JOIN ratings r ON t.id = r.id
+            LEFT JOIN description d ON t.id = d.id
+            WHERE f.commented = 0 AND f.user_id = \"$user_id\"
+        ";
+
+        $result = $this->db->query($query);
+        $data = $result->result_array();
+        return $data;
+    }
+
+
     
 
 }

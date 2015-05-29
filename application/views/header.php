@@ -98,7 +98,7 @@
             <li><a class="lightbox_button" data-name="socials" href="#"><i class="fa fa-thumbs-o-up fa-lg"></i>&nbsp;&nbsp;Socials</a></li>
 
               <?php if ($this->session->userdata('user_id')): ?>
-                  <li><a class="lightbox_button" data-name="feedback" href="#"><i class="fa fa-thumbs-o-up fa-lg"></i>&nbsp;&nbsp;Feedback</a></li>
+                  <li><a href="<?=base_url('feedback')?>"><i class="fa fa-thumbs-o-up fa-lg"></i>&nbsp;&nbsp;Feedback</a></li>
                   <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                           <i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;<?=$this->session->userdata('user_login')?>

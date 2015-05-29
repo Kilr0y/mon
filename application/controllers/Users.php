@@ -56,4 +56,23 @@ class Users extends CI_Controller
         $this->load->view('favorites', $data);
         $this->load->view('footer');
     }
+
+    public function feedback(){
+        if (empty($_SESSION['user_id']))
+            show_404();
+
+        $header = $this->general->get_header_array('favorite');
+        $header['title'] = $this->config->item('site_title');
+
+        $this->load->model('user');
+        $this->load->library('user_agent');
+        $data['is_mobile'] = $this->agent->is_mobile();
+        $this->load->model('torrents');
+        $data['torrents'] = $this->torrents->get_nocomment_torrents($_SESSION['user_id']);
+
+        $this->load->view('header', $header);
+        $this->load->view('feedback', $data);
+        $this->load->view('footer');
+
+    }
 }

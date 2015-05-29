@@ -60,6 +60,8 @@ $route['torrent/download/(:num)'] = 'torrent/download/$1';
 
 $route['user/(:any)'] = 'users/index/$1';
 
+$route['feedback'] = 'users/feedback';
+
 $route['bookmarks'] = 'users/bookmarks';
 $route['bookmarks/movies'] = 'users/bookmarks/1';
 $route['bookmarks/music'] = 'users/bookmarks/3';

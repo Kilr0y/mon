@@ -123,6 +123,17 @@ $(document).ready(function(){
             }
         });
     });
+
+    $('.remove_feedback_button').click(function(e){
+        e.stopPropagation();
+        var $row = $(this).closest('tr').next('tr').andSelf();
+        $.post(base_uri + 'ajax/remove_feedback', {'torrent_id': $(this).attr('data-torrent_id')}, function(data){
+            if (data = 'ok'){
+                $row.remove();
+                showNotification('Torrent removed from feedback');
+            }
+        });
+    });
     
     //USER FOCUS TEXTAREA, TO WRITE COMMENT
     $('#reply-textarea').focus(function(){
@@ -293,8 +304,30 @@ function init_comments(){
             
         }, 'json');           
     });
-    
-    $('.button-like, .button-dislike').unbind('click').click(function(e){
+
+    $('.reply .feedback').unbind('click').click(function(){
+        var comment_id = $(this).closest('.media').find('.comment_id').val();
+        if (comment_id == undefined || ! comment_id) comment_id = 0;
+        var torrent_id = $(this).attr('data-torrent_id');
+        var text = $(this).closest('.reply').find('textarea').val();
+        var post = {comment_id: comment_id, torrent_id: torrent_id, text: text};
+
+        $(this).attr('disabled', 'disabled');
+
+        var submit_button = $(this);
+
+        $.post(base_uri + 'ajax/add_comment', post, function(data){
+            submit_button.closest('tr').prev('tr').andSelf().remove();
+            showNotification('Feedback added succesfuly');
+        });
+    });
+
+    $('tr.feedback_torrent_row').click(function(){
+        $('tr.feedback_comment_row').hide();
+        $(this).next('tr').show();
+    });
+
+        $('.button-like, .button-dislike').unbind('click').click(function(e){
         e.preventDefault();
         if ( ! user_login){
             lightboxAction('login');
