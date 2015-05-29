@@ -8,9 +8,21 @@ class Main extends CI_Controller {
         //loading cache by default        
         $this->load->driver('cache', array('adapter'=>$this->config->item('cache_adapter')));
         
+        
+        
         //taking session language
         $lang = $this->session->userdata('lang');
-        if (!$lang) $lang = 'en';
+        if (!$lang) {
+            //detecting the best language for this user
+            $this->load->helper('lang');
+            $lang = detect_best_lang();
+            
+        }
+        
+        //echo $lang;
+        //die();
+        
+        
         
         //loading library
         $this->lang->load('all', $lang);        

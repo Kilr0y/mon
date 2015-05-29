@@ -7,7 +7,7 @@ class Ajax extends CI_Controller {
         parent::__construct();
         //loading cache by default
         //$this->load->driver('cache', array('adapter'=>$this->config->item('cache_adapter')));
-
+          
 
         //lets check if this is not bot
         if( ! empty($_POST['username'])){  //username field should stay empty
@@ -910,5 +910,115 @@ class Ajax extends CI_Controller {
             $result = $this->torrents->trigger_favorites($user_id, $torrent_id);
         }
         echo $result;
+    }
+    
+    //TODO: Need to limit number of chars for comment message
+    public function add_comment(){
+        //checking required params
+        $torrent_id = $this->input->post('torrent_id');
+        $comment_id = $this->input->post('comment_id');
+        $comment_text = $this->input->post('text');
+        if (empty($_SESSION['user_id']) || empty($torrent_id) ||  empty($comment_text)){
+            echo json_encode(array('status'=>'error'));
+            die();
+        }
+        
+        //loading database class
+        $this->load->database();
+        
+        $insert = array(
+            'parent_id' => $comment_id,
+            'torrent_id' => $torrent_id,
+            'post' => $comment_text,
+            'added_time' => time(),
+            'added_by' => $this->session->userdata('user_login'),
+            'ip' => $this->input->ip_address(),
+            'lang' => $this->session->userdata('lang') ? $this->session->userdata('lang') : 'en'            
+        );
+        $this->db->insert('torrent_comment', $insert);
+        $insert_id = $this->db->insert_id();
+        
+        echo json_encode(array('status'=>'ok', 'comment_id'=>$insert_id));
+    }
+    
+    public function like_comment(){
+        $data = array();                        
+        //$this->load->model('comments');        
+              
+        $torrent_id = $this->input->post('torrent_id');
+        $item_id = $this->input->post('comment_id');
+        $uid = $this->session->userdata('user_id');
+        $type = (int)$this->input->post('type');
+        
+        //Lets check if all data is vaild  
+        if (! $uid || ! $item_id || ! $torrent_id){
+            echo json_encode(array('status'=>'error', 'error'=>'not all fields are valid'));
+            die();
+        }
+        
+        //Lets check if type is vaid
+        if (! in_array($type, array(1, 2))){
+            echo json_encode(array('status'=>'error', 'error'=>'incorrect type'));
+            die();
+        }
+        
+        $this->load->database();
+        
+        $update = false;
+        $removed = false;
+        
+        if ($uid && $item_id && $type){
+            $query = "SELECT * FROM torrent_comment_likes WHERE user_id = \"$uid\" AND comment_id = \"$item_id\"";
+            $result = $this->db->query($query);
+            
+            if ($result->num_rows() > 0){
+                $row = $result->row_array();
+                if ($row['type_id'] == $type){
+                    $query = "DELETE FROM torrent_comment_likes WHERE id = \"$row[id]\"";
+                    $this->db->query($query);
+                    $removed = true;
+                } else {
+                    $query = "UPDATE torrent_comment_likes SET type_id = \"$type\" WHERE id = \"$row[id]\"";
+                    $this->db->query($query);
+                    $update = true;
+                }
+            } else {                
+                $query = "INSERT INTO torrent_comment_likes (user_id, comment_id, torrent_id, type_id) VALUES (\"$uid\", \"$item_id\", \"$torrent_id\", \"$type\")";
+                $this->db->query($query);
+            }
+            
+            if ($update){
+                if ($type === 1){
+                    $query = "UPDATE torrent_comment SET likes = likes + 1, dislikes = dislikes - 1 WHERE id = \"$item_id\"";
+                } else if ($type === 2){
+                    $query = "UPDATE torrent_comment SET likes = likes - 1, dislikes = dislikes + 1 WHERE id = \"$item_id\"";
+                }
+            } else if ($removed){
+                if ($type === 1){
+                    $query = "UPDATE torrent_comment SET likes = likes - 1 WHERE id = \"$item_id\"";
+                } else if ($type === 2){
+                    $query = "UPDATE torrent_comment SET dislikes = dislikes - 1 WHERE id = \"$item_id\"";
+                }
+            } else if (! $update && ! $removed){
+                if ($type === 1){
+                    $query = "UPDATE torrent_comment SET likes = likes + 1 WHERE id = \"$item_id\"";
+                } else if ($type === 2){
+                    $query = "UPDATE torrent_comment SET dislikes = dislikes +1 WHERE id = \"$item_id\"";
+                }
+            }
+            
+            $this->db->query($query);
+            $data['status'] = 'ok';
+            $data['type'] = $type;
+                
+            
+            
+        } else {
+            $data['status'] = 'error';
+            $data['error'] = 'not all data come';
+        }
+        
+        
+        echo json_encode($data);
     }
 }

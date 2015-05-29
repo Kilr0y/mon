@@ -4,17 +4,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Users extends CI_Controller
 {
 
-
     public function __construct()
     {
         parent::__construct();
         $this->load->library('general');
     }
-    public function index($login=0){
+    
+    
+    public function index($login = 0){
         if (empty($login)){
-            if (!empty($_SESSION['user_login']))
+            if (! empty($_SESSION['user_login']))
                 $login = $_SESSION['user_login'];
-            else
+            else                
                 show_404();
         }
 
@@ -23,10 +24,8 @@ class Users extends CI_Controller
 
         $this->load->model('user');
         $this->load->library('user_agent');
-        $data['is_mobile'] = $this->agent->is_mobile();
-        $data['user'] = $this->user->get_user_data($login);
-        if (empty($data['user']))
-            show_404();
+        $data['login'] = $login;
+        $data['is_mobile'] = $this->agent->is_mobile();        
         $data['torrents'] = $this->user->get_torrents($login);
 
         $this->load->view('header', $header);
@@ -35,7 +34,7 @@ class Users extends CI_Controller
 
     }
 
-    public function favorites($maincat = 0){
+    public function bookmarks($maincat = 0){
         if (empty($_SESSION['user_id']))
             show_404();
 

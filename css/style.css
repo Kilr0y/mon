@@ -116,7 +116,7 @@ body{
 
 /* autocomplete */
 .autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; border-radius: 0 0 5px 5px;}
-.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; cursor: pointer; }
+.autocomplete-suggestion { padding: 5px 15px; white-space: nowrap; overflow: hidden; cursor: pointer; font-size: 18px; }
 .autocomplete-selected { background: #F0F0F0; }
 .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
 .autocomplete-group { padding: 2px 5px; }
@@ -625,6 +625,17 @@ body{
     top: 300px;
 }
 /************************/
+
+
+/***** SOCIALS FOLLOW LIGHTBOX *******/
+
+#vk_groups, #vk_groups iframe, .fb_iframe_widget, .fb_iframe_widget span, .fb_iframe_widget span iframe[style] {
+    width: 100% !important;
+}
+
+/************************/
+
+
 
 /***** TOOLTIPS *******/
 .animated {

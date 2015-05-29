@@ -17,7 +17,7 @@
                 <h2><?=$torrent['torrentname']?></h2>                
             </div>
             <div class="col-md-6 torrent_stats">
-                <h5 class="torrent_added">added on <span><?=date('M j, Y', strtotime($torrent['added']))?></span> by <a href="<?=site_url('users/'.$torrent['verified_by'])?>"><?=$torrent['verified_by']?></a><?=$torrent['verified']?' <i class="fa fa-check" data-toggle="tooltip" data-placement="bottom" title="Verified user"></i>':''?></h5>
+                <h5 class="torrent_added">added on <span><?=date('M j, Y', strtotime($torrent['added']))?></span> by <a href="<?=site_url('user/'.$torrent['verified_by'])?>"><?=$torrent['verified_by']?></a><?=$torrent['verified']?' <i class="fa fa-check" data-toggle="tooltip" data-placement="bottom" title="Verified user"></i>':''?></h5>
             </div>
             <div class="col-md-6">
                 <div class="pull-right page-buttons">
@@ -27,7 +27,7 @@
                         <a href="<?=$magnet?>" class="btn btn-success"><?php if ($torrent['verified']) echo '<i class="fa fa-check" data-toggle="tooltip" data-placement="bottom" title="Verified torrent"></i> '?>Download via magnet</a>
                     <?php endif ?>
                     <a href="<?=$magnet?>" class="btn btn-success w40" data-toggle="tooltip" data-placement="bottom" title="Magnet link"><i class="fa fa-magnet"></i></a>
-                    <span id="favorite_button" class="btn btn-success w40 <?=$favorite ? '' : 'off'?>" data-torrent_id="<?=$torrent['id']?>" data-name="<?=$this->session->userdata('user_id') ? 'favorite' : 'login'?>" data-toggle="tooltip" data-placement="bottom" title="Favorite"><i class="fa fa-star"></i></span>
+                    <span id="favorite_button" class="btn btn-success w40 <?=$favorite ? 'on' : ''?>" data-torrent_id="<?=$torrent['id']?>" data-name="<?=$this->session->userdata('user_id') ? 'favorite' : 'login'?>" data-toggle="tooltip" data-placement="bottom" title="Bookmark"><i class="fa fa-star"></i></span>
                     <a href="#" id="report_button" class="btn btn-warning w40 lightbox_button" data-torrent_id="<?=$torrent['id']?>" data-name="<?=$this->session->userdata('user_id') ? 'report' : 'login'?>" data-toggle="tooltip" data-placement="bottom" title="Report"><i class="fa fa-exclamation"></i></a>
                 </div> 
             </div>
@@ -163,7 +163,10 @@
         
         <div class="row">
             <div class="col-md-12">
-                <h3>Comments</h3>
+                <h3>Comments</h3>   
+                
+                <?php include('comments.php') ?>
+                
                 
             </div>
         </div>
@@ -171,7 +174,7 @@
 <div id="side_banners">
 </div>
         
-        <?php include('footer_links.php') ?>
+<?php include('footer_links.php') ?>
    
         
 

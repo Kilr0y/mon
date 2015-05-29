@@ -81,12 +81,9 @@ class Torrent extends CI_Controller {
         } else {
             $disabled = '';
         }
-        $data['rating']['disabled'] = $disabled;
-        if ($current_rating && $count)
-            $data['rating']['value'] = round($current_rating/$count);
-        else
-            $data['rating']['value'] = 0;
-            
+        $data['rating']['disabled'] = $disabled;           
+        $data['rating']['value'] = $torrent['rating'];
+        
         
         //generating magnet link
         $data['magnet']  = 'magnet:?xt=urn:btih:' . strtoupper($this->general->base32_encode(pack("H*", $torrent['hash'])));  
@@ -99,11 +96,59 @@ class Torrent extends CI_Controller {
         $related = $this->torrents->get_related_torrents($id, $trimed_title);
         $data['related'] = $related;
         
+        
+        //TAKING COMMENTS DATA
+        $this->load->model('comments');
+        $comments = $this->comments->get_torrent_comments($id);
+        if ( ! empty($comments)){
+            $new = array();
+            foreach ($comments as $a){
+                $new[$a['parent_id']][] = $a;
+            }
+            foreach ($new[0] as $parent){
+                $data['comments'][] = $this->_create_tree($new, array($parent));
+            }
+            
+            //taking like/dislike data for this user-torrent
+            $likes = $this->comments->get_torrent_likes($id, $this->session->userdata('user_id'));
+            
+            if (! empty($likes)){
+                
+                $likes_ordered = array();
+                foreach ($likes as $k=>$v){
+                    $likes_ordered[$v['comment_id']] = $v;
+                }
+                $data['likes'] = $likes_ordered;
+                
+            } else {
+                $data['likes'] = array();
+            }            
+        } else {
+            $data['comments'] = array();
+        }
+        
+        //echo '<pre>';
+        //print_r($data['comments']);
+        //die();
+        
+        
         $this->load->view('header', $header);
         $this->load->view('torrent', $data);
         $this->load->view('footer');
                 
     }
+    
+    private function _create_tree(&$list, $parent){
+        $tree = array();
+        foreach ($parent as $k=>$l){
+            if(isset($list[$l['id']])){
+                $l['children'] = $this->_create_tree($list, $list[$l['id']]);
+            }
+            $tree[] = $l;
+        } 
+        return $tree;
+    }
+
 
     public function adult_confirm($id){
         //Generating header data

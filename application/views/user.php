@@ -1,5 +1,5 @@
 <?php $is_mobile ? include('templates/mobile_top_banner_bar.php') : include('templates/top_banner_bar.php') ?>
-    <h2><?=$user['login']?></h2>
+    <h2>Torrents added by <?=$login?></h2>
 
 <?php if (count($torrents)): ?>
     <div class="row">

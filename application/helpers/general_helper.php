@@ -87,9 +87,9 @@ function show_toolbar($form_name, $element_name, $short = false)
                 <input type='button' value='".tr('Center')."' onclick=\"addText('[CENTER]','[/CENTER]');\">
 				<input type='button' value='" . (empty($short) ? tr('http://') : tr('Link')) . "' onclick=\"addText('[URL=http://',''); addText(']link description','[/URL]');\">
 				<input type='button' value='".tr('IMG')."' onclick=\"addText('[IMG]','[/IMG]');\">
-				<input type='button' value='".tr('Email')."' onclick=\"addText('[EMAIL]','[/EMAIL]');\">
+				<!--input type='button' value='".tr('Email')."' onclick=\"addText('[EMAIL]','[/EMAIL]');\">
 				<input type='button' value='".tr('Quote')."' onclick=\"addText('[QUOTE]','[/QUOTE]');\">
-				<input type='button' value='".tr('Code')."' onclick=\"addText('[CODE]','[/CODE]');\">
+				<input type='button' value='".tr('Code')."' onclick=\"addText('[CODE]','[/CODE]');\"-->
 				</div>
 				<div style='margin-top: 5; margin-bottom: 5'>
 				<select name='face' onchange=\"addText('[FACE=' + value + ']','[/FACE]');\">

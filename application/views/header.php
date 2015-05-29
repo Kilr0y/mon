@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="<?=isset($description) ? $description : '' ?>" />
     <meta name="author" content="monova.org" />
-    <!--link rel="icon" href="favicon.ico"-->
+    <link rel="shortcut icon" href="data:image/png;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAD18/EOnYJppXVUNPdxUDD/cE4u/25MK/9sSin/a0gn/2lGJf9nRCP/ZkIh/2RAHv9iPhz/ZUMg95uBZ6X18/EOnoVsoYdvWf+Nemj/iHVi/4RvXP+BbFr/e2RQ/3ZfSv9xWkT/bVZB/2hPOP9kSjL/X0Qs/1o/Jv9ZOx//nIJpo3FNKfWNb1H/qZJ7/6mSfP9+XT3/dlc6/6iRe/+pkXv/qZN8/25NLv92VDP/qZJ8/6mSe/+eg2r/Xj4f/2VDIfd2UzL/s56K////////////moBn/4VnSv////////////////+Qc1j/g2VI////////////4trS/2FBI/9iPh3/fl4//6SMdf///////////5+Gbf+dhGv/////////////////vaya/3tYN////////////+Lb0/9kRSf/ZEEf/4JjRv+cgmn///////////+mjnf/u6mX/////////////////+zn4v90Tyv////////////k3db/Z0gr/2ZDIv+EZkn/l3xi////////////rpmE/9vSyP//////////////////////i2xN////////////5+Ha/2pLLv9oRST/h2lM/5N3Xf///////////7qnlf/5+Pb//////+jh2/////7//////6+Zhf/+/v7//////+vm4P9sTTD/aUcm/4lsT/+QdFn////////////d1Mv////////////Ftqf/6+bh///////OwbT//fz8///////v6+b/bk8y/2tJKf+Mb1P/kXZc//z7+v///////Pz7////////////qpR+/7+unf//////7urm//v6+f//////8/Dt/3BRM/9tSyv/jnJW/5mAZ//08e7//////////////////////5B0Wf+TeF3///////////////7///////j29P9yUjT/b04u/5F1Wf+jjXf/6uXf//////////////////f18/+FaU3/hWlO//Ds6P/////////////////8+/r/dVU3/3FQMP+TeF3/rpuI/+La0v/////////////////YzsT/mIFs/56Mev/BsKD//////////////////v79/3laPP9zUjL/lHhc87qqmv+qlH7/v66d/7+unf+/rp3/noRr/6ubi/+0qZ7/jW9R/7+unv+/rp3/v66d/8Cvnv95WTv/eFc49aOLc5zDtab/yb2x/8S3qv+/saT/uaqc/7OjlP/Bt67/vbOp/6eWhv+ei3n/mYVy/5R/bP+Qemb/g2lQ/6CHb5/39vQKo4tzm45xU/CNcFP6i25Q+olrTvqHaUv6hWZI+oJkRfqBYkL6f19B+n1dPvp7Wjv6fFs88KGIcJz49vQKgAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAA=="/>
 
     <title><?php echo $title ?></title>
 
@@ -18,7 +18,9 @@
     
     <script>
         var base_uri = "<?php echo site_url()?>";
+        var user_login = <?=$this->session->userdata('user_login') ? '"' . $this->session->userdata('user_login') . '"' : 'FALSE' ?>;
     </script>
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?116"></script>
   </head>
 
   <body role="document"> 
@@ -92,6 +94,8 @@
                     <li><a href="#"><i class="fa fa-question fa-lg"></i>&nbsp;&nbsp;FAQ</a></li>                                           
                 </ul>
             </li>
+            
+            <li><a class="lightbox_button" data-name="socials" href="#"><i class="fa fa-thumbs-o-up fa-lg"></i>&nbsp;&nbsp;Socials</a></li>
 
               <?php if ($this->session->userdata('user_id')): ?>
                   <li><a class="lightbox_button" data-name="feedback" href="#"><i class="fa fa-thumbs-o-up fa-lg"></i>&nbsp;&nbsp;Feedback</a></li>
@@ -101,7 +105,7 @@
                       </a>
                       <ul class="dropdown-menu" role="menu">
                           <li><a href="#">Profile</a></li>
-                          <li><a href="<?=site_url('favorites')?>">Favorites</a></li>
+                          <li><a href="<?=site_url('bookmarks')?>">My Bookmarks</a></li>
                           <li><a href="#">Settings</a></li>
                           <li><a href="#">My Uploads</a></li>
                           <li class="divider"></li>

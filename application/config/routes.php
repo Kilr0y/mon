@@ -58,19 +58,19 @@ $route['torrent/(:num)'] = 'torrent/index/$1';
 
 $route['torrent/download/(:num)'] = 'torrent/download/$1';
 
-$route['users/(:any)'] = 'users/index/$1';
+$route['user/(:any)'] = 'users/index/$1';
 
-$route['favorites'] = 'users/favorites';
-$route['favorites/movies'] = 'users/favorites/1';
-$route['favorites/music'] = 'users/favorites/3';
-$route['favorites/games'] = 'users/favorites/4';
-$route['favorites/software'] = 'users/favorites/5';
-$route['favorites/anime'] = 'users/favorites/6';
-$route['favorites/books'] = 'users/favorites/7';
-$route['favorites/tv'] = 'users/favorites/8';
-$route['favorites/other'] = 'users/favorites/9';
-$route['favorites/pictures'] = 'users/favorites/10';
-$route['favorites/adult'] = 'users/favorites/11';
+$route['bookmarks'] = 'users/bookmarks';
+$route['bookmarks/movies'] = 'users/bookmarks/1';
+$route['bookmarks/music'] = 'users/bookmarks/3';
+$route['bookmarks/games'] = 'users/bookmarks/4';
+$route['bookmarks/software'] = 'users/bookmarks/5';
+$route['bookmarks/anime'] = 'users/bookmarks/6';
+$route['bookmarks/books'] = 'users/bookmarks/7';
+$route['bookmarks/tv'] = 'users/bookmarks/8';
+$route['bookmarks/other'] = 'users/bookmarks/9';
+$route['bookmarks/pictures'] = 'users/bookmarks/10';
+$route['bookmarks/adult'] = 'users/bookmarks/11';
 
 
 $route['latest'] = 'main/latest';

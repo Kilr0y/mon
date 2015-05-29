@@ -63,8 +63,9 @@
     width: 40px;
 }
 
-.page-buttons .off{
-    background-color: rgba(92, 184, 92, 0.6);
+.page-buttons .on{
+    color: yellow;
+    /*background-color: rgba(92, 184, 92, 0.6);*/
 }
 
 /*** LIGHTBOX ******/
@@ -303,4 +304,20 @@
 }
 .full_description_button:hover{
     opacity: 0.8;
+}
+
+#comments-wrapper .media-left{
+    min-width: 20px;
+}
+#comments-wrapper .media-heading{
+    font-size: 12px;
+}
+
+#comments-wrapper .button-like.active i{
+    color: #5cb85c;
+    font-weight: bold;
+}
+#comments-wrapper .button-dislike.active i{
+    color: #d9534f;
+    font-weight: bold;
 }
