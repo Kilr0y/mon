@@ -318,7 +318,7 @@ function init_comments(){
 
         $.post(base_uri + 'ajax/add_comment', post, function(data){
             submit_button.closest('tr').prev('tr').andSelf().remove();
-            showNotification('Feedback added succesfuly');
+            showNotification('Feedback added success');
         });
     });
 

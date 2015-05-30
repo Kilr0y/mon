@@ -73,13 +73,20 @@ class Search extends CI_Controller {
             'search-soft' =>        site_url("search?term=$term&cat=5&page=$page&sort=$sort&verified=$verf"),
             'search-verf' =>        site_url("search?term=$term&cat=$cat&page=$page&sort=$sort&verified=1"),
             'search-not-verf' =>    site_url("search?term=$term&cat=$cat&page=$page&sort=$sort&verified=0"),
-            'sort_by_date' =>       site_url("search?term=$term&cat=$cat&page=$page&sort=1&verified=$verf"),
-            'sort_by_name' =>       site_url("search?term=$term&cat=$cat&page=$page&sort=2&verified=$verf"),
-            'sort_by_comments' =>   site_url("search?term=$term&cat=$cat&page=$page&sort=3&verified=$verf"),
-            'sort_by_rating' =>     site_url("search?term=$term&cat=$cat&page=$page&sort=4&verified=$verf"),
-            'sort_by_size' =>       site_url("search?term=$term&cat=$cat&page=$page&sort=5&verified=$verf"),
-            'sort_by_seeds' =>      site_url("search?term=$term&cat=$cat&page=$page&sort=6&verified=$verf"),
-            'sort_by_peers' =>      site_url("search?term=$term&cat=$cat&page=$page&sort=7&verified=$verf"),
+            'sort_by_date_desc' =>       site_url("search?term=$term&cat=$cat&page=$page&sort=1&verified=$verf"),
+            'sort_by_date_asc' =>       site_url("search?term=$term&cat=$cat&page=$page&sort=8&verified=$verf"),
+            'sort_by_name_asc' =>       site_url("search?term=$term&cat=$cat&page=$page&sort=2&verified=$verf"),
+            'sort_by_name_desc' =>       site_url("search?term=$term&cat=$cat&page=$page&sort=9&verified=$verf"),
+            'sort_by_comments_desc' =>   site_url("search?term=$term&cat=$cat&page=$page&sort=3&verified=$verf"),
+            'sort_by_comments_asc' =>   site_url("search?term=$term&cat=$cat&page=$page&sort=10&verified=$verf"),
+            'sort_by_rating_desc' =>     site_url("search?term=$term&cat=$cat&page=$page&sort=4&verified=$verf"),
+            'sort_by_rating_asc' =>     site_url("search?term=$term&cat=$cat&page=$page&sort=11&verified=$verf"),
+            'sort_by_size_desc' =>       site_url("search?term=$term&cat=$cat&page=$page&sort=5&verified=$verf"),
+            'sort_by_size_asc' =>       site_url("search?term=$term&cat=$cat&page=$page&sort=12&verified=$verf"),
+            'sort_by_seeds_desc' =>      site_url("search?term=$term&cat=$cat&page=$page&sort=6&verified=$verf"),
+            'sort_by_seeds_asc' =>      site_url("search?term=$term&cat=$cat&page=$page&sort=13&verified=$verf"),
+            'sort_by_peers_desc' =>      site_url("search?term=$term&cat=$cat&page=$page&sort=7&verified=$verf"),
+            'sort_by_peers_asc' =>      site_url("search?term=$term&cat=$cat&page=$page&sort=14&verified=$verf")
         );
         
         

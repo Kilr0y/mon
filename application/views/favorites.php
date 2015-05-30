@@ -38,6 +38,11 @@
 <?php endif ?>
 <?php endforeach?>
 
+<nav class="text-center">
+    <ul class="pagination pagination-lg">
+        <?=$pagination?>
+    </ul>
+</nav>
 
 <div id="side_banners">
 </div>

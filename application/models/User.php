@@ -61,30 +61,40 @@ class User extends CI_Model{
     }
 
     public function get_favorites($user_id){
-        $result = $this->db
-            ->select('t.*, (IFNULL(CEIL(r.total_value / r.total_votes), 0)) as rating, UNIX_TIMESTAMP(t.added) as added_time', FALSE)
-            ->join('torrents as t', 'f.torrent_id = t.id', 'left')
-            ->join('ratings as r', 't.id = r.id', 'left')
-            ->where(array('f.user_id'=>$user_id))
-            ->order_by('t.maincat')
-            ->get('favorites as f');
-        $data = $result->result_array();
+//        $result = $this->db
+//            ->select('t.*, (IFNULL(CEIL(r.total_value / r.total_votes), 0)) as rating, UNIX_TIMESTAMP(t.added) as added_time', FALSE)
+//            ->join('torrents as t', 'f.torrent_id = t.id', 'left')
+//            ->join('ratings as r', 't.id = r.id', 'left')
+//            ->where(array('f.user_id'=>$user_id))
+//            ->order_by('t.maincat')
+//            ->get('favorites as f');
+//        $data = $result->result_array();
         $favorites = array();
-        foreach ($data as $row)
-            $favorites[$row['maincat']][]= $row;
-
+        foreach ($this->config->item('maincat_name') as $k => $v) {
+            $data = $this->get_favorites_in_cat($user_id, $k, $this->config->item('bookmarks_per_category'), 1);
+            $favorites[$k] = $data[$k];
+        }
         return $favorites;
     }
 
-    public function get_favorites_in_cat($user_id, $maincat){
+    public function get_favorites_in_cat($user_id, $maincat, $num_rows, $page = 1){
+        $from = ($page - 1) * $num_rows;
         $result = $this->db
             ->select('t.*, (IFNULL(CEIL(r.total_value / r.total_votes), 0)) as rating, UNIX_TIMESTAMP(t.added) as added_time', FALSE)
             ->join('torrents as t', 'f.torrent_id = t.id', 'left')
             ->join('ratings as r', 't.id = r.id', 'left')
             ->where(array('f.user_id'=>$user_id, 't.maincat'=>$maincat))
-            ->get('favorites as f');
+            ->get('favorites as f', $num_rows, $from);
         $favorites[$maincat] = $result->result_array();
         return $favorites;
+    }
+
+    public function get_favorites_count($user_id, $maincat){
+        $result = $this->db
+            ->join('torrents as t', 'f.torrent_id = t.id', 'left')
+            ->where(array('f.user_id'=>$user_id, 't.maincat'=>$maincat))
+            ->get('favorites as f');
+        return $result->num_rows();
     }
 
 }

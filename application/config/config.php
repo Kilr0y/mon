@@ -9,8 +9,11 @@ $config['media_url'] = 'http://127.0.0.1/monova_crawlers/';
 $config['site_title'] = ' - monova.org';
 
 $config['latest_per_category'] = 10;
+$config['bookmarks_per_category'] = 10;
 $config['category_per_page'] = 25;
 $config['search_per_page'] = 25;
+$config['feedback_per_page'] = 25;
+$config['bookmarks_per_page'] = 25;
 $config['hot_per_page'] = 12;
 $config['hot_page_count'] = 3;
 $config['related_items_count'] = 5;

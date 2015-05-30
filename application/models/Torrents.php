@@ -171,7 +171,7 @@ class Torrents extends CI_Model {
         
         $sort = ' ORDER BY added DESC ';
         if ($type == '2'){
-            $sort = ' ORDER BY torrentname DESC ';
+            $sort = ' ORDER BY torrentname ASC ';
         } elseif ($type == '3'){
             $sort = ' ORDER BY comments DESC ';
         } elseif ($type == '4'){
@@ -182,7 +182,21 @@ class Torrents extends CI_Model {
             $sort = ' ORDER BY seeds DESC ';
         } elseif ($type == '7'){
             $sort = ' ORDER BY peers DESC ';
-        } 
+        } elseif ($type == '8'){
+            $sort = ' ORDER BY added ASC ';
+        } elseif ($type == '9'){
+            $sort = ' ORDER BY torrentname DESC ';
+        } elseif ($type == '10'){
+            $sort = ' ORDER BY comments ASC ';
+        } elseif ($type == '11'){
+            $sort = ' ORDER BY rating ASC ';
+        } elseif ($type == '12'){
+            $sort = ' ORDER BY size ASC ';
+        } elseif ($type == '13'){
+            $sort = ' ORDER BY seeds ASC ';
+        } elseif ($type == '14'){
+            $sort = ' ORDER BY peers ASC ';
+        }
         return $sort;
         
     }
@@ -235,8 +249,10 @@ class Torrents extends CI_Model {
         return true;
     }
 
-    public function get_nocomment_torrents($user_id){
-        $user_id = (int)$user_id;
+    public function get_nocomment_torrents($user_id, $page = 1){
+        $num_rows = $this->config->item('feedback_per_page');
+        $from = ($page - 1) * $num_rows;
+
         $query = "
             SELECT t.*, (IFNULL(CEIL(r.total_value / r.total_votes), 0)) as rating, r.used_ips, d.descr, UNIX_TIMESTAMP(t.added) as added_time
             FROM feedback f
@@ -244,11 +260,17 @@ class Torrents extends CI_Model {
             LEFT JOIN ratings r ON t.id = r.id
             LEFT JOIN description d ON t.id = d.id
             WHERE f.commented = 0 AND f.user_id = \"$user_id\"
+            LIMIT $from, $num_rows
         ";
 
         $result = $this->db->query($query);
         $data = $result->result_array();
         return $data;
+    }
+
+    public function get_nocomment_torrents_count($user_id){
+        $result = $this->db->get_where('feedback', array('user_id'=>$user_id, 'commented'=>0));
+        return $result->num_rows();
     }
 
 

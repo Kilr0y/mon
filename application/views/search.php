@@ -20,13 +20,20 @@
                         </select>
                         Sort by:
                         <select id="sort">
-                            <option <?php if ($sort == 1) echo 'selected' ?> value="<?=$links['sort_by_date']?>">Date</option>
-                            <option <?php if ($sort == 2) echo 'selected' ?> value="<?=$links['sort_by_name']?>">Name</option>
-                            <option <?php if ($sort == 3) echo 'selected' ?> value="<?=$links['sort_by_comments']?>">Comments</option>
-                            <option <?php if ($sort == 4) echo 'selected' ?> value="<?=$links['sort_by_rating']?>">Rating</option>
-                            <option <?php if ($sort == 5) echo 'selected' ?> value="<?=$links['sort_by_size']?>">Size</option>
-                            <option <?php if ($sort == 6) echo 'selected' ?> value="<?=$links['sort_by_seeds']?>">Seeds</option>
-                            <option <?php if ($sort == 7) echo 'selected' ?> value="<?=$links['sort_by_peers']?>">Peers</option>
+                            <option <?php if ($sort == 1) echo 'selected' ?> value="<?=$links['sort_by_date_desc']?>">Date▼</option>
+                            <option <?php if ($sort == 8) echo 'selected' ?> value="<?=$links['sort_by_date_asc']?>">Date▲</option>
+                            <option <?php if ($sort == 2) echo 'selected' ?> value="<?=$links['sort_by_name_asc']?>">Name▼</option>
+                            <option <?php if ($sort == 9) echo 'selected' ?> value="<?=$links['sort_by_name_desc']?>">Name▲</option>
+                            <option <?php if ($sort == 3) echo 'selected' ?> value="<?=$links['sort_by_comments_desc']?>">Comments▼</option>
+                            <option <?php if ($sort == 10) echo 'selected' ?> value="<?=$links['sort_by_comments_asc']?>">Comments▲</option>
+                            <option <?php if ($sort == 4) echo 'selected' ?> value="<?=$links['sort_by_rating_desc']?>">Rating▼</option>
+                            <option <?php if ($sort == 11) echo 'selected' ?> value="<?=$links['sort_by_rating_asc']?>">Rating▲</option>
+                            <option <?php if ($sort == 5) echo 'selected' ?> value="<?=$links['sort_by_size_desc']?>">Size▼</option>
+                            <option <?php if ($sort == 12) echo 'selected' ?> value="<?=$links['sort_by_size_asc']?>">Size▲</option>
+                            <option <?php if ($sort == 6) echo 'selected' ?> value="<?=$links['sort_by_seeds_desc']?>">Seeds▼</option>
+                            <option <?php if ($sort == 13) echo 'selected' ?> value="<?=$links['sort_by_seeds_asc']?>">Seeds▲</option>
+                            <option <?php if ($sort == 7) echo 'selected' ?> value="<?=$links['sort_by_peers_desc']?>">Peers▼</option>
+                            <option <?php if ($sort == 14) echo 'selected' ?> value="<?=$links['sort_by_peers_asc']?>">Peers▲</option>
                         </select>
                     </div>
                 </h3>

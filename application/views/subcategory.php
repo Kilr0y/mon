@@ -20,13 +20,20 @@
                         </select>
                         Sort by:
                         <select id="sort">
-                            <option <?php if ($sort == 1) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=1&verified=$verf&page=1")?>">Date</option>
-                            <option <?php if ($sort == 2) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=2&verified=$verf&page=1")?>">Name</option>
-                            <option <?php if ($sort == 3) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=3&verified=$verf&page=1")?>">Comments</option>
-                            <option <?php if ($sort == 4) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=4&verified=$verf&page=1")?>">Rating</option>
-                            <option <?php if ($sort == 5) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=5&verified=$verf&page=1")?>">Size</option>
-                            <option <?php if ($sort == 6) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=6&verified=$verf&page=1")?>">Seeds</option>
-                            <option <?php if ($sort == 7) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=7&verified=$verf&page=1")?>">Peers</option>
+                            <option <?php if ($sort == 1) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=1&verified=$verf&page=1")?>">Date▼</option>
+                            <option <?php if ($sort == 8) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=8&verified=$verf&page=1")?>">Date▲</option>
+                            <option <?php if ($sort == 2) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=2&verified=$verf&page=1")?>">Name▼</option>
+                            <option <?php if ($sort == 9) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=9&verified=$verf&page=1")?>">Name▲</option>
+                            <option <?php if ($sort == 3) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=3&verified=$verf&page=1")?>">Comments▼</option>
+                            <option <?php if ($sort == 10) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=10&verified=$verf&page=1")?>">Comments▲</option>
+                            <option <?php if ($sort == 4) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=4&verified=$verf&page=1")?>">Rating▼</option>
+                            <option <?php if ($sort == 11) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=11&verified=$verf&page=1")?>">Rating▲</option>
+                            <option <?php if ($sort == 5) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=5&verified=$verf&page=1")?>">Size▼</option>
+                            <option <?php if ($sort == 12) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=12&verified=$verf&page=1")?>">Size▲</option>
+                            <option <?php if ($sort == 6) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=6&verified=$verf&page=1")?>">Seeds▼</option>
+                            <option <?php if ($sort == 13) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=13&verified=$verf&page=1")?>">Seeds▲</option>
+                            <option <?php if ($sort == 7) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=7&verified=$verf&page=1")?>">Peers▼</option>
+                            <option <?php if ($sort == 14) echo 'selected' ?> value="<?=site_url(strtolower($category['name']) . '/' . $category['segment'] . "?sort=14&verified=$verf&page=1")?>">Peers▲</option>
                         </select>
                     </div>
                 </h3>
